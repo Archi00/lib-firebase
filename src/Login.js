@@ -38,7 +38,10 @@ function Login() {
         />
         <button
           className="login__btn"
-          onClick={() => signInWithEmailPassword(email, password)}
+          onClick={
+            (() => signInWithEmailPassword(email, password),
+            window.location.reload())
+          }
         >
           Login
         </button>

@@ -32,6 +32,7 @@ export default class AddCategory extends React.Component {
             closePopup={this.togglePopup}
             handleSubmit={this.props.handleSubmit}
             handleChange={this.props.handleChange}
+            user={this.props.user}
           />
         ) : null}
       </div>

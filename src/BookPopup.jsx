@@ -45,7 +45,6 @@ export default class BookPopup extends React.Component {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          console.log(book);
                           let cat = book.volumeInfo.categories[0];
 
                           if (!cat) {
@@ -63,7 +62,6 @@ export default class BookPopup extends React.Component {
                             }
                           });
                         }}
-                        type="submit"
                       >
                         +
                       </button>

@@ -5,9 +5,7 @@ import getBookInfo from "./bookData";
 import { initializeApp } from "@firebase/app";
 import { firebaseConfig } from "./firebase";
 import { getFirestore } from "@firebase/firestore";
-import postCategory from "./addCategory";
 import getDbData from "./getDb";
-import { capitalize } from "./utils";
 import { getAuth } from "@firebase/auth";
 import Login from "./Login";
 import Register from "./Register";
@@ -26,9 +24,9 @@ export default class App extends React.Component {
       bookInfoList: [],
       name: "",
       bookTitle: "",
-      displayCategory: ""
+      displayCategory: "",
+      uid: ""
     };
-    this.handleCatSubmit = this.handleCatSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
     this.handleBooSubmit = this.handleBooSubmit.bind(this);
@@ -39,34 +37,26 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     const categories = await getDbData();
-    categories.map((cat) => {
-      if (
-        !this.state.catList.includes(cat.data.books.category) &&
-        cat.data.books.category
-      )
-        this.setState({
-          catList: this.state.catList.concat(cat.data.books.category)
-        });
-      if (
-        window.location.pathname.includes(cat.data.books.category) &&
-        !this.state.displayCategory
-      ) {
-        this.setState({ displayCategory: cat.data.books.category });
-      }
-    });
-  }
 
-  handleCatSubmit(e) {
-    e.preventDefault();
-    if (this.state.name !== "") {
-      const dbObj = {
-        books: {
-          category: capitalize(this.state.name),
-          data: { title: "", info: {} }
+    if (auth.currentUser) {
+      categories.map((cat) => {
+        if (
+          !this.state.catList.includes(cat.data.books.category) &&
+          cat.data.books.category &&
+          cat.data.uid === auth.currentUser.uid
+        )
+          this.setState({
+            catList: this.state.catList.concat(cat.data.books.category)
+          });
+        if (
+          window.location.pathname.includes(cat.data.books.category) &&
+          !this.state.displayCategory
+        ) {
+          this.setState({ displayCategory: cat.data.books.category });
         }
-      };
-      postCategory(dbObj);
+      });
     }
+    //setTimeout(() => console.clear(), 1000);
   }
 
   async handleBooSubmit(e) {

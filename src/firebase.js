@@ -72,7 +72,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
 
 export const sendPswResetEmail = async (email) => {
   try {
-    await sendPasswordResetEmail(email);
+    await sendPasswordResetEmail(auth, email);
     console.log("Password reset link sent!");
   } catch (err) {
     console.error(err);
@@ -81,5 +81,4 @@ export const sendPswResetEmail = async (email) => {
 
 export const logout = async () => {
   await signOut(auth);
-  window.location.pathname.replace("/");
 };

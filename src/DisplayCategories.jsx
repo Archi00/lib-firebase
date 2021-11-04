@@ -15,15 +15,14 @@ export default class DisplayCategories extends React.Component {
             user={this.props.user}
           />
           <AddCategory
-            handleSubmit={this.props.handleCatSubmit}
             handleChange={this.props.handleChange}
+            user={this.props.user}
           />
           {this.props.catList.length > 0
             ? this.props.catList.map((title) => {
                 if (!this.props.displayCategory) {
                   return this.props.multiCat(title);
                 } else {
-                  console.log(title);
                   return this.props.uniqueCat(title);
                 }
               })
