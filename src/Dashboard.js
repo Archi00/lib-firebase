@@ -20,7 +20,6 @@ function Dashboard(props) {
       setName(data.name);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
     }
   };
 
@@ -28,30 +27,49 @@ function Dashboard(props) {
     if (loading) return null;
     if (!user) return history.replace("/");
     fetchUserName();
+    props.handleLogin(user);
   }, [user, loading]);
 
   try {
     return (
       <div className="dashboard">
-        <div className="dashboard__container">
-          Logged in as
-          <div>{name}</div>
-          <div>{user.email}</div>
-          <button className="dashboard__btn" onClick={logout}>
-            Logout
-          </button>
-        </div>
+        <header className="home-header">
+          <div className="header-container">
+            {props.displayCategory ? (
+              <button
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.replace("/dashboard");
+                  props.handleDisplay("");
+                }}
+              >
+                &larr;
+              </button>
+            ) : null}
+            <div>
+              <div>{user.email}</div>
+            </div>
+            <button className="dashboard__btn" onClick={logout}>
+              Logout
+            </button>
+          </div>
+        </header>
+
         <DisplayCategories
           handleBooSubmit={props.handleBooSubmit}
           handleBooChange={props.handleBooChange}
           bookInfoList={props.bookInfoList}
           catList={props.catList}
           handleCatSubmit={props.handleCatSubmit}
+          handleDisplay={props.handleDisplay}
           handleChange={props.handleChange}
           displayCategory={props.displayCategory}
           multiCat={props.multiCat}
           uniqueCat={props.uniqueCat}
           user={user}
+          handleLogin={props.handleLogin}
+          history={history}
         />
       </div>
     );

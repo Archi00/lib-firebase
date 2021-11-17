@@ -24,7 +24,10 @@ export const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
-    const q = await query(collection(db, "01"), where("uid", "==", user.uid));
+    const q = await query(
+      collection(db, "users"),
+      where("uid", "==", user.uid)
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       list.push(doc);
@@ -80,5 +83,6 @@ export const sendPswResetEmail = async (email) => {
 };
 
 export const logout = async () => {
-  await signOut(auth);
+  signOut(auth);
+  window.location.reload(true);
 };

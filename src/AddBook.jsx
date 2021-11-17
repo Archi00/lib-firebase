@@ -35,6 +35,7 @@ export default class AddBook extends React.Component {
             bookList={this.props.bookList}
             catList={this.props.catList}
             user={this.props.user}
+            displayCategory={this.props.displayCategory}
           />
         ) : null}
       </div>

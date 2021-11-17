@@ -8,10 +8,12 @@
     "@firebase/app": "0.7.5",
     "@firebase/auth": "0.19.0",
     "@firebase/firestore": "3.2.0",
+    "firebase": "9.2.0",
+    "node-sass": "6.0.1",
     "qrcode.react": "1.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-firebase-hooks": "3.0.4",
+    "react-firebase-hooks": "4.0.0",
     "react-router-dom": "5.3.0"
   },
   "devDependencies": {
@@ -21,12 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "node-sass src/ -o src/ ",
+    "watch:css": "npm run build:css && node-sass src/ -o src/ -w -r"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }

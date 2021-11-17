@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  transition-timing-function: ease-in-out;
 }
 
 *::focus {
@@ -11,9 +12,21 @@
 
 html {
   font: 62.5% / 1.15 sans-serif;
-  background: #ddd;
-  height: 100%;
+  height: 100vh;
   display: flex;
+  overflow-y: hidden;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -95,12 +108,21 @@ code {
   justify-content: space-around;
 }
 
+.btn-display {
+  display: flex;
+  justify-content: space-around;
+}
+
 .btn {
   padding: 0.8rem 1rem 0.7rem;
   border: 0.1rem solid #4d4d4d;
   cursor: pointer;
   text-transform: capitalize;
   border-radius: 10px;
+}
+.btn:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
 }
 
 [class*="stack"] > * {
@@ -116,7 +138,7 @@ code {
 .category-list-container {
   text-align: center;
   margin: auto;
-  width: 70%;
+  width: 90%;
 }
 
 .popup {
@@ -179,7 +201,7 @@ form {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-content: space-between;
   margin: auto;
 }
@@ -198,11 +220,12 @@ form {
   transition: all 0.5s;
   background-color: #e5e5e5;
   margin-bottom: 2rem;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem 0rem 1rem 0rem;
   max-height: 6.1rem;
   -ms-overflow-style: none;
   max-width: 79vw;
   border: solid 1px rgba(153, 150, 155, 0.5);
+  overflow-y: auto;
 }
 
 .list-item:hover {
@@ -217,48 +240,32 @@ form {
 .display-info {
   display: flex;
   align-content: center;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   flex-direction: row;
-  padding: 0 1rem 0 1rem;
   margin: 0;
+}
+
+.display-info li {
+  overflow-y: hidden;
+}
+
+.display-info li {
+  display: block;
+  width: 90%;
+}
+
+.display-info li::-webkit-scrollbar {
+  display: none;
 }
 
 .display-cover {
   width: 2rem;
+  min-width: 2rem;
   border-radius: 5px;
 }
 
-/*
-.btn-book {
-  appearance: button;
-  backface-visibility: hidden;
-  background-color: #405cf5;
-  border-radius: 6px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
-  font-size: 100%;
-  height: 44px;
-  line-height: 1.15;
-  margin: 12px 0 0;
-  outline: none;
-  overflow: hidden;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: 100%;
-}
-*/
 .btn-book:disabled {
   cursor: default;
 }
@@ -271,6 +278,7 @@ form {
 .App {
   font-family: sans-serif;
   text-align: center;
+  margin: 8rem auto auto auto;
 }
 
 /* The Modal (background) */

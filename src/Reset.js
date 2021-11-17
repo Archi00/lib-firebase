@@ -33,7 +33,7 @@ function Reset() {
             history.replace("/");
           }}
         >
-          Send password reset email
+          Send reset email
         </button>
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.

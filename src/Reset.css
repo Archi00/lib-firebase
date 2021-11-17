@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.892);
 }
 .reset__container {
   display: flex;
@@ -11,19 +12,35 @@
   text-align: center;
   background-color: #dcdcdc;
   padding: 30px;
+  border-radius: 10px;
+}
+
+.reset__container:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
+  transition: ease-in-out 0.5s;
 }
 .reset__textBox {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 .reset__btn {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
   border: none;
+  border-radius: 10px;
   color: white;
-  background-color: black;
+  background-color: #24b9d3c1;
+}
+
+.reset__btn:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
+  transition: ease-in-out 0.5s;
+  cursor: pointer;
 }
 .reset div {
   margin-top: 7px;

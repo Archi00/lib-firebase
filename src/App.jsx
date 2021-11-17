@@ -6,11 +6,12 @@ import { initializeApp } from "@firebase/app";
 import { firebaseConfig } from "./firebase";
 import { getFirestore } from "@firebase/firestore";
 import getDbData from "./getDb";
-import { getAuth } from "@firebase/auth";
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import Login from "./Login";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Reset from "./Reset";
+import AddBook from "./AddBook";
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
@@ -25,7 +26,7 @@ export default class App extends React.Component {
       name: "",
       bookTitle: "",
       displayCategory: "",
-      uid: ""
+      user: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -33,29 +34,34 @@ export default class App extends React.Component {
     this.handleDisplay = this.handleDisplay.bind(this);
     this.multiCat = this.multiCat.bind(this);
     this.uniqueCat = this.uniqueCat.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleDisplay = this.handleDisplay.bind(this);
   }
 
   async componentDidMount() {
-    const categories = await getDbData();
-
-    if (auth.currentUser) {
-      categories.map((cat) => {
-        if (
-          !this.state.catList.includes(cat.data.books.category) &&
-          cat.data.books.category &&
-          cat.data.uid === auth.currentUser.uid
-        )
-          this.setState({
-            catList: this.state.catList.concat(cat.data.books.category)
-          });
-        if (
-          window.location.pathname.includes(cat.data.books.category) &&
-          !this.state.displayCategory
-        ) {
-          this.setState({ displayCategory: cat.data.books.category });
-        }
-      });
-    }
+    let categories = null;
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        categories = await getDbData();
+        categories.map((cat) => {
+          if (
+            !this.state.catList.includes(cat.data.category.name) &&
+            cat.data.category.name
+          )
+            this.setState({
+              catList: this.state.catList.concat(cat.data.category.name)
+            });
+          if (
+            window.location.pathname.includes(cat.data.category.name) &&
+            !this.state.displayCategory
+          ) {
+            this.setState({ displayCategory: cat.data.category.name });
+          }
+        });
+      } else {
+        return null;
+      }
+    });
     //setTimeout(() => console.clear(), 1000);
   }
 
@@ -63,6 +69,10 @@ export default class App extends React.Component {
     e.preventDefault();
     const listInfo = await getBookInfo(this.state.bookTitle);
     this.setState({ bookInfoList: listInfo });
+  }
+
+  handleLogin(user) {
+    this.setState({ user: user });
   }
 
   handleChange(e) {
@@ -85,6 +95,14 @@ export default class App extends React.Component {
     if (title === this.state.displayCategory) {
       return (
         <Router>
+          <AddBook
+            handleSubmit={this.handleBooSubmit}
+            handleChange={this.handleBooChange}
+            bookList={this.state.bookInfoList}
+            catList={this.state.catList}
+            user={this.state.user}
+            displayCategory={this.state.displayCategory}
+          />
           <Link
             to={"/dashboard/" + title}
             onClick={(e) => {
@@ -99,6 +117,7 @@ export default class App extends React.Component {
             handleSubmit={this.handleBooSubmit}
             handleChange={this.handleBooChange}
             handleDisplay={this.handleDisplay}
+            user={this.state.user}
           />
         </Router>
       );
@@ -113,16 +132,10 @@ export default class App extends React.Component {
           onClick={(e) => {
             this.handleDisplay(title);
           }}
+          className="catButton"
         >
           <h3>{title}</h3>
         </Link>
-        <CategoryInfo
-          key={title}
-          titleName={title}
-          handleSubmit={this.handleBooSubmit}
-          handleChange={this.handleBooChange}
-          handleDisplay={this.handleDisplay}
-        />
       </Router>
     );
   }
@@ -136,7 +149,7 @@ export default class App extends React.Component {
               <Route exact path="/" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/reset" component={Reset} />
-              <Route exact path="/dashboard">
+              <Route path="/dashboard">
                 <Dashboard
                   handleBooSubmit={this.handleBooSubmit}
                   handleBooChange={this.handleBooChange}
@@ -147,6 +160,8 @@ export default class App extends React.Component {
                   displayCategory={this.state.displayCategory}
                   multiCat={this.multiCat}
                   uniqueCat={this.uniqueCat}
+                  handleLogin={this.handleLogin}
+                  handleDisplay={this.handleDisplay}
                 />
               </Route>
             </Switch>

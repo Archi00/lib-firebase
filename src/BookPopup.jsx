@@ -1,6 +1,5 @@
 import React from "react";
 import postCategory from "./addCategory";
-import QRCode from "qrcode.react";
 
 export default class BookPopup extends React.Component {
   render() {
@@ -45,22 +44,15 @@ export default class BookPopup extends React.Component {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          let cat = book.volumeInfo.categories[0];
-
-                          if (!cat) {
-                            cat = "miscellaneous";
-                          }
-                          postCategory({
-                            uid: this.props.user.uid,
-                            location: "",
-                            books: {
-                              category: book.volumeInfo.categories[0],
-                              data: {
-                                title: book.volumeInfo.title,
-                                info: book.volumeInfo
+                          postCategory(
+                            {
+                              category: {
+                                name: this.props.displayCategory,
+                                books: [book.volumeInfo]
                               }
-                            }
-                          });
+                            },
+                            this.props.user.uid
+                          );
                         }}
                       >
                         +

@@ -18,15 +18,15 @@ export default class CategoryPopup extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.name !== "") {
-      const dbObj = {
-        uid: this.props.user.uid,
-        location: "",
-        books: {
-          category: capitalize(this.state.name),
-          data: { title: "", info: {} }
-        }
-      };
-      postCategory(dbObj);
+      postCategory(
+        {
+          category: {
+            name: capitalize(this.state.name),
+            books: []
+          }
+        },
+        this.props.user.uid
+      );
     }
   }
 
