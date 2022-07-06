@@ -14,6 +14,7 @@ export default class AddCategory extends React.Component {
     this.setState({
       showPopup: !this.state.showPopup
     });
+    this.props.setAddCat(!this.props.addingCat)
   }
 
   render() {

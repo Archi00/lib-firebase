@@ -13,6 +13,7 @@ function Dashboard(props) {
   const [name, setName] = useState("");
   const [catFilters, setCatFilters] = useState([]);
   const [bFilters, setBFilters] = useState([]);
+  const [addingCategory, setAddingCategory] = useState(false)
   const history = useHistory();
 
   const fetchUserName = async () => {
@@ -193,6 +194,8 @@ function Dashboard(props) {
                 history={history}
                 handleDisplay={props.handleDisplay}
                 addCat={props.addCat}
+                setAddCat={setAddingCategory}
+                addingCat={addingCategory}
               />
               <div className="inline-block">
                 <Router>
@@ -260,29 +263,31 @@ function Dashboard(props) {
             Search Publisher
           </button>
         </div>
-        <DisplayCategories
-          handleBooSubmit={props.handleBooSubmit}
-          handleBooChange={props.handleBooChange}
-          bookInfoList={props.bookInfoList}
-          catList={props.catList}
-          handleCatSubmit={props.handleCatSubmit}
-          handleDisplay={props.handleDisplay}
-          handleChange={props.handleChange}
-          displayCategory={props.displayCategory}
-          multiCat={props.multiCat}
-          uniqueCat={props.uniqueCat}
-          user={user}
-          handleLogin={props.handleLogin}
-          history={history}
-          addCat={props.addCat}
-          clearSearch={props.clearSearch}
-          showCat={props.showCat}
-          handleShowCat={props.handleShowCat}
-          handleShowCatTrue={props.handleShowCatTrue}
-          catFilters={catFilters}
-          bFilters={bFilters}
-          cleanFilters={cleanFilters}
-        />
+        {!addingCategory ?
+          <DisplayCategories
+            handleBooSubmit={props.handleBooSubmit}
+            handleBooChange={props.handleBooChange}
+            bookInfoList={props.bookInfoList}
+            catList={props.catList}
+            handleCatSubmit={props.handleCatSubmit}
+            handleDisplay={props.handleDisplay}
+            handleChange={props.handleChange}
+            displayCategory={props.displayCategory}
+            multiCat={props.multiCat}
+            uniqueCat={props.uniqueCat}
+            user={user}
+            handleLogin={props.handleLogin}
+            history={history}
+            addCat={props.addCat}
+            clearSearch={props.clearSearch}
+            showCat={props.showCat}
+            handleShowCat={props.handleShowCat}
+            handleShowCatTrue={props.handleShowCatTrue}
+            catFilters={catFilters}
+            bFilters={bFilters}
+            cleanFilters={cleanFilters}
+          />
+      : null}
       </>
     );
   } catch (err) {
