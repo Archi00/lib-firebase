@@ -1,15 +1,19 @@
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import "./Dashboard.css";
 import { logout } from "./firebase";
 import { auth, db } from "./App";
-import { getDocs, query, collection, where } from "@firebase/firestore";
+import { getDocs, query, collection, where, doc } from "@firebase/firestore";
 import DisplayCategories from "./DisplayCategories";
+import AddCategory from "./AddCategory";
 
 function Dashboard(props) {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [catFilters, setCatFilters] = useState([]);
+  const [bFilters, setBFilters] = useState([]);
   const history = useHistory();
 
   const fetchUserName = async () => {
@@ -28,37 +32,236 @@ function Dashboard(props) {
     if (!user) return history.replace("/");
     fetchUserName();
     props.handleLogin(user);
-  }, [user, loading]);
+    if (bFilters.length < 1) history.replace("/dashboard");
+  }, [user, loading, bFilters]);
+  //  if (filters) {
+  //    filters[0].childNodes.forEach((n) => {
+  //      if (n.nodeName === "INPUT" && n.innerText === "" && !n.activeElement) {
+  //        replaceTags(n);
+  //      }
+  //    });
+  //  }
+
+  const cleanFilters = () => {
+    setBFilters([]);
+    setCatFilters([]);
+  };
+  cleanFilters.bind(this);
+
+  const replaceTags = (originalTag, count = 0) => {
+    cleanFilters();
+
+    originalTag.parentNode.childNodes.forEach((t) => {
+      t.nodeName === "INPUT" ? count++ : null;
+    });
+
+    if (count < 1) {
+      const replacement = document.createElement("input");
+      for (let i = 0, l = originalTag.attributes.length; i < l; ++i) {
+        let nodeName = originalTag.attributes.item(i).nodeName;
+        let nodeValue = originalTag.attributes.item(i).nodeValue;
+        replacement.setAttribute(nodeName, nodeValue);
+      }
+      if (replacement.nodeName === "INPUT") {
+        replacement.setAttribute("placeholder", originalTag.innerText);
+        replacement.setAttribute("autoFocus", true);
+        replacement.onchange = (e) => {
+          filterCategories(e);
+        };
+      }
+      originalTag.parentNode.replaceChild(replacement, originalTag);
+      replacement.focus();
+    } else {
+      const replacement = document.createElement("button");
+
+      originalTag.parentNode.childNodes.forEach((t) => {
+        if (t !== originalTag && t.nodeName === "INPUT") {
+          for (let i = 0, l = t.attributes.length; i < l; ++i) {
+            if (
+              t.attributes.item(i).nodeName !== "placeholder" &&
+              t.attributes.item(i).nodeName !== "autoFocus"
+            ) {
+              let nodeName = t.attributes.item(i).nodeName;
+              let nodeValue = t.attributes.item(i).nodeValue;
+              replacement.setAttribute(nodeName, nodeValue);
+            }
+            if (t.attributes.item(i).nodeName === "placeholder") {
+              replacement.innerText = t.attributes.item(i).nodeValue;
+            }
+            replacement.onclick = (e) => replaceTags(e.target);
+          }
+          t.parentNode.replaceChild(replacement, t);
+        }
+      });
+      replaceTags(originalTag);
+    }
+  };
+
+  const getData = async (filter, value) => {
+    let temp = [];
+    if (filter === "category") {
+      for (let i = 0, l = props.info.length; i < l; i++) {
+        if (
+          props.info[i].data.name.toUpperCase().includes(value.toUpperCase())
+        ) {
+          temp.push(props.info[i].data.name);
+        }
+      }
+      return temp;
+    } else {
+      for (let i = 0, l = props.info.length; i < l; i++) {
+        if (props.info[i].data.books) {
+          props.info[i].data.books.map((e) => {
+            if (props.info[i].data.books)
+              if (typeof e[filter] === "string") {
+                if (e[filter].toUpperCase().includes(value.toUpperCase())) {
+                  temp.push(e);
+                }
+              } else if (typeof e[filter] === "object") {
+                Object.values(e[filter]).forEach((y) => {
+                  if (!y.identifier) {
+                    if (
+                      e[filter][0].toUpperCase().includes(value.toUpperCase())
+                    ) {
+                      temp.push(e);
+                    }
+                  } else {
+                    if (y.identifier.includes(value)) {
+                      temp.push(e);
+                    }
+                  }
+                });
+              }
+          });
+        }
+      }
+      history.replace(`/dashboard/search-by-${filter}`);
+      return temp;
+    }
+  };
+
+  const filterCategories = (e) => {
+    if (!e.target.value) {
+      cleanFilters();
+      history.replace("/dashboard");
+    }
+    const name = e.target.name.split("-").pop();
+    e.target.parentNode.childNodes.forEach((a) => {
+      if (a.nodeName === "INPUT" && name === "category") {
+        if (!a.value) {
+          cleanFilters();
+          history.replace("/dashboard");
+        }
+        getData(a.name.split("-").pop(), a.value).then((res, err) => {
+          if (a.value) setCatFilters(res);
+        });
+      } else if (a.nodeName === "INPUT" && name !== "category") {
+        if (!a.value) {
+          cleanFilters();
+          history.replace("/dashboard");
+        }
+        getData(a.name.split("-").pop(), a.value).then((res, err) => {
+          if (a.value) setBFilters(res);
+        });
+      }
+    });
+  };
 
   try {
     return (
       <div className="dashboard">
         <header className="home-header">
           <div className="header-container">
-            {props.displayCategory ? (
+            <div className="header-logo-container">
               <button
                 type="submit"
                 className="return-btn"
                 onClick={(e) => {
                   e.preventDefault();
+                  cleanFilters();
                   history.replace("/dashboard");
                   props.handleDisplay("");
                 }}
               >
-                &larr;
+                Logo
               </button>
-            ) : (
-              <h3>{user.email}</h3>
-            )}
-            <div>
-              <h3>{props.displayCategory}</h3>
+              <p>|</p>
+              <p>{user.email}</p>
+            </div>
+            <div className="btn-display">
+              <AddCategory
+                handleChange={props.handleChange}
+                user={user}
+                history={history}
+                handleDisplay={props.handleDisplay}
+                addCat={props.addCat}
+              />
+              <div className="add-btn-container">
+                <Router>
+                  <Link
+                    type="button"
+                    className="btn toggle-btn addbook-btn"
+                    onClick={props.addBooks}
+                    to="/dashboard/adding-books"
+                  >
+                    +
+                  </Link>
+                </Router>
+              </div>
             </div>
             <button className="dashboard__btn" onClick={logout}>
               Logout
             </button>
           </div>
         </header>
-
+        <div className="filters">
+          <button
+            className=""
+            name="search-by-category"
+            type="text"
+            onClick={(e) => {
+              replaceTags(e.target);
+            }}
+          >
+            Category
+          </button>
+          <button
+            className=""
+            name="search-by-title"
+            onClick={(e) => {
+              replaceTags(e.target);
+            }}
+          >
+            Search Title
+          </button>
+          <button
+            className=""
+            name="search-by-authors"
+            onClick={(e) => {
+              replaceTags(e.target);
+            }}
+          >
+            Search Author
+          </button>
+          <button
+            className=""
+            name="search-by-industryIdentifiers"
+            onClick={(e) => {
+              replaceTags(e.target);
+            }}
+          >
+            Search ISBN
+          </button>
+          <button
+            className=""
+            name="search-by-publisher"
+            onClick={(e) => {
+              replaceTags(e.target);
+            }}
+          >
+            Search Publisher
+          </button>
+        </div>
         <DisplayCategories
           handleBooSubmit={props.handleBooSubmit}
           handleBooChange={props.handleBooChange}
@@ -74,6 +277,13 @@ function Dashboard(props) {
           handleLogin={props.handleLogin}
           history={history}
           addCat={props.addCat}
+          clearSearch={props.clearSearch}
+          showCat={props.showCat}
+          handleShowCat={props.handleShowCat}
+          handleShowCatTrue={props.handleShowCatTrue}
+          catFilters={catFilters}
+          bFilters={bFilters}
+          cleanFilters={this.cleanFilters}
         />
       </div>
     );

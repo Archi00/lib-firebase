@@ -1,7 +1,7 @@
 const getBookInfo = async (bookTitle) => {
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const fullUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${apiKey}&maxResults=40&orderBy=relevance&printType=books`;
+  const fullUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${apiKey}&maxResults=40&orderBy=relevance&projection=full&printType=books`;
   let list = [];
 
   await fetch(fullUrl)

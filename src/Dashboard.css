@@ -8,24 +8,18 @@
   cursor: pointer;
   text-transform: capitalize;
   border-radius: 10px;
-  position: fixed;
-  top: 1.8px;
-  right: 2px;
+  text-align: center;
+  align-self: center;
+  flex-grow: 1;
 }
 
 .return-btn {
-  position: fixed;
-  display: inline-block;
   cursor: pointer;
-  top: 1.2rem;
-  left: 2rem;
-  transform: scale(2.5);
   transition: 250ms ease;
-}
-
-.return-btn:hover,
-.return-btn:focus {
-  transform: scale(3);
+  align-self: center;
+  padding-top: 0.55em;
+  margin: 0;
+  display: inline-block;
 }
 
 .dashboard__btn:hover,
@@ -42,13 +36,17 @@
   padding: 0;
   background-color: #ffffff;
   z-index: 1;
+  display: block;
 }
 
 .header-container {
-  padding: 0rem 1rem 2rem 1rem;
-  height: 3rem;
+  padding: 1.5rem 2rem 2rem 2rem;
+  height: 6rem;
   border-radius: 0.5rem;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   transition: all 0.5s;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
 }

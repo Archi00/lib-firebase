@@ -1,0 +1,206 @@
+.display-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80vh;
+  min-width: 100vw;
+}
+
+.book-items {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 0;
+  overflow-y: hidden;
+  background-color: rgba(255, 255, 255, 0.542);
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(153, 150, 155, 0.5);
+  box-shadow: 0px 6px 10px rgba(70, 70, 70, 0.625);
+}
+
+.bookdisplay-info {
+  display: flex;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  min-width: 100%;
+  margin: 0;
+  color: #000;
+  font-size: 1.5rem;
+  overflow-y: hidden;
+}
+
+.displayBook-info-container {
+  margin: auto;
+}
+
+.bookdisplay-info-top {
+  display: flex;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 0;
+  color: #000;
+  font-size: 1.5rem;
+}
+
+.display-cover-book {
+  min-width: 2rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.display-cover:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.popup-display {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 1;
+  background-color: rgba(118, 118, 118, 0.584);
+}
+
+.displayBook-header {
+  border-radius: 5px;
+  padding: 0.5rem 1rem 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.displayBook-title {
+  color: #000;
+}
+
+.displayBook-update-input {
+  text-align: center;
+}
+
+.displayBook-edit-btn:hover,
+.displayBook-edit-btn:focus {
+  cursor: pointer;
+  color: #fff;
+}
+
+.displayBook-save-btn,
+.displayBook-cancel-btn {
+  position: absolute;
+  bottom: 1em;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.4em 1em 0.4em;
+  border: 0.1em solid #4d4d4d;
+  text-transform: capitalize;
+  border-radius: 10px;
+  transition: 150ms ease;
+}
+
+.displayBook-save-btn:hover,
+.displayBook-save-btn:focus {
+  background-color: rgba(0, 140, 255, 0.699);
+  color: white;
+  border: 0.1em solid rgba(0, 140, 255, 0.699);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+.displayBook-cancel-btn:hover,
+.displayBook-cancel-btn:focus {
+  background-color: red;
+  color: white;
+  border: 0.1em solid red;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
+}
+
+.displayBook-cancel-btn {
+  left: 0;
+}
+.displayBook-save-btn {
+  right: 0;
+}
+
+.img-container {
+  margin: 1em;
+  padding: 0;
+  text-decoration: none;
+  transition: 250ms ease;
+  display: inline-block;
+}
+
+.display-cover-book:hover,
+.display-cover-book:focus {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.displayBook-info-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 1em;
+  gap: 0.3em;
+}
+
+.displayBook-extra-info {
+  text-align: left;
+  max-height: 40vh;
+}
+
+.displayBook-extra-info {
+  text-align: justify;
+  margin: 1em 1em 0 0;
+  overflow-y: scroll;
+}
+
+.ISBN-info {
+  position: relative;
+  margin: 1em 1em 0em 1em;
+  overflow-x: hidden;
+}
+
+.ISBN {
+  display: block;
+  max-width: 30%;
+  text-align: center;
+  margin: auto;
+}
+.displayBook-close-btn {
+  color: #000;
+  cursor: pointer;
+}
+
+.displayBook-close-btn:hover,
+.displayBook-close-btn:focus {
+  color: #fff;
+}
+
+.displayBook-description {
+  font-size: 1.5rem;
+  max-width: 20em;
+}
+
+.displayBook-update-description {
+  font-size: 1.5rem;
+  max-width: 20em;
+  min-height: 100%;
+}
+
+.displayBook-extra-info::-webkit-scrollbar {
+  display: none;
+}
+
+.displayBook-info-container:hover,
+.displayBook-description:hover,
+.displayBook-title:hover,
+.display-info > li:hover {
+  cursor: default;
+}
