@@ -10,6 +10,10 @@ export default class AddBook extends React.Component {
     this.togglePopup = this.togglePopup.bind(this);
   }
 
+  componentDidMount() {
+    this.props.clearSearch();
+  }
+
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
@@ -21,10 +25,10 @@ export default class AddBook extends React.Component {
       <div className="add-btn-container">
         <button
           type="button"
-          className="btn toggle-btn"
+          className="btn toggle-btn addbook-btn"
           onClick={this.togglePopup}
         >
-          Add Book
+          +
         </button>
         {this.state.showPopup ? (
           <BookPopup
@@ -36,6 +40,8 @@ export default class AddBook extends React.Component {
             catList={this.props.catList}
             user={this.props.user}
             displayCategory={this.props.displayCategory}
+            closeSubmit={this.props.closeSubmit}
+            clearSearch={this.props.clearSearch}
           />
         ) : null}
       </div>

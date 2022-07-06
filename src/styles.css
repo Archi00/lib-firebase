@@ -3,21 +3,21 @@
 *::after {
   box-sizing: border-box;
   transition-timing-function: ease-in-out;
+  transition: all 0.1s;
 }
 
-*::focus {
-  outline: 3px dashed #228bec;
-  outline-offset: 0;
+*:focus {
+  outline: none;
 }
 
 html {
   font: 62.5% / 1.15 sans-serif;
   height: 100vh;
-  display: flex;
   overflow-y: hidden;
 }
 
 body {
+  background-color: #1b1b1b;
   overflow-y: scroll;
 }
 
@@ -32,10 +32,6 @@ html::-webkit-scrollbar {
 body {
   width: 100%;
   margin: auto;
-}
-
-.App {
-  text-align: center;
 }
 
 h1,
@@ -94,8 +90,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   width: 100vw;
-  background-color: #f5f5f5;
-  color: #4d4d4d;
+  background-color: hsl(0, 0%, 96%);
+  color: #444343;
 }
 
 code {
@@ -108,11 +104,6 @@ code {
   justify-content: space-around;
 }
 
-.btn-display {
-  display: flex;
-  justify-content: space-around;
-}
-
 .btn {
   padding: 0.8rem 1rem 0.7rem;
   border: 0.1rem solid #4d4d4d;
@@ -120,25 +111,55 @@ code {
   text-transform: capitalize;
   border-radius: 10px;
 }
-.btn:hover {
+.btn:hover,
+.btn:focus {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   transform: scale(1.01);
 }
 
 [class*="stack"] > * {
-  margin-top: 0;
   margin-bottom: 0;
 }
 
 .btn.toggle-btn {
   border-width: 1px;
   border-color: #d3d3d3;
+  transition: 250ms ease;
+  margin-bottom: 3em;
 }
 
 .category-list-container {
-  text-align: center;
+  display: flex;
+  direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  align-content: space-around;
+  gap: 1em;
+  z-index: -1;
+}
+.feedback-cat {
+  width: 30vw;
+  max-height: 8vh;
+  position: absolute;
+  left: 35%;
+  right: 50%;
   margin: auto;
-  width: 90%;
+  top: 20%;
+  background: white;
+  border-radius: 6px;
+  font-size: 2em;
+  text-align: center;
+  padding: 1em;
+  border: none;
+  box-shadow: 0px 6px 10px rgba(237, 154, 154, 0.25);
+  background-color: #e5e5e5;
+  z-index: 1;
+}
+
+.feedback-cat p {
+  padding: 0;
+  margin: 0;
 }
 
 .popup {
@@ -149,6 +170,15 @@ code {
   bottom: 0;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.addbook-btn {
+  position: fixed;
+  top: 0;
+  left: 2rem;
+  display: inline-block;
+  margin-top: 5rem;
 }
 
 form {
@@ -158,33 +188,45 @@ form {
 }
 
 .book-input {
-  width: 50%;
+  height: 3%;
+  width: 70vw;
   position: absolute;
-  left: 25%;
+  left: 15%;
   right: 25%;
-  top: 10%;
-  margin: auto;
+  top: 12%;
   background: white;
+  border-radius: 6px;
+  font-size: 2em;
   text-align: center;
-  border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
-  transition: 0.4s ease-out;
-  max-height: 2.5rem;
+  padding: 1em;
+  border: none;
+  box-shadow: 0px 6px 10px rgba(237, 154, 154, 0.25);
+  background-color: #e5e5e5;
+  z-index: 1;
 }
 
+.display-unique {
+  max-width: 70%;
+  text-align: center;
+  margin: auto;
+}
+
+.book-input:focus {
+  outline: none;
+}
 .display-books {
   margin: auto;
-  left: 15%;
-  top: 20%;
-  width: 70%;
+  left: 0;
+  right: 0;
+  top: 15%;
   position: absolute;
   text-align: center;
   max-height: 70vh;
+  max-width: 70vw;
   overflow-y: auto;
   -ms-overflow-style: none;
-  background: #ffffff;
+  background: transparent;
   padding: 1rem;
-  border-radius: 10px;
 }
 
 .display-books::-webkit-scrollbar {
@@ -197,13 +239,8 @@ form {
   align-self: start;
 }
 
-.boxed-results {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-content: space-between;
-  margin: auto;
+.boxed-results::before {
+  box-shadow: 0px 6px 10px rgba(70, 217, 244, 0.25);
 }
 
 .boxed-results::-webkit-scrollbar {
@@ -211,26 +248,44 @@ form {
 }
 
 .list-item {
+  flex: 1 0 20%;
+  max-width: 20vw;
+  gap: 5em 5em 5em 5em;
+  transition: all 100ms ease;
+  align-items: center;
+}
+
+.each-flex-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 20%;
+  max-width: 20vw;
+  margin-top: 2em;
+  transition: all 100ms ease;
+}
+
+.search-results {
+  flex: 1 0 25%;
+  max-width: 20vw;
   height: auto;
+  padding: 0.8rem 1rem 0.7rem;
   font-size: 10px;
   text-align: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  border-width: 1px;
+  cursor: pointer;
+  margin: auto;
+  box-shadow: 0px 6px 10px rgba(237, 154, 154, 0.25);
   transition: all 0.5s;
+  border-color: #d3d3d3;
   background-color: #e5e5e5;
-  margin-bottom: 2rem;
-  padding: 1rem 0rem 1rem 0rem;
   max-height: 6.1rem;
+  min-height: 4rem;
   -ms-overflow-style: none;
+  overflow-y: hidden;
   max-width: 79vw;
   border: solid 1px rgba(153, 150, 155, 0.5);
-  overflow-y: auto;
-}
-
-.list-item:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  transform: scale(1.01);
 }
 
 .list-item::-webkit-scrollbar {
@@ -240,6 +295,89 @@ form {
 .display-info {
   display: flex;
   align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  margin: 0.5em;
+  position: relative;
+  gap: 0.3em;
+}
+
+.update-button {
+  cursor: pointer;
+  position: fixed;
+  display: inline-block;
+  top: 0;
+  right: 2rem;
+  margin-top: 6rem;
+  display: inline-block;
+  padding: 0.4em 1em 0.4em;
+  border: 0.1em solid #4d4d4d;
+  text-transform: capitalize;
+  border-radius: 10px;
+  transition: 250ms ease;
+}
+
+.edit-button {
+  cursor: pointer;
+  position: fixed;
+  display: inline-block;
+  top: 0;
+  right: 2rem;
+  margin-top: 8.5rem;
+  display: inline-block;
+  padding: 0.4em 1em 0.4em;
+  border: 0.1em solid #4d4d4d;
+  text-transform: capitalize;
+  border-radius: 10px;
+  transition: 250ms ease;
+}
+
+.edit-button:hover,
+.edit-button:focus {
+  background-color: rgba(0, 140, 255, 0.699);
+  color: white;
+  border: 0.1em solid rgba(0, 140, 255, 0.699);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.sort-button {
+  cursor: pointer;
+  position: fixed;
+  display: inline-block;
+  top: 0;
+  right: 2rem;
+  margin-top: 11rem;
+  display: inline-block;
+  padding: 0.4em 1em 0.4em;
+  border: 0.1em solid #4d4d4d;
+  text-transform: capitalize;
+  border-radius: 10px;
+  transition: 250ms ease;
+}
+
+.sort-button:hover,
+.sort-button:focus {
+  background-color: rgba(0, 140, 255, 0.699);
+  color: white;
+  border: 0.1em solid rgba(0, 140, 255, 0.699);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.update-button:hover,
+.update-button:focus {
+  background-color: rgba(0, 140, 255, 0.699);
+  color: white;
+  border: 0.1em solid rgba(0, 140, 255, 0.699);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+}
+
+.search-info {
+  display: flex;
+  align-content: center;
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -247,20 +385,21 @@ form {
   margin: 0;
 }
 
-.display-info li {
-  overflow-y: hidden;
-}
-
-.display-info li {
-  display: block;
-  width: 90%;
-}
-
-.display-info li::-webkit-scrollbar {
+.display-info li::-webkit-scrollbar,
+.search-info li::-webkit-scrollbar {
   display: none;
 }
 
 .display-cover {
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 100%;
+  align-self: flex-end;
+  transition: 300ms ease;
+  margin-bottom: 0.5em;
+}
+
+.search-display-cover {
   width: 2rem;
   min-width: 2rem;
   border-radius: 5px;
@@ -275,18 +414,12 @@ form {
     rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
     rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
-.App {
-  font-family: sans-serif;
-  text-align: center;
-  margin: 8rem auto auto auto;
-}
 
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
@@ -326,6 +459,42 @@ form {
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s;
+}
+
+.delete-book-btn {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.4em 1em 0.4em;
+  border: 0.1em solid #4d4d4d;
+  text-transform: capitalize;
+  border-radius: 10px;
+  transition: 250ms ease;
+  min-width: 6vw;
+  align-self: center;
+}
+
+.delete-book-btn:hover,
+.delete-book-btn:focus {
+  background-color: red;
+  color: white;
+  border: 0.1em solid red;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
+}
+
+.ISBN {
+  transition: all 250ms ease;
+}
+
+.ISBN:hover,
+.ISBN:focus {
+  color: #000;
+  cursor: default;
+  transform: scale(1.5);
+}
+
+.QRCode {
+  margin: 10em 0 5em 0;
 }
 
 @-webkit-keyframes animatezoom {

@@ -12,6 +12,7 @@ import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Reset from "./Reset";
 import AddBook from "./AddBook";
+import "./App.css";
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
@@ -26,7 +27,9 @@ export default class App extends React.Component {
       name: "",
       bookTitle: "",
       displayCategory: "",
-      user: {}
+      user: {},
+      currentBook: [],
+      bookCount: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -36,26 +39,30 @@ export default class App extends React.Component {
     this.uniqueCat = this.uniqueCat.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleDisplay = this.handleDisplay.bind(this);
+    this.addCat = this.addCat.bind(this);
+    this.handleAddBook = this.handleAddBook.bind(this);
+    this.checkCurrentBook = this.checkCurrentBook.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
+    this.categories = null;
+    this.currentBook = false;
+    this.book = {};
+    this.flag = false;
   }
 
   async componentDidMount() {
-    let categories = null;
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        categories = await getDbData();
-        categories.map((cat) => {
-          if (
-            !this.state.catList.includes(cat.data.category.name) &&
-            cat.data.category.name
-          )
+        this.categories = await getDbData();
+        this.categories.map((cat) => {
+          if (!this.state.catList.includes(cat.data.name) && cat.data.name)
             this.setState({
-              catList: this.state.catList.concat(cat.data.category.name)
+              catList: this.state.catList.concat(cat.data.name)
             });
           if (
-            window.location.pathname.includes(cat.data.category.name) &&
+            window.location.pathname.includes(cat.data.name) &&
             !this.state.displayCategory
           ) {
-            this.setState({ displayCategory: cat.data.category.name });
+            this.setState({ displayCategory: cat.data.name });
           }
         });
       } else {
@@ -69,6 +76,11 @@ export default class App extends React.Component {
     e.preventDefault();
     const listInfo = await getBookInfo(this.state.bookTitle);
     this.setState({ bookInfoList: listInfo });
+    return clearTimeout(this.timer);
+  }
+
+  addCat(cat) {
+    this.setState({ catList: this.state.catList.concat(cat) });
   }
 
   handleLogin(user) {
@@ -81,14 +93,46 @@ export default class App extends React.Component {
 
   handleBooChange(e) {
     this.setState({ bookTitle: e.target.value });
+    this.timer = setTimeout(() => {
+      this.handleBooSubmit(e);
+    }, 900);
+  }
+
+  checkCurrentBook(e) {
+    return [this.currentBook, this.book];
+  }
+
+  clearSearch() {
+    this.setState({ bookInfoList: [] });
   }
 
   handleAddBook(e) {
-    e.preventDefault();
+    this.currentBook = true;
+    setTimeout(() => {
+      this.currentBook = false;
+    }, 50);
+    return (this.book = e);
   }
 
   handleDisplay(e) {
     this.setState({ displayCategory: e });
+  }
+
+  showNumOfBooks(title) {
+    let count = 0;
+    if (!this.flag) {
+      this.categories.map((e) => {
+        if (
+          e.data.name === title &&
+          e.data.books &&
+          e.data.books.length > count
+        ) {
+          count = e.data.books.length;
+        }
+      });
+      this.flag = true;
+    }
+    return count;
   }
 
   uniqueCat(title) {
@@ -102,22 +146,23 @@ export default class App extends React.Component {
             catList={this.state.catList}
             user={this.state.user}
             displayCategory={this.state.displayCategory}
+            closeSubmit={this.handleAddBook}
+            clearSearch={this.clearSearch}
           />
           <Link
             to={"/dashboard/" + title}
             onClick={(e) => {
               this.handleDisplay(title);
             }}
-          >
-            <h3>{title}</h3>
-          </Link>
+          ></Link>
           <CategoryInfo
-            key={title}
             titleName={title}
             handleSubmit={this.handleBooSubmit}
             handleChange={this.handleBooChange}
             handleDisplay={this.handleDisplay}
             user={this.state.user}
+            checkCurrentBook={this.checkCurrentBook}
+            category={this.state.displayCategory}
           />
         </Router>
       );
@@ -125,16 +170,19 @@ export default class App extends React.Component {
   }
 
   multiCat(title) {
+    const count = this.showNumOfBooks(title);
+    this.flag = false;
     return (
       <Router>
         <Link
+          className="cat-btn"
           to={"/dashboard/" + title}
           onClick={(e) => {
             this.handleDisplay(title);
           }}
-          className="catButton"
         >
           <h3>{title}</h3>
+          <p>{count}</p>
         </Link>
       </Router>
     );
@@ -162,6 +210,7 @@ export default class App extends React.Component {
                   uniqueCat={this.uniqueCat}
                   handleLogin={this.handleLogin}
                   handleDisplay={this.handleDisplay}
+                  addCat={this.addCat}
                 />
               </Route>
             </Switch>

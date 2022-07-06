@@ -1,5 +1,5 @@
 {
-  "name": "lib",
+  "name": "lib-firebase",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -27,5 +27,10 @@
     "build:css": "node-sass src/ -o src/ ",
     "watch:css": "npm run build:css && node-sass src/ -o src/ -w -r"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

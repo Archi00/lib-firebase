@@ -38,6 +38,7 @@ function Dashboard(props) {
             {props.displayCategory ? (
               <button
                 type="submit"
+                className="return-btn"
                 onClick={(e) => {
                   e.preventDefault();
                   history.replace("/dashboard");
@@ -46,9 +47,11 @@ function Dashboard(props) {
               >
                 &larr;
               </button>
-            ) : null}
+            ) : (
+              <h3>{user.email}</h3>
+            )}
             <div>
-              <div>{user.email}</div>
+              <h3>{props.displayCategory}</h3>
             </div>
             <button className="dashboard__btn" onClick={logout}>
               Logout
@@ -70,6 +73,7 @@ function Dashboard(props) {
           user={user}
           handleLogin={props.handleLogin}
           history={history}
+          addCat={props.addCat}
         />
       </div>
     );

@@ -6,10 +6,28 @@ export default class CategoryPopup extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: ""
+      name: "",
+      catAdded: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = null;
+  }
+
+  componentDidMount() {
+    this.handleClickOutside = (event) => {
+      if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this.props.closePopup();
+      }
+    };
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    clearTimeout(this.timer);
   }
   handleChange(e) {
     this.setState({ name: e.target.value });
@@ -20,28 +38,35 @@ export default class CategoryPopup extends React.Component {
     if (this.state.name !== "") {
       postCategory(
         {
-          category: {
-            name: capitalize(this.state.name),
-            books: []
-          }
+          name: capitalize(this.state.name)
         },
         this.props.user.uid
       );
     }
+    this.props.addCat(capitalize(this.state.name));
+    this.setState({ catAdded: true });
+    this.timer = setTimeout(() => {
+      this.setState({ catAdded: false });
+    }, 2000);
+    e.target.children[0].value = "";
   }
 
   render() {
     return (
       <div className="popup">
-        <form onSubmit={this.handleSubmit}>
-          <button onClick={this.props.closePopup}>close me</button>
+        <form onSubmit={this.handleSubmit} ref={this.wrapperRef}>
           <input
             className="book-input"
             name="title"
             onChange={(this.props.handleChange, this.handleChange)}
+            autoFocus
           />
-          <button>Submit</button>
         </form>
+        {this.state.catAdded ? (
+          <div className="feedback-cat">
+            <p>Category added</p>
+          </div>
+        ) : null}
       </div>
     );
   }
