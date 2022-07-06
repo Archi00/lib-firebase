@@ -133,6 +133,7 @@ code {
   align-items: flex-start;
   align-content: flex-start;
   gap: 3em;
+  margin-top: 4em;
 }
 
 .btn-display {
@@ -147,15 +148,6 @@ code {
   flex-direction: row;
   gap: 1em;
   padding-left: 1em;
-}
-
-.filters {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 8em 1em 2em 1em;
-  width: 100vw;
-  height: 2em;
 }
 
 .feedback-cat {
@@ -328,6 +320,7 @@ form {
   text-align: center;
   align-items: center;
   justify-content: center;
+  list-style-type: none;
 }
 
 .each-flex-container:hover,
@@ -427,7 +420,7 @@ form {
   display: inline-block;
   top: 0;
   right: 2rem;
-  margin-top: 6rem;
+  margin-top: 7rem;
   display: inline-block;
   padding: 0.4em 1em 0.4em;
   border: 0.1em solid #4d4d4d;
@@ -442,7 +435,7 @@ form {
   display: inline-block;
   top: 0;
   right: 2rem;
-  margin-top: 8.5rem;
+  margin-top: 10rem;
   display: inline-block;
   padding: 0.4em 1em 0.4em;
   border: 0.1em solid #4d4d4d;
@@ -466,7 +459,7 @@ form {
   display: inline-block;
   top: 0;
   right: 2rem;
-  margin-top: 11rem;
+  margin-top: 13rem;
   display: inline-block;
   padding: 0.4em 1em 0.4em;
   border: 0.1em solid #4d4d4d;

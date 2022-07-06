@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import "./Dashboard.css";
 import { logout } from "./firebase";
 import { auth, db } from "./App";
 import { getDocs, query, collection, where, doc } from "@firebase/firestore";
@@ -46,7 +45,6 @@ function Dashboard(props) {
     setBFilters([]);
     setCatFilters([]);
   };
-  cleanFilters.bind(this);
 
   const replaceTags = (originalTag, count = 0) => {
     cleanFilters();
@@ -169,13 +167,13 @@ function Dashboard(props) {
 
   try {
     return (
-      <div className="dashboard">
-        <header className="home-header">
-          <div className="header-container">
-            <div className="header-logo-container">
+      <>
+        <header className="fixed top-0 w-screen p-0 bg-white z-1 block">
+          <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
+            <div className="mt-4 header-logo-container">
               <button
                 type="submit"
-                className="return-btn"
+                className="p-0 return-btn"
                 onClick={(e) => {
                   e.preventDefault();
                   cleanFilters();
@@ -185,10 +183,10 @@ function Dashboard(props) {
               >
                 Logo
               </button>
-              <p>|</p>
-              <p>{user.email}</p>
+              <p className="my-auto">|</p>
+              <p className="my-auto">{user.email}</p>
             </div>
-            <div className="btn-display">
+            <div className="self-center my-auto btn-display">
               <AddCategory
                 handleChange={props.handleChange}
                 user={user}
@@ -196,7 +194,7 @@ function Dashboard(props) {
                 handleDisplay={props.handleDisplay}
                 addCat={props.addCat}
               />
-              <div className="add-btn-container">
+              <div className="inline-block">
                 <Router>
                   <Link
                     type="button"
@@ -214,7 +212,7 @@ function Dashboard(props) {
             </button>
           </div>
         </header>
-        <div className="filters">
+        <div className="flex flex-row justify-start mt-28 gap-96 ml-24 ">
           <button
             className=""
             name="search-by-category"
@@ -283,9 +281,9 @@ function Dashboard(props) {
           handleShowCatTrue={props.handleShowCatTrue}
           catFilters={catFilters}
           bFilters={bFilters}
-          cleanFilters={this.cleanFilters}
+          cleanFilters={cleanFilters}
         />
-      </div>
+      </>
     );
   } catch (err) {
     console.error(err);

@@ -1,6 +1,8 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
+import "./Dashboard.css";
+import "./index.css";
 
 import App from "./App";
 
