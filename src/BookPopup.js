@@ -322,6 +322,7 @@ export default class BookPopup extends React.Component {
                     this.displayBook = [];
                     this.bookIds = [];
                   }
+                  setTimeout(() => window.location.pathname = "/dashboard", 1000)
                 }}
               >
                 Save

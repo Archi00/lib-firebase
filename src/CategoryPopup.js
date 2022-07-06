@@ -23,6 +23,7 @@ export default class CategoryPopup extends React.Component {
       }
     };
     document.addEventListener("mousedown", this.handleClickOutside);
+    console.log(this.props.categories)
   }
 
   componentWillUnmount() {

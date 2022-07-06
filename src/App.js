@@ -186,7 +186,7 @@ export default class App extends React.Component {
     const count = this.showNumOfBooks(title);
     this.flag = false;
     return (
-      <div className="group cat-btn">
+      <div className="group cat-btn" id={title}>
         <Router>
           <Link
             key={title}
@@ -204,6 +204,8 @@ export default class App extends React.Component {
           className="remove-category hidden group-hover:inline"
           onClick={(e) => {
             this.deleteCategory(title);
+            const bookToHide = document.getElementById(title)
+            bookToHide.style.display = "none";
           }}
         >
           x
