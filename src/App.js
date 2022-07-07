@@ -30,7 +30,7 @@ export default class App extends React.Component {
       currentBook: [],
       bookCount: 0,
       isAdding: false,
-      showCat: false,
+      showCat: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
