@@ -201,16 +201,16 @@ function Dashboard(props) {
                 <Router>
                   <Link
                     type="button"
-                    className="btn toggle-btn addbook-btn"
+                    className="hover:bg-sky-400 btn toggle-btn addbook-btn"
                     onClick={props.addBooks}
                     to="/dashboard/adding-books"
                   >
-                    +
+                    Add Book
                   </Link>
                 </Router>
               </div>
             </div>
-            <button className="dashboard__btn" onClick={logout}>
+            <button className="hover:bg-red-500 dashboard__btn" onClick={logout}>
               Logout
             </button>
           </div>

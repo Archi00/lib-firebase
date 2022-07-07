@@ -22,7 +22,7 @@ export default class AddCategory extends React.Component {
       <div className="add-btn-container">
         <button
           type="button"
-          className="btn toggle-btn"
+          className="hover:bg-sky-400 btn toggle-btn"
           onClick={this.togglePopup}
         >
           Add Category
