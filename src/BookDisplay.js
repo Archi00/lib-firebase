@@ -104,9 +104,9 @@ export default class BookPopup extends React.Component {
 
   render() {
     return (
-      <div className="popup-display bg-black opacity-80">
+      <div className="popup-display bg-black opacity-90">
         <div className="display-book">
-          <div className="book-items bg-gray-600 opacity-100" ref={this.wrapperRef}>
+          <div className="book-items bg-gray-700 opacity-100" ref={this.wrapperRef}>
             <div className="displayBook-header">
               <button
                 className="displayBook-edit-btn"

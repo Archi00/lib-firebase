@@ -145,7 +145,7 @@ export default class CategoryInfo extends React.Component {
 
           {this.state.bookInfo.map((each) =>
             each ? (
-              <div className="each-flex-container bg-gray-700 text-white hover:bg-gray-600">
+              <div className="each-flex-container bg-gray-800 text-white hover:bg-gray-600">
                 <div
                   onClick={(e) => this.togglePopup(each)}
                   className="list-item"

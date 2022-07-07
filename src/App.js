@@ -188,7 +188,7 @@ export default class App extends React.Component {
     return (
       <>
         <Router>
-          <Link id="category" className="bg-gray-700 border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600" to={`/dashboard/${title}`} onClick={(e) => {
+          <Link id="category" className="bg-gray-800 border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600" to={`/dashboard/${title}`} onClick={(e) => {
             this.handleDisplay(title)
           }}>
             <span
