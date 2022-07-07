@@ -60,142 +60,70 @@ export default class BookPopup extends React.Component {
   render() {
     return (
       <div className="categories-container">
-        {/* Start of category selection | Using state */}
-
-        {/* 
-        {this.state.categoryList.length > 0 ? (
-          this.state.showCat ? (
-            this.state.categoryList.map((e) => (
-              <div className="display-categories-display">
-                <div className="display-category-list">
-                  <h4
-                    className="cat-title-categories"
-                    onClick={() => this.setCategory(e)}
-                  >
-                    {e}
-                  </h4>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div
-              className="display-categories-display"
-              onClick={this.handleShowCat}
-            >
-              <div className="display-category-list">
-                {!this.state.category ? (
-                  <h4 className="cat-title-categories">Choose Category</h4>
-                ) : (
-                  <h4 className="cat-title-categories">
-                    {this.state.category}
-                  </h4>
-                )}
-              </div>
-            </div>
-          )
-        ) : null}
-        */}
-
-        {/* End of category selection */}
-
-        {/* Start of search book form | Checks if there's a category selected */}
-        {!this.state.showCat ? (
-          <div className="book-search-info-container" >
-          {/*
-            <form id="searchBook" onSubmit={this.props.handleSubmit}>
-              <input
-                className="book-input"
-                onChange={this.props.handleChange}
-                name="title"
-                autoFocus
-                onFocus={() => this.checkInput()}
-              />
-              {this.state.showCloseBtn ? (
-                <p
-                  className="remove-title"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const input = document.getElementsByClassName("book-input");
-                    input.title.value = "";
-                    input.title.focus();
-                    this.checkInput();
-                  }}
-                >
-                  x
-                </p>
-              ) : null}
-            </form>
-            */}
-            <SearchBookInput 
+        <div className="book-search-info-container" >
+          <SearchBookInput 
               catList={this.props.catList} 
               setCategory={this.setCategory} 
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-
-
-            {true ? (
-              this.props.bookList.length > 0 ? (
-                <div className="display-books">
-                  <div className="boxed-results">
-                    {this.props.bookList.map((book) => (
-                      <div
-                        style={
-                          this.bookIds.includes(book.id)
-                            ? { border: ".3em solid #7FFFD4" }
-                            : null
-                        }
-                        className="search-results"
+            <div className="display-books">
+              <div className="boxed-results">
+                {this.props.bookList.map((book) => (
+                  <div
+                    style={
+                      this.bookIds.includes(book.id)
+                        ? { border: ".3em solid #7FFFD4" }
+                        : null
+                    }
+                    className="search-results"
+                    onClick={(e) => {
+                      this.handleAddBook(e, book);
+                    }}
+                  >
+                    <h4 className="cat-title">
+                      {book.volumeInfo.categories}
+                    </h4>
+                    <ul className="search-info">
+                      <li>
+                        {book.volumeInfo.imageLinks ? (
+                          <img
+                            load="lazyload"
+                            className="search-display-cover"
+                            alt="cover"
+                            src={book.volumeInfo.imageLinks.thumbnail}
+                          />
+                        ) : null}
+                      </li>
+                      <li>{book.volumeInfo.title}</li>
+                      <li>{book.volumeInfo.authors}</li>
+                      <li>{book.volumeInfo.pageCount}</li>
+                      <li>{book.volumeInfo.publishedDate}</li>
+                      <li>{book.volumeInfo.publisher}</li>
+                      <li
                         onClick={(e) => {
-                          this.handleAddBook(e, book);
+                          e.preventDefault();
+                          if (this.state.category) {
+                            postCategory(
+                              {
+                                name: this.state.category,
+                                books: [book.volumeInfo]
+                              },
+                              this.props.user.uid
+                            );
+                          } else {
+                            alert("Category Not Selected");
+                          }
                         }}
                       >
-                        <h4 className="cat-title">
-                          {book.volumeInfo.categories}
-                        </h4>
-                        <ul className="search-info">
-                          <li>
-                            {book.volumeInfo.imageLinks ? (
-                              <img
-                                load="lazyload"
-                                className="search-display-cover"
-                                alt="cover"
-                                src={book.volumeInfo.imageLinks.thumbnail}
-                              />
-                            ) : null}
-                          </li>
-                          <li>{book.volumeInfo.title}</li>
-                          <li>{book.volumeInfo.authors}</li>
-                          <li>{book.volumeInfo.pageCount}</li>
-                          <li>{book.volumeInfo.publishedDate}</li>
-                          <li>{book.volumeInfo.publisher}</li>
-                          <li
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (this.state.category) {
-                                postCategory(
-                                  {
-                                    name: this.state.category,
-                                    books: [book.volumeInfo]
-                                  },
-                                  this.props.user.uid
-                                );
-                              } else {
-                                alert("Category Not Selected");
-                              }
-                            }}
-                          >
-                            {this.bookIds.includes(book.id) ? "0" : "+"}
-                          </li>
-                        </ul>
-                      </div>
-                    ))}
+                        {this.bookIds.includes(book.id) ? "0" : "+"}
+                      </li>
+                    </ul>
                   </div>
-                </div>
-              ) : null
-            ) : null}
+                ))}
+              </div>
+            </div>
           </div>
-        ) : null}
         <div>
           <div className="adding-books">
             {this.state.showBook.length > 0

@@ -79,7 +79,6 @@ export default class App extends React.Component {
   async handleBooSubmit(e) {
     e.preventDefault();
     const listInfo = await getBookInfo(this.state.bookTitle);
-    console.log(listInfo)
     this.setState({ bookInfoList: listInfo });
     return clearTimeout(this.timer);
   }
