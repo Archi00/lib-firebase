@@ -1,6 +1,7 @@
 import React from "react";
 import postCategory from "./addCategory";
 import getDbData from "./getDb";
+import SearchBookInput from "./SearchBookInput";
 
 export default class BookPopup extends React.Component {
   constructor() {
@@ -13,48 +14,12 @@ export default class BookPopup extends React.Component {
       showCloseBtn: false
     };
 
-    this.wrapperRef = React.createRef();
-    this.wrapperRefCat = React.createRef();
     this.displayBook = [];
     this.bookIds = [];
     this.newObj = {};
+    this.setCategory = this.setCategory.bind(this)
   }
 
-  handleClickOutside = (event) => {
-    if (
-      !this.state.showCat &&
-      this.wrapperRef &&
-      !this.wrapperRef.current.contains(event.target)
-    ) {
-      this.props.handleShowCat();
-    }
-  };
-
-  handleClickInside = (event) => {
-    if (
-      !this.state.showCat &&
-      this.wrapperRef &&
-      this.wrapperRef.current.contains(event.target) &&
-      this.props.bookList.length > 0
-    ) {
-      this.props.handleShowCatTrue();
-    }
-  };
-
-  handleClickOutsideCat = (event) => {
-    if (
-      this.state.showCat &&
-      this.wrapperRefCat &&
-      !this.wrapperRefCat.current.contains(event.target)
-    ) {
-      console.log(event.target);
-      this.setState({ showCat: false });
-    }
-  };
-
-  handleShowCat = () => {
-    this.setState({ showCat: !this.state.showCat });
-  };
 
   async componentDidMount() {
     this.data = await getDbData();
@@ -79,14 +44,7 @@ export default class BookPopup extends React.Component {
 
   setCategory(e) {
     this.setState({ category: e });
-    this.handleShowCat();
-  }
-
-  checkInput(e) {
-    const input = document.getElementsByClassName("book-input");
-    input.title.value
-      ? this.setState({ showCloseBtn: true })
-      : this.setState({ showCloseBtn: false });
+    console.log(e)
   }
 
   async handleAddBook(e, book) {
@@ -123,7 +81,10 @@ export default class BookPopup extends React.Component {
 
   render() {
     return (
-      <div className="categories-container" ref={this.wrapperRefCat}>
+      <div className="categories-container">
+        {/* Start of category selection | Using state */}
+
+        {/* 
         {this.state.categoryList.length > 0 ? (
           this.state.showCat ? (
             this.state.categoryList.map((e) => (
@@ -155,8 +116,14 @@ export default class BookPopup extends React.Component {
             </div>
           )
         ) : null}
+        */}
+
+        {/* End of category selection */}
+
+        {/* Start of search book form | Checks if there's a category selected */}
         {!this.state.showCat ? (
-          <div className="book-search-info-container" ref={this.wrapperRef}>
+          <div className="book-search-info-container" >
+          {/*
             <form id="searchBook" onSubmit={this.props.handleSubmit}>
               <input
                 className="book-input"
@@ -180,6 +147,15 @@ export default class BookPopup extends React.Component {
                 </p>
               ) : null}
             </form>
+            */}
+            <SearchBookInput 
+              catList={this.props.catList} 
+              setCategory={this.setCategory} 
+              handleSubmit={this.props.handleSubmit} 
+              handleChange={this.props.handleChange}
+            />
+
+
             {this.props.showCat ? (
               this.props.bookList.length > 0 ? (
                 <div className="display-books">
