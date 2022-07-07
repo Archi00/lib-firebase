@@ -169,7 +169,7 @@ function Dashboard(props) {
   try {
     return (
       <>
-        <header className="fixed top-0 w-screen p-0 bg-white z-1 block">
+        <header className="fixed top-0 w-screen p-0 bg-gray-700 z-1 block">
           <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
             <div className="mt-4 header-logo-container">
               <button
