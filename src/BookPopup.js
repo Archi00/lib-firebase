@@ -1,5 +1,6 @@
 import React from "react";
 import postCategory from "./addCategory";
+import AddingBooksTracker from "./AddingBooksTracker";
 import getDbData from "./getDb";
 import SearchBookDropdown from "./SearchBookDropdown";
 import SearchBookInput from "./SearchBookInput";
@@ -12,14 +13,15 @@ export default class BookPopup extends React.Component {
       showCat: false,
       category: "",
       showBook: [],
-      showCloseBtn: false
+      showCloseBtn: false,
+      booksBeingAdded: {},
+      forceUpdate: 0
     };
 
     
     this.displayBook = [];
     this.bookIds = [];
     this.newObj = {};
-    this.booksBeingAdded = {}
     this.setCategory = this.setCategory.bind(this)
   }
 
@@ -27,21 +29,28 @@ export default class BookPopup extends React.Component {
     this.setState({ category: e });
   }
 
-  async handleAddBook(book, index) {
+  handleAddBook(book, index) {
     const el = document.getElementById(index)
-    if (!this.booksBeingAdded.hasOwnProperty(book.id)) {
+    const li = document.getElementById(book.id)
+    if (!this.state.booksBeingAdded.hasOwnProperty(book.id)) {
       el.style.backgroundColor = "rgb(156 163 175)";
-      this.booksBeingAdded = {...this.booksBeingAdded, [book.id]: book.volumeInfo}
+      this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: book.volumeInfo}})
     } else {
       el.style.backgroundColor = "rgb(55 65 81)"
-      delete this.booksBeingAdded[book.id]
+      delete this.state.booksBeingAdded[book.id]
+      this.setState({forceUpdate: 0})
+      //li.parentElement.removeChild(li)
     }
+    console.log(Object.entries(this.state.booksBeingAdded))
+    Object.entries(this.state.booksBeingAdded).map(book => console.log(book[1].title))
   }
 
   render() {
     return (
-      <div className="categories-container">
-        <div className="book-search-info-container" >
+      <>
+      <div className="categories-container ">
+        <div className="book-search-info-container mt-24" >
+
           <SearchBookInput 
               catList={this.props.catList} 
               setCategory={this.setCategory} 
@@ -89,6 +98,8 @@ export default class BookPopup extends React.Component {
               </div>
             </div>
           </div>
+
+        {/*}
         <div>
           <div className="adding-books">
             {this.state.showBook.length > 0
@@ -177,7 +188,10 @@ export default class BookPopup extends React.Component {
             </div>
           ) : null}
         </div>
+              */}
       </div>
+      <AddingBooksTracker booksList={this.state.booksBeingAdded} />
+      </>
     );
   }
 }
