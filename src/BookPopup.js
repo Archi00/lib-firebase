@@ -134,7 +134,7 @@ export default class BookPopup extends React.Component {
             />
 
 
-            {this.props.showCat ? (
+            {true ? (
               this.props.bookList.length > 0 ? (
                 <div className="display-books">
                   <div className="boxed-results">
