@@ -20,28 +20,6 @@ export default class BookPopup extends React.Component {
     this.setCategory = this.setCategory.bind(this)
   }
 
-
-  async componentDidMount() {
-    this.data = await getDbData();
-    let temp = [];
-    this.data.map((e) => temp.push(e.data.name));
-    temp.sort((a, b) => a.localeCompare(b));
-
-    this.setState({ categoryList: temp });
-
-    this.props.clearSearch();
-    document.addEventListener("mousedown", this.handleClickOutside);
-    document.addEventListener("mousedown", this.handleClickOutsideCat);
-    document.addEventListener("mousedown", this.handleClickInside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-    document.removeEventListener("mousedown", this.handleClickOutsideCat);
-    document.removeEventListener("mousedown", this.handleClickInside);
-    this.props.clearSearch();
-  }
-
   setCategory(e) {
     this.setState({ category: e });
     console.log(e)
