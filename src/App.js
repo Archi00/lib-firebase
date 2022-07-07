@@ -30,7 +30,7 @@ export default class App extends React.Component {
       currentBook: [],
       bookCount: 0,
       isAdding: false,
-      showCat: false
+      showCat: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -186,31 +186,25 @@ export default class App extends React.Component {
     const count = this.showNumOfBooks(title);
     this.flag = false;
     return (
-      <div className="bg-gray-700 border-none text-2xl text-gray-300 group cat-btn" id={title}>
+      <>
         <Router>
-          <Link
-            key={title}
-            className="cat-btn-info"
-            to={`/dashboard/${title}`}
-            onClick={(e) => {
-              this.handleDisplay(title);
-            }}
-          >
-            <h3>{title}</h3>
-            <p className="num-of-books">{count}</p>
+          <Link id="category" className="bg-gray-700 border-none text-2xl text-gray-300 group cat-btn" to={`/dashboard/${title}`} onClick={(e) => {
+            this.handleDisplay(title)
+          }}>
+            <span
+              key={title}
+              className="cat-btn-info"
+              to={`/dashboard/${title}`}
+              onClick={(e) => {
+                this.handleDisplay(title);
+              }}
+            >
+              <h3>{title}</h3>
+              <p className="num-of-books">{count}</p>
+            </span>
           </Link>
         </Router>
-        <button
-          className="remove-category hidden group-hover:inline"
-          onClick={(e) => {
-            this.deleteCategory(title);
-            const bookToHide = document.getElementById(title)
-            bookToHide.style.display = "none";
-          }}
-        >
-          x
-        </button>
-      </div>
+      </>
     );
   }
 

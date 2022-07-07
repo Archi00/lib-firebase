@@ -24,7 +24,7 @@ function DisplayCategories(props) {
         ) : props.bFilters.length < 1 ? (
           props.catList.length > 0 ? (
             !props.displayCategory ? (
-              <div className="display-categories">
+              <div className="display-categories" id="catZone">
                 {props.catFilters.length > 0
                   ? props.catFilters.map((e) => props.multiCat(e))
                   : props.catList.map((title) => props.multiCat(title))}
