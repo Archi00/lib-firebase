@@ -54,12 +54,12 @@ export default class CategoryPopup extends React.Component {
 
   render() {
     return (
-      <div className="popup">
+      <div className="popup opacity-90">
         <form onSubmit={this.handleSubmit} ref={this.wrapperRef} className="my-[40vh] block m-auto w-[50%]">   
             <label for="search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Add Category</label>
             <div className="relative">
-              <input onChange={(this.props.handleChange, this.handleChange)} name="title" autoFocus type="search" id="search" className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add Category" required=""></input>
-              <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+              <input onChange={(this.props.handleChange, this.handleChange)} name="title" autoFocus type="search" id="search" className="block p-4 pl-10 w-full text-2xl text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  min-h-[5vh]" placeholder="Add Category" required=""></input>
+              <button type="submit" className="text-white absolute right-0 bottom-0 w-[10%] h-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-4 py-2 shadow-xl dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
             </div>
         </form>
         {this.state.catAdded ? (
