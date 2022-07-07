@@ -186,7 +186,7 @@ export default class App extends React.Component {
     const count = this.showNumOfBooks(title);
     this.flag = false;
     return (
-      <div className="group cat-btn" id={title}>
+      <div className="bg-gray-700 border-none text-2xl text-gray-300 group cat-btn" id={title}>
         <Router>
           <Link
             key={title}

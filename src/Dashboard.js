@@ -171,7 +171,7 @@ function Dashboard(props) {
       <>
         <header className="fixed top-0 w-screen p-0 bg-gray-700 z-1 block">
           <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
-            <div className="mt-4 header-logo-container">
+            <div className="mt-2 text-3xl whitespace-nowrap text-bold text-white header-logo-container">
               <button
                 type="submit"
                 className="p-0 return-btn"
@@ -201,7 +201,7 @@ function Dashboard(props) {
                 <Router>
                   <Link
                     type="button"
-                    className="hover:bg-sky-400 btn toggle-btn addbook-btn"
+                    className="hover:bg-blue-700 hover:text-white text-gray-300 border-none text-xl btn toggle-btn addbook-btn"
                     onClick={props.addBooks}
                     to="/dashboard/adding-books"
                   >
@@ -210,7 +210,7 @@ function Dashboard(props) {
                 </Router>
               </div>
             </div>
-            <button className="hover:bg-red-500 dashboard__btn" onClick={logout}>
+            <button className="bg-gray-800 hover:bg-red-700 hover:text-black hover:text-2xl hover:text-bold border-none shadow-inner text-bold text-gray-300 dashboard__btn" onClick={logout}>
               Logout
             </button>
           </div>
