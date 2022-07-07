@@ -48,10 +48,6 @@
   max-width: 10%;
 }
 
-.cat-btn:hover,
-.cat-btn:focus {
-  transform: scale(1.1);
-}
 
 .remove-category {
   position: absolute;

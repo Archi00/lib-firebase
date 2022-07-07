@@ -1,6 +1,7 @@
 import React from "react";
 import "./displayBook.css";
 import updateBook from "./updateBook";
+import "./index.css"
 
 export default class BookPopup extends React.Component {
   constructor() {
@@ -103,9 +104,9 @@ export default class BookPopup extends React.Component {
 
   render() {
     return (
-      <div className="popup-display">
+      <div className="popup-display bg-black opacity-80">
         <div className="display-book">
-          <div className="book-items" ref={this.wrapperRef}>
+          <div className="book-items bg-gray-600 opacity-100" ref={this.wrapperRef}>
             <div className="displayBook-header">
               <button
                 className="displayBook-edit-btn"
@@ -153,13 +154,6 @@ export default class BookPopup extends React.Component {
                   </li>
                 </div>
                 <div className="displayBook-info-container">
-                  <li
-                    className="displayBook-title"
-                    value={this.props.book.title ? this.props.book.title : ""}
-                    objKey="title"
-                  >
-                    {this.props.book.title ? this.props.book.title : ""}
-                  </li>
                   {this.props.book.authors ? (
                     this.props.book.authors.length > 1 &&
                     typeof this.props.book.authors === "array" ? (

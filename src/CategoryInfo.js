@@ -115,7 +115,7 @@ export default class CategoryInfo extends React.Component {
         ) : null}
         <div className="category-list-container">
           <button
-            className="update-button"
+            className="update-button bg-blue-700 text-white border-none hover:bg-blue-800"
             onClick={(e) => {
               e.preventDefault();
               this.update();
@@ -124,7 +124,7 @@ export default class CategoryInfo extends React.Component {
             Update
           </button>
           <button
-            className="edit-button"
+            className="edit-button bg-blue-700 text-white border-none hover:bg-blue-800"
             onClick={(e) => {
               e.preventDefault();
               this.edit();
@@ -133,7 +133,7 @@ export default class CategoryInfo extends React.Component {
             Edit
           </button>
           <button
-            className="sort-button"
+            className="sort-button bg-blue-700 text-white border-none hover:bg-blue-800"
             onClick={(e) => {
               e.preventDefault();
               this.setState({ sorted: !this.state.sorted });
@@ -145,7 +145,7 @@ export default class CategoryInfo extends React.Component {
 
           {this.state.bookInfo.map((each) =>
             each ? (
-              <div className="each-flex-container">
+              <div className="each-flex-container bg-gray-700 text-white hover:bg-gray-600">
                 <div
                   onClick={(e) => this.togglePopup(each)}
                   className="list-item"

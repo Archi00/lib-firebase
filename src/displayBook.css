@@ -12,7 +12,6 @@
   border-radius: 5px;
   padding: 0;
   overflow-y: hidden;
-  background-color: rgba(255, 255, 255, 0.542);
   backdrop-filter: blur(5px);
   border-bottom: 1px solid rgba(153, 150, 155, 0.5);
   box-shadow: 0px 6px 10px rgba(70, 70, 70, 0.625);
@@ -64,7 +63,6 @@
   bottom: 0;
   margin: auto;
   z-index: 1;
-  background-color: rgba(118, 118, 118, 0.584);
 }
 
 .displayBook-header {

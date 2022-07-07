@@ -201,7 +201,7 @@ function Dashboard(props) {
                 <Router>
                   <Link
                     type="button"
-                    className="hover:bg-blue-700 hover:text-white text-gray-300 border-none text-xl btn toggle-btn addbook-btn"
+                    className="bg-blue-700 shadow-xl text-white text-bold hover:bg-blue-800 text-gray-300 border-none text-xl btn toggle-btn addbook-btn"
                     onClick={props.addBooks}
                     to="/dashboard/adding-books"
                   >
