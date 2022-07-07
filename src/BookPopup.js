@@ -15,9 +15,11 @@ export default class BookPopup extends React.Component {
       showCloseBtn: false
     };
 
+    
     this.displayBook = [];
     this.bookIds = [];
     this.newObj = {};
+    this.booksBeingAdded = {}
     this.setCategory = this.setCategory.bind(this)
   }
 
@@ -25,35 +27,14 @@ export default class BookPopup extends React.Component {
     this.setState({ category: e });
   }
 
-  async handleAddBook(e, book) {
-    if (e.target.parentElement.className === "search-results") {
-      e = e.target.parentElement;
-    } else if (
-      e.target.parentElement.parentElement.className === "search-results"
-    ) {
-      e = e.target.parentElement.parentElement;
-    } else if (e.target.className === "search-results") {
-      e = e.target;
-    }
-
-    if (!this.bookIds.includes(book.id)) {
-      this.setState({ showBook: this.displayBook });
-      e.style.border = ".3em solid #7FFFD4";
-      e.style.paddingTop = ".5em";
-      this.displayBook.push(book);
-      this.bookIds.push(book.id);
-      e.children[1].children[6].innerText = "0";
+  async handleAddBook(book, index) {
+    const el = document.getElementById(index)
+    if (!this.booksBeingAdded.hasOwnProperty(book.id)) {
+      el.style.backgroundColor = "rgb(156 163 175)";
+      this.booksBeingAdded = {...this.booksBeingAdded, [book.id]: book.volumeInfo}
     } else {
-      e.style.border = "";
-      e.style.paddingTop = "";
-      e.children[1].children[6].innerText = "+";
-      for (let i = 0; i < this.bookIds.length; i++) {
-        if (this.bookIds[i] === book.id) {
-          this.displayBook.splice(i, 1);
-          this.bookIds.splice(i, 1);
-        }
-      }
-      this.setState({ showBook: this.displayBook });
+      el.style.backgroundColor = "rgb(55 65 81)"
+      delete this.booksBeingAdded[book.id]
     }
   }
 
@@ -69,8 +50,10 @@ export default class BookPopup extends React.Component {
             />
             <div className="display-books mt-2.5">
               <div className="boxed-results">
-                {this.props.bookList.map((book) => (
+                {this.props.bookList.map((book, index) => (
                   <div
+                    id={index}
+                    key={index}
                     style={
                       this.bookIds.includes(book.id)
                         ? { border: ".3em solid #7FFFD4" }
@@ -78,7 +61,7 @@ export default class BookPopup extends React.Component {
                     }
                     className="search-results bg-gray-700 text-white text-xl hover:bg-gray-600 min-h-[10vh] m-1 border-sm border-gray-400"
                     onClick={(e) => {
-                      this.handleAddBook(e, book);
+                      this.handleAddBook(book, index);
                     }}
                   >
                     <h4 className="cat-title">
@@ -100,24 +83,6 @@ export default class BookPopup extends React.Component {
                       <li>{book.volumeInfo.pageCount}</li>
                       <li>{book.volumeInfo.publishedDate}</li>
                       <li>{book.volumeInfo.publisher}</li>
-                      <li
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (this.state.category) {
-                            postCategory(
-                              {
-                                name: this.state.category,
-                                books: [book.volumeInfo]
-                              },
-                              this.props.user.uid
-                            );
-                          } else {
-                            alert("Category Not Selected");
-                          }
-                        }}
-                      >
-                        {this.bookIds.includes(book.id) ? "0" : "+"}
-                      </li>
                     </ul>
                   </div>
                 ))}
