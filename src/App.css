@@ -59,3 +59,14 @@
   right: 0.5em;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 1690px) {
+  .num-of-books {
+    display: none;
+  }
+
+  .cat-btn-info {
+    display: block;
+    width: auto;
+  }
+}

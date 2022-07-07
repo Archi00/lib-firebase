@@ -197,7 +197,7 @@ export default class App extends React.Component {
             }}
           >
             <h3>{title}</h3>
-            <p>{count}</p>
+            <p className="num-of-books">{count}</p>
           </Link>
         </Router>
         <button
