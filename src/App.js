@@ -211,7 +211,6 @@ export default class App extends React.Component {
   render() {
     try {
       return (
-        <main>
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
@@ -243,7 +242,6 @@ export default class App extends React.Component {
               </Route>
             </Switch>
           </Router>
-        </main>
       );
     } catch (err) {
       console.error(err);

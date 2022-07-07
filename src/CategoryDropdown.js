@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-export default function Dropdown({categories, setCategory}) {
+export default function CategoryDropdown({categories, setCategory}) {
   const [selected, setSelected] = useState();
 
   const handleSubmit = (e, cat) => {

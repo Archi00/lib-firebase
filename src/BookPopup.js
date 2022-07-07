@@ -1,6 +1,7 @@
 import React from "react";
 import postCategory from "./addCategory";
 import getDbData from "./getDb";
+import SearchBookDropdown from "./SearchBookDropdown";
 import SearchBookInput from "./SearchBookInput";
 
 export default class BookPopup extends React.Component {
@@ -22,7 +23,6 @@ export default class BookPopup extends React.Component {
 
   setCategory(e) {
     this.setState({ category: e });
-    console.log(e)
   }
 
   async handleAddBook(e, book) {
@@ -67,7 +67,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books">
+            <div className="display-books mt-2.5">
               <div className="boxed-results">
                 {this.props.bookList.map((book) => (
                   <div
@@ -76,7 +76,7 @@ export default class BookPopup extends React.Component {
                         ? { border: ".3em solid #7FFFD4" }
                         : null
                     }
-                    className="search-results"
+                    className="search-results bg-gray-700 text-white text-xl hover:bg-gray-600 min-h-[10vh] m-1 border-sm border-gray-400"
                     onClick={(e) => {
                       this.handleAddBook(e, book);
                     }}
