@@ -19,10 +19,6 @@ export default class BookPopup extends React.Component {
     this.setState({ category: e });
   }
 
-  classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
   handleAddBook(book, index) {
     const el = document.getElementById(index)
     const li = document.getElementById(book.id)

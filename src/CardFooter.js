@@ -7,9 +7,14 @@ export default function CardFooter({bookList}) {
   const totalPages = numOfResults / resultsForPage
   const numOfPages = totalPages % 2 !== 0 ? Math.round(totalPages + 1) : totalPages
 
+  const classNames = (...classes) => {
+    return classes.filter(Boolean).join(' ')
+  }
+
   const displayNums = () => {
     let temp = []
     for (let i = 1; i < numOfPages + 1; i++) {
+      if (i === 1 )
      temp.push(
       <a
         key={i}
