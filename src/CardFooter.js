@@ -28,7 +28,7 @@ export default function CardFooter({bookList}) {
         href="#"
         aria-current="page"
         onClick={() => setCurrent(i)}
-        className={classNames(constant + current ? active : inactive)}
+        className={classNames(constant, current === i ? active : inactive)}
       >
         {i}
       </a>
