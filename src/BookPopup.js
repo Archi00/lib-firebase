@@ -54,7 +54,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books bg-gray-800 border-white border-4 border-gray-700 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="display-books bg-gray-800 border-white border-4 border-gray-700 rounded m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="boxed-results bg-gray-800">
                 {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div
