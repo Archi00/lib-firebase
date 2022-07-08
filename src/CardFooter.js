@@ -1,7 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import {useState} from "react"
 
 export default function CardFooter({bookList}) {
+  const [current, setCurrent] = useState(1)
+
   const numOfResults = bookList.length;
   const resultsForPage = 9
   const totalPages = numOfResults / resultsForPage
@@ -13,14 +16,19 @@ export default function CardFooter({bookList}) {
 
   const displayNums = () => {
     let temp = []
+    const active = "z-10 bg-gray-600 border-black text-gray-900 hover:text-gray-300"
+    const inactive = "bg-gray-800 border-gray-900 text-gray-300 hover:bg-gray-900 hover:text-gray-50"
+    const constant = "relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+
     for (let i = 1; i < numOfPages + 1; i++) {
-      if (i === 1 )
      temp.push(
       <a
+        id={i}
         key={i}
         href="#"
         aria-current="page"
-        className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+        onClick={() => setCurrent(i)}
+        className={classNames(constant + current ? active : inactive)}
       >
         {i}
       </a>
@@ -56,55 +64,16 @@ export default function CardFooter({bookList}) {
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
             <a
               href="#"
-              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-200 hover:bg-gray-50"
+              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-900 bg-gray-800 text-sm font-medium text-gray-300 hover:bg-gray-900 hover:text-gray-50"
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </a>
-            {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
+            {/* Current: "z-10 bg-gray-600 border-black text-gray-900 hover:text-gray-300", Default: "bg-gray-800 border-gray-900 text-gray-300 hover:bg-gray-900 hover:text-gray-50" */}
+            {displayNums()}
             <a
               href="#"
-              aria-current="page"
-              className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              1
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              2
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              3
-            </a>
-            <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-              ...
-            </span>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              8
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              9
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              10
-            </a>
-            <a
-              href="#"
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="relative inline-flex items-center px-2 py-2 rounded-r-md border text-sm font-medium bg-gray-800 border-gray-900 text-gray-300 hover:bg-gray-900 hover:text-gray-50"
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
