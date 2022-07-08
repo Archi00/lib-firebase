@@ -28,18 +28,14 @@ export default class BookPopup extends React.Component {
 
   handlePagination(page) {
     this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 9, lIter: (page * this.numOfBooks)})
-    console.log(this.state.currentPage)
-    console.log("current page: ", page, "first Iter: ", (page * this.numOfBooks) - 9, "last iter: ", (page * this.numOfBooks))
   }
 
   handleAddBook(book, index) {
     const el = document.getElementById(index)
     const li = document.getElementById(book.id)
     if (!this.state.booksBeingAdded.hasOwnProperty(book.id)) {
-      //el.style.backgroundColor = "rgb(156 163 175)";
       this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: book.volumeInfo}})
     } else {
-      //el.style.backgroundColor = "rgb(55 65 81)"
       delete this.state.booksBeingAdded[book.id]
       this.setState({forceUpdate: 0})
     }
@@ -189,7 +185,7 @@ export default class BookPopup extends React.Component {
               */}
       </div>
       <div className="absolute right-0 bottom-0 mx-12 my-14 min-h-[20vh] max-h-[20vh">
-        <AddingBooksTracker booksList={this.state.booksBeingAdded} /> 
+        <AddingBooksTracker that={this} /> 
       </div>
       </>
     );
