@@ -2,8 +2,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import {useState} from "react"
 
-export default function CardFooter({bookList}) {
+export default function CardFooter({bookList, that}) {
   const [current, setCurrent] = useState(1)
+
 
   const numOfResults = bookList.length;
   const resultsForPage = 9
@@ -25,9 +26,13 @@ export default function CardFooter({bookList}) {
       <a
         id={i}
         key={i}
+        name={current === i ? "true" : "false"}
         href="#"
         aria-current="page"
-        onClick={() => setCurrent(i)}
+        onClick={() => {
+          setCurrent(i)
+          that.handlePagination(i)
+        }}
         className={classNames(constant, current === i ? active : inactive)}
       >
         {i}
@@ -65,6 +70,7 @@ export default function CardFooter({bookList}) {
             <a
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-900 bg-gray-800 text-sm font-medium text-gray-300 hover:bg-gray-900 hover:text-gray-50"
+              onClick={() => current !== 1 ? (setCurrent(current - 1), that.handlePagination(current - 1)) : null}
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -74,6 +80,7 @@ export default function CardFooter({bookList}) {
             <a
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-r-md border text-sm font-medium bg-gray-800 border-gray-900 text-gray-300 hover:bg-gray-900 hover:text-gray-50"
+              onClick={() => current !== numOfPages ? (setCurrent(current + 1), that.handlePagination(current + 1)) : null}
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />

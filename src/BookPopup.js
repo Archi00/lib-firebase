@@ -10,13 +10,22 @@ export default class BookPopup extends React.Component {
       booksBeingAdded: {},
       forceUpdate: 0,
       fIter: 0,
-      lIter: 9
+      lIter: 9,
+      currentPage: 1,
+      category: ""
     };
     this.setCategory = this.setCategory.bind(this)
+    this.numOfBooks = 9
   }
 
   setCategory(e) {
     this.setState({ category: e });
+  }
+
+  handlePagination(page) {
+    this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 9, lIter: (page * this.numOfBooks)})
+    console.log(this.state.currentPage)
+    console.log("current page: ", page, "first Iter: ", (page * this.numOfBooks) - 9, "last iter: ", (page * this.numOfBooks))
   }
 
   handleAddBook(book, index) {
@@ -79,7 +88,7 @@ export default class BookPopup extends React.Component {
                 ))}
               </div>
                 {this.props.bookList.length > 0 ?
-                  <CardFooter bookList={this.props.bookList}/>
+                  <CardFooter bookList={this.props.bookList} that={this} />
                 : null }
             </div>
           </div>
