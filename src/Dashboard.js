@@ -185,8 +185,6 @@ function Dashboard(props) {
               >
                 Logo
               </button>
-              <p className="my-auto">|</p>
-              <p className="my-auto">{user.email}</p>
             </div>
             <div className="self-center my-auto btn-display">
               <AddCategory

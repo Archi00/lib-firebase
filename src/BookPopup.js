@@ -17,6 +17,9 @@ export default class BookPopup extends React.Component {
     };
     this.setCategory = this.setCategory.bind(this)
     this.numOfBooks = 9
+    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[8.35vh] border-sm border-gray-400"
+    this.inactive = "bg-gray-700 hover:bg-gray-600"
+    this.active = "bg-gray-400 hover:bg-gray-700"
   }
 
   setCategory(e) {
@@ -33,10 +36,10 @@ export default class BookPopup extends React.Component {
     const el = document.getElementById(index)
     const li = document.getElementById(book.id)
     if (!this.state.booksBeingAdded.hasOwnProperty(book.id)) {
-      el.style.backgroundColor = "rgb(156 163 175)";
+      //el.style.backgroundColor = "rgb(156 163 175)";
       this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: book.volumeInfo}})
     } else {
-      el.style.backgroundColor = "rgb(55 65 81)"
+      //el.style.backgroundColor = "rgb(55 65 81)"
       delete this.state.booksBeingAdded[book.id]
       this.setState({forceUpdate: 0})
     }
@@ -60,7 +63,7 @@ export default class BookPopup extends React.Component {
                   <div
                     id={index}
                     key={index}
-                    className="search-results bg-gray-700 text-white text-xl hover:bg-gray-600 min-h-[8.35vh] border-sm border-gray-400"
+                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inactive)}
                     onClick={(e) => {
                       this.handleAddBook(book, index);
                     }}
