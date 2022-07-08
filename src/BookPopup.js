@@ -194,7 +194,7 @@ export default class BookPopup extends React.Component {
         </div>
               */}
       </div>
-      <div className="absolute right-0 bottom-0 mx-12 my-14 min-h-[20vh] max-h-[20vh">
+      <div className={classNames("absolute right-0 bottom-0 mx-12 my-14", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
         <AddingBooksTracker that={this} /> 
       </div>
       </>

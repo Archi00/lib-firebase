@@ -58,7 +58,7 @@ export default function CardFooter({bookList, that}) {
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-300">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">{numOfPages}</span> of{' '}
+            Showing <span className="font-medium">{current}</span> to <span className="font-medium">{numOfPages}</span> of{' '}
             <span className="font-medium">{numOfResults}</span> results
           </p>
         </div>
