@@ -1,7 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
-export default function CardFooter() {
+export default function CardFooter({bookList}) {
+  const numOfResults = bookList.length;
+  const resultsForPage = 9
+  const totalPages = numOfResults / resultsForPage
+  const numOfPages = totalPages % 2 !== 0 ? Math.round(totalPages + 1) : totalPages
   return (
     <div className="bg-gray-700 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -21,8 +25,8 @@ export default function CardFooter() {
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-300">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
-            <span className="font-medium">97</span> results
+            Showing <span className="font-medium">1</span> to <span className="font-medium">{numOfPages}</span> of{' '}
+            <span className="font-medium">{numOfResults}</span> results
           </p>
         </div>
         <div>

@@ -78,7 +78,9 @@ export default class BookPopup extends React.Component {
                   </div>
                 ))}
               </div>
-                <CardFooter />
+                {this.props.bookList.length > 0 ?
+                  <CardFooter bookList={this.props.bookList}/>
+                : null }
             </div>
           </div>
 
