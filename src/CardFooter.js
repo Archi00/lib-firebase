@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { classNames } from './utils';
 import {useState} from "react"
 
 export default function CardFooter({bookList, that}) {
@@ -10,10 +11,6 @@ export default function CardFooter({bookList, that}) {
   const resultsForPage = 9
   const totalPages = numOfResults / resultsForPage
   const numOfPages = totalPages % 2 !== 0 ? Math.round(totalPages + 1) : totalPages
-
-  const classNames = (...classes) => {
-    return classes.filter(Boolean).join(' ')
-  }
 
   const displayNums = () => {
     let temp = []

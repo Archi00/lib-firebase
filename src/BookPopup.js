@@ -2,6 +2,7 @@ import React from "react";
 import AddingBooksTracker from "./AddingBooksTracker";
 import SearchBookInput from "./SearchBookInput";
 import CardFooter from "./CardFooter"
+import { classNames } from "./utils";
 
 export default class BookPopup extends React.Component {
   constructor() {
@@ -53,7 +54,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books bg-gray-600 border-white border-4 border-gray-700 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="display-books bg-gray-800 border-white border-4 border-gray-700 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="boxed-results bg-gray-800">
                 {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div
@@ -184,11 +185,9 @@ export default class BookPopup extends React.Component {
         </div>
               */}
       </div>
-      {Object.entries(this.state.booksBeingAdded).length > 0 ?
-      <div className="absolute right-0 bottom-0 mx-12 my-24">
+      <div className="absolute right-0 bottom-0 mx-12 my-14 min-h-[20vh] max-h-[20vh">
         <AddingBooksTracker booksList={this.state.booksBeingAdded} /> 
       </div>
-      : null}
       </>
     );
   }

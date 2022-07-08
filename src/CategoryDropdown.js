@@ -13,9 +13,9 @@ export default function CategoryDropdown({categories, setCategory}) {
 
   return (
     <>
-      <Menu as="div" className="relative inline-block text-left">
+      <Menu as="div" className="relative inline-block text-left m-0">
         <>
-          <Menu.Button className="inline-flex justify-center w-[17rem] rounded-md border border-gray-300 shadow-xl px-4 py-[1.10rem] text-xl font-medium bg-gray-600 text-black hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-0.5">
+          <Menu.Button className="inline-flex justify-center w-[17rem] rounded-md border border-gray-300 shadow-xl py-[1.3rem] text-xl font-medium bg-gray-600 text-black hover:bg-gray-700 focus:outline-none  focus:ring-offset-0.5">
             {!selected ? "Choose Category" : selected}
             <ChevronDownIcon className="-mr-1 ml-2 h-8 w-5" aria-hidden="true" />
           </Menu.Button>

@@ -21,4 +21,8 @@ async function FetchUserName() {
   }
 }
 
-export { capitalize, FetchUserName };
+const classNames = (...classes) => {
+  return classes.filter(Boolean).join(' ')
+}
+
+export { capitalize, FetchUserName, classNames };
