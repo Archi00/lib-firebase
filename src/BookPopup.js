@@ -12,13 +12,14 @@ export default class BookPopup extends React.Component {
       booksBeingAdded: {},
       forceUpdate: 0,
       fIter: 0,
-      lIter: 9,
+      lIter: 10,
       currentPage: 1,
     };
     this.numOfBooks = 9
-    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[8.38vh] border-sm border-gray-400"
+    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
+
   }
   
   handlePagination(page) {
@@ -63,8 +64,17 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books bg-gray-800 border-white border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
-              <div className="boxed-results bg-gray-800">
+            <div className="bg-gray-800 border-white border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+              <div className="bg-gray-800">
+                    <ul className="grid grid-cols-7 gap-4 min-h-[5.5vh]">
+                      <li className="my-auto">Cover</li>
+                      <li className="my-auto">Title</li>
+                      <li className="my-auto">Categories</li>
+                      <li className="my-auto">Authors</li>
+                      <li className="my-auto">Pages</li>
+                      <li className="my-auto">Publish Date</li>
+                      <li className="my-auto">Publisher</li>
+                    </ul>
                 {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div
                     id={index}
@@ -74,10 +84,7 @@ export default class BookPopup extends React.Component {
                       this.handleAddBook(book, index);
                     }}
                   >
-                    <h4 className="cat-title">
-                      {book.volumeInfo.categories}
-                    </h4>
-                    <ul className="search-info">
+                    <ul className="grid grid-cols-7 gap-4">
                       <li>
                         {book.volumeInfo.imageLinks ? (
                           <img
@@ -88,11 +95,12 @@ export default class BookPopup extends React.Component {
                           />
                         ) : null}
                       </li>
-                      <li>{book.volumeInfo.title}</li>
-                      <li>{book.volumeInfo.authors}</li>
-                      <li>{book.volumeInfo.pageCount}</li>
-                      <li>{book.volumeInfo.publishedDate}</li>
-                      <li>{book.volumeInfo.publisher}</li>
+                      <li className="my-auto">{book.volumeInfo.title}</li>
+                      <li className="my-auto">{book.volumeInfo.categories}</li>
+                      <li className="my-auto">{book.volumeInfo.authors}</li>
+                      <li className="my-auto">{book.volumeInfo.pageCount}</li>
+                      <li className="my-auto">{book.volumeInfo.publishedDate}</li>
+                      <li className="my-auto">{book.volumeInfo.publisher}</li>
                     </ul>
                   </div>
                 ))}

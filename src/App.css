@@ -55,6 +55,11 @@
   cursor: pointer;
 }
 
+.btnSearch {
+  height: 2em;
+  margin: auto;
+}
+
 @media only screen and (max-width: 1690px) {
   .num-of-books {
     display: none;
