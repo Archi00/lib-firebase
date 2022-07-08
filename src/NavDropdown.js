@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const Dropdown = ({ color }) => {
   // dropdown props
@@ -18,17 +19,17 @@ const Dropdown = ({ color }) => {
   // bg colors
   let bgColor;
   color === "white"
-    ? (bgColor = "bg-slate-700")
+    ? (bgColor = "bg-indigo-800")
     : (bgColor = "bg-" + color + "-500");
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full sm:w-6/12 md:w-4/12 px-4">
-          <div className="relative inline-flex align-middle w-full">
+          <div className="relative flex flex-row align-middle w-full">
             <button
               className={
-                "text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
-                bgColor
+                "flex flex-row text-gray-300 font-bold uppercase text-xl px-8 py-3 rounded shadow-xl hover:shadow-2xl hover:bg-gray-800 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
+                "bg-gray-900"
               }
               type="button"
               ref={btnDropdownRef}
@@ -38,57 +39,58 @@ const Dropdown = ({ color }) => {
                   : openDropdownPopover();
               }}
             >
-              {color === "white" ? "White Dropdown" : color + " Dropdown"}
+              Options 
+              <ChevronDownIcon className="-mr-2 ml-3 h-8 w-5" aria-hidden="true" />
             </button>
             <div
               ref={popoverDropdownRef}
               className={
                 (dropdownPopoverShow ? "block " : "hidden ") +
-                (color === "white" ? "bg-white " : bgColor + " ") +
+                (color === "indigo" ? "bg-white " : "bg-gray-800" + " ") +
                 "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
               }
-              style={{ minWidth: "12rem" }}
+              style={{ minWidth: "14rem" }}
             >
               <a
-                href="#pablo"
+                href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                  (color === "white" ? " text-slate-700" : "text-white")
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
+                  (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
               >
-                Action
+                Home
               </a>
               <a
-                href="#pablo"
+                href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                  (color === "white" ? " text-slate-700" : "text-white")
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
+                  (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
               >
-                Another action
+                Add Category
               </a>
               <a
-                href="#pablo"
+                href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                  (color === "white" ? " text-slate-700" : "text-white")
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
+                  (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
               >
-                Something else here
+                Add Book
               </a>
-              <div className="h-0 my-2 border border-solid border-t-0 border-slate-800 opacity-25" />
+              <div className="h-0 my-2 border border-solid border-t-0 border-gray-300 opacity-25" />
               <a
-                href="#pablo"
+                href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
-                  (color === "white" ? " text-slate-700" : "text-white")
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
+                  (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
               >
-                Seprated link
+                Logout
               </a>
             </div>
           </div>

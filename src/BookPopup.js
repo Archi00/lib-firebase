@@ -16,7 +16,7 @@ export default class BookPopup extends React.Component {
       currentPage: 1,
     };
     this.numOfBooks = 9
-    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[8.35vh] border-sm border-gray-400"
+    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[8.38vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
   }
@@ -63,7 +63,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books bg-gray-800 border-white border-4 border-gray-700 rounded m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="display-books bg-gray-800 border-white border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="boxed-results bg-gray-800">
                 {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div

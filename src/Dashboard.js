@@ -200,7 +200,7 @@ function Dashboard(props) {
                 <Router>
                   <Link
                     type="button"
-                    className="bg-blue-700 shadow-xl text-white text-bold hover:bg-blue-800 text-gray-300 border-none text-xl btn toggle-btn addbook-btn"
+                    className="bg-blue-700 shadow-xl rounded text-white text-bold hover:bg-blue-800 text-gray-300 border-none text-xl btn toggle-btn addbook-btn"
                     onClick={props.addBooks}
                     to="/dashboard/adding-books"
                   >
@@ -210,11 +210,6 @@ function Dashboard(props) {
               </div>
             </div>
             <DropdownRender />
-            {/*
-            <button className="bg-red-500 hover:bg-red-700 hover:text-black hover:text-2xl hover:text-bold border-none shadow-inner text-bold text-gray-300 dashboard__btn" onClick={logout}>
-              Logout
-            </button>
-            */}
           </div>
         </header>
         <div className="flex flex-row justify-start mt-28 gap-96 ml-24 ">

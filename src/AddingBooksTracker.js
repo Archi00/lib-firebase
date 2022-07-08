@@ -4,7 +4,7 @@ import { useState } from "react"
 export default function AddingBooksTracker({that}) {
   const [forceState, setForceState] = useState(0)
   return (
-    <div className="flex flex-col border-4 border-gray-700 rounded">
+    <div className="flex flex-col border-2 border-gray-700 rounded">
       <div className="p-4 text-2xl text-bold text-gray-300 bg-gray-900 border-gray-700 border-b-2 w-[100%] rounded-t">ADDING QUEUE</div>
       <ul className={classNames("bg-gray-800 rounded-xl border-gray-700 w-96 text-white overflow-auto", Object.entries(that.state.booksBeingAdded).length > 0 ? "h-[20vh]" : null)}>
         {Object.entries(that.state.booksBeingAdded).map((book, index) => (
