@@ -1,27 +1,17 @@
 import React from "react";
-import postCategory from "./addCategory";
 import AddingBooksTracker from "./AddingBooksTracker";
-import getDbData from "./getDb";
-import SearchBookDropdown from "./SearchBookDropdown";
 import SearchBookInput from "./SearchBookInput";
+import CardFooter from "./CardFooter"
 
 export default class BookPopup extends React.Component {
   constructor() {
     super();
     this.state = {
-      categoryList: [],
-      showCat: false,
-      category: "",
-      showBook: [],
-      showCloseBtn: false,
       booksBeingAdded: {},
-      forceUpdate: 0
+      forceUpdate: 0,
+      fIter: 0,
+      lIter: 9
     };
-
-    
-    this.displayBook = [];
-    this.bookIds = [];
-    this.newObj = {};
     this.setCategory = this.setCategory.bind(this)
   }
 
@@ -39,17 +29,14 @@ export default class BookPopup extends React.Component {
       el.style.backgroundColor = "rgb(55 65 81)"
       delete this.state.booksBeingAdded[book.id]
       this.setState({forceUpdate: 0})
-      //li.parentElement.removeChild(li)
     }
-    console.log(Object.entries(this.state.booksBeingAdded))
-    Object.entries(this.state.booksBeingAdded).map(book => console.log(book[1].title))
   }
 
   render() {
     return (
       <>
-      <div className="categories-container ">
-        <div className="book-search-info-container mt-24" >
+      <div className="categories-container">
+        <div className="my-10" >
 
           <SearchBookInput 
               catList={this.props.catList} 
@@ -57,18 +44,13 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books mt-2.5">
-              <div className="boxed-results">
-                {this.props.bookList.map((book, index) => (
+            <div className="display-books border-white border-4 border-gray-600 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+              <div className="boxed-results bg-gray-800">
+                {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div
                     id={index}
                     key={index}
-                    style={
-                      this.bookIds.includes(book.id)
-                        ? { border: ".3em solid #7FFFD4" }
-                        : null
-                    }
-                    className="search-results bg-gray-700 text-white text-xl hover:bg-gray-600 min-h-[10vh] m-1 border-sm border-gray-400"
+                    className="search-results bg-gray-700 text-white text-xl hover:bg-gray-600 min-h-[8.35vh] border-sm border-gray-400"
                     onClick={(e) => {
                       this.handleAddBook(book, index);
                     }}
@@ -96,6 +78,7 @@ export default class BookPopup extends React.Component {
                   </div>
                 ))}
               </div>
+                <CardFooter />
             </div>
           </div>
 
@@ -190,7 +173,11 @@ export default class BookPopup extends React.Component {
         </div>
               */}
       </div>
-      <AddingBooksTracker booksList={this.state.booksBeingAdded} />
+      {Object.entries(this.state.booksBeingAdded).length > 0 ?
+      <div className="absolute right-0 bottom-0 mx-12 my-24">
+        <AddingBooksTracker booksList={this.state.booksBeingAdded} /> 
+      </div>
+      : null}
       </>
     );
   }
