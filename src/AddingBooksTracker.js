@@ -11,7 +11,7 @@ export default function AddingBooksTracker({that}) {
       {Object.entries(that.state.booksBeingAdded).length > 0 ?
       <div className="flex space-x p-4 text-2xl text-bold text-gray-300 bg-gray-900 border-gray-700 border-t-2 w-[100%] min-h-[4vh]">
         <div className="flex flex-1 justify-start">
-          <button className="border-none text-gray-300 bg-blue-600 text-white shadow-xl text-bold hover:bg-blue-800 py-2 px-5 rounded ">Add</button>
+          <button onClick={() => that.postBook()} className="border-none text-gray-300 bg-blue-600 text-white shadow-xl text-bold hover:bg-blue-800 py-2 px-5 rounded ">Add</button>
         </div>
         <div className="flex flex-1 justify-end">
           <button onClick={() => that.setState({booksBeingAdded: {}})} className="border-none text-gray-800 bg-red-600 text-black shadow-xl text-bold hover:bg-red-800 py-2 px-5 rounded ">Cancel</button>

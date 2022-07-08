@@ -3,6 +3,7 @@ import AddingBooksTracker from "./AddingBooksTracker";
 import SearchBookInput from "./SearchBookInput";
 import CardFooter from "./CardFooter"
 import { classNames } from "./utils";
+import postCategory from "./addCategory";
 
 export default class BookPopup extends React.Component {
   constructor() {
@@ -13,21 +14,31 @@ export default class BookPopup extends React.Component {
       fIter: 0,
       lIter: 9,
       currentPage: 1,
-      category: ""
     };
-    this.setCategory = this.setCategory.bind(this)
     this.numOfBooks = 9
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[8.35vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
   }
-
-  setCategory(e) {
-    this.setState({ category: e });
-  }
-
+  
   handlePagination(page) {
     this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 9, lIter: (page * this.numOfBooks)})
+  }
+
+  postBook() {
+    const category = document.getElementById("choosenCategory").children[0].textContent
+    const books = Object.entries(this.state.booksBeingAdded)
+
+    if (category === "Choose Category") alert("No category choosen")
+    for (let i = 0, l = books.length; i < l; i++) {
+      postCategory(
+        {
+          name: category,
+          books: [{id: books[i][0], ...books[i][1]}]
+        },
+        this.props.user.uid
+      );
+    }
   }
 
   handleAddBook(book, index) {
@@ -49,7 +60,6 @@ export default class BookPopup extends React.Component {
 
           <SearchBookInput 
               catList={this.props.catList} 
-              setCategory={this.setCategory} 
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
