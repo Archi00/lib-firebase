@@ -1,7 +1,7 @@
 import CategoryDropdown from "./CategoryDropdown"
 function SearchBookInput(props) {
     return (
-    <form onSubmit={props.handleSubmit} className="block m-auto w-[50%]">   
+    <form onSubmit={props.handleSubmit} className="block m-auto w-[50%] mb-6">   
         <label htmlFor="search" className="mb-2 text-lg font-medium text-gray-900 sr-only dark:text-gray-300">Search Book</label>
         <div className="relative">
             <div className="flex absolute left-0.5 min-w-[18rem] h-[100%] items-center">

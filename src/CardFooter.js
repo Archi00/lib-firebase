@@ -6,6 +6,24 @@ export default function CardFooter({bookList}) {
   const resultsForPage = 9
   const totalPages = numOfResults / resultsForPage
   const numOfPages = totalPages % 2 !== 0 ? Math.round(totalPages + 1) : totalPages
+
+  const displayNums = () => {
+    let temp = []
+    for (let i = 1; i < numOfPages + 1; i++) {
+     temp.push(
+      <a
+        key={i}
+        href="#"
+        aria-current="page"
+        className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+      >
+        {i}
+      </a>
+      )
+    }
+    return temp;
+  }
+
   return (
     <div className="bg-gray-700 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">

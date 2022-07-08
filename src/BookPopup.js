@@ -36,7 +36,7 @@ export default class BookPopup extends React.Component {
     return (
       <>
       <div className="categories-container">
-        <div className="my-10" >
+        <div className="my-4" >
 
           <SearchBookInput 
               catList={this.props.catList} 
@@ -44,7 +44,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="display-books border-white border-4 border-gray-600 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="display-books bg-gray-600 border-white border-4 border-gray-700 rounded-2xl m-auto text-center max-h-[70vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="boxed-results bg-gray-800">
                 {this.props.bookList.slice(this.state.fIter, this.state.lIter).map((book, index) => (
                   <div

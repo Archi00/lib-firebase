@@ -7,6 +7,7 @@ import { auth, db } from "./App";
 import { getDocs, query, collection, where, doc } from "@firebase/firestore";
 import DisplayCategories from "./DisplayCategories";
 import AddCategory from "./AddCategory";
+import DropdownRender from "./NavDropdown";
 
 function Dashboard(props) {
   const [user, loading, error] = useAuthState(auth);
@@ -210,9 +211,12 @@ function Dashboard(props) {
                 </Router>
               </div>
             </div>
+            <DropdownRender />
+            {/*
             <button className="bg-red-500 hover:bg-red-700 hover:text-black hover:text-2xl hover:text-bold border-none shadow-inner text-bold text-gray-300 dashboard__btn" onClick={logout}>
               Logout
             </button>
+            */}
           </div>
         </header>
         <div className="flex flex-row justify-start mt-28 gap-96 ml-24 ">
