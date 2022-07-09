@@ -214,11 +214,11 @@ function Dashboard(props) {
           </div>
         </header>
         {!addingCategory ?
-        <div className="flex flex-row content-start gap-1">
-          <div className="flex flex-1">
+        <div className="flex flex-row content-start ">
+          <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
             <SideBar />
           </div>
-          <div className="flex flex-9 mt-[10vh]">
+          <div className="flex flex-9 mt-[10vh] mx-auto">
             <DisplayCategories
               handleBooSubmit={props.handleBooSubmit}
               handleBooChange={props.handleBooChange}

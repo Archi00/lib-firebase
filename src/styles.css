@@ -229,7 +229,6 @@ form {
 }
 
 .display-unique {
-  max-width: 70%;
   text-align: center;
   margin: auto;
 }
@@ -245,8 +244,6 @@ form {
 .display-categories-display {
   margin: auto;
   text-align: center;
-  max-height: 70vh;
-  max-width: 70vw;
   min-width: 70vw;
   background: transparent;
 }

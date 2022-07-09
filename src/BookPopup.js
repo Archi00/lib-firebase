@@ -30,7 +30,7 @@ export default class BookPopup extends React.Component {
     const category = document.getElementById("choosenCategory").children[0].textContent
     const books = Object.entries(this.state.booksBeingAdded)
 
-    if (category === "Choose Category") alert("No category choosen")
+    if (category === "Category") alert("No category choosen")
     for (let i = 0, l = books.length; i < l; i++) {
       postCategory(
         {
@@ -58,7 +58,7 @@ export default class BookPopup extends React.Component {
   render() {
     return (
       <>
-      <div className="categories-container">
+      <div className="categories-container min-h-[80vh] min-w-[65vw]">
         <div className="my-4" >
 
           <SearchBookInput 
@@ -114,7 +114,7 @@ export default class BookPopup extends React.Component {
           </div>
         </div>
         <div id="alertParent"></div>
-        <div className={classNames("absolute right-0 bottom-0 mx-12 my-14", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
+        <div className={classNames("absolute left-0 bottom-0 min-w-[15vw]", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
           <AddingBooksTracker that={this} /> 
         </div>
       </>
