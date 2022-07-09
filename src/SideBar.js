@@ -1,6 +1,6 @@
 const SideBar = () => {
   return(
-    <aside className="w-64 h-[100vh] top-o" aria-label="Sidebar">
+    <aside className="w-[50%] h-[100vh] top-o" aria-label="Sidebar">
       <div className="h-[100vh] overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
           <ul className="space-y-24">
             <li>

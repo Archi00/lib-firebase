@@ -8,6 +8,7 @@ import { getDocs, query, collection, where, doc } from "@firebase/firestore";
 import DisplayCategories from "./DisplayCategories";
 import AddCategory from "./AddCategory";
 import DropdownRender from "./NavDropdown";
+import SideBar from "./SideBar";
 
 function Dashboard(props) {
   const [user, loading, error] = useAuthState(auth);
@@ -170,7 +171,7 @@ function Dashboard(props) {
   try {
     return (
       <>
-        <header className="fixed top-0 w-screen p-0 bg-gray-800 z-9999 block">
+        <header className="fixed top-0 w-screen p-0 bg-gray-800 block">
           <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
             <div className="mt-2 text-3xl whitespace-nowrap text-bold text-white header-logo-container">
               <button
@@ -212,79 +213,38 @@ function Dashboard(props) {
             <DropdownRender />
           </div>
         </header>
-        <div className="flex flex-row justify-start mt-28 gap-96 ml-24 ">
-          <button
-            className=""
-            name="search-by-category"
-            type="text"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Category
-          </button>
-          <button
-            className=""
-            name="search-by-title"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Title
-          </button>
-          <button
-            className=""
-            name="search-by-authors"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Author
-          </button>
-          <button
-            className=""
-            name="search-by-industryIdentifiers"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search ISBN
-          </button>
-          <button
-            className=""
-            name="search-by-publisher"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Publisher
-          </button>
-        </div>
         {!addingCategory ?
-          <DisplayCategories
-            handleBooSubmit={props.handleBooSubmit}
-            handleBooChange={props.handleBooChange}
-            bookInfoList={props.bookInfoList}
-            catList={props.catList}
-            handleCatSubmit={props.handleCatSubmit}
-            handleDisplay={props.handleDisplay}
-            handleChange={props.handleChange}
-            displayCategory={props.displayCategory}
-            multiCat={props.multiCat}
-            uniqueCat={props.uniqueCat}
-            user={user}
-            handleLogin={props.handleLogin}
-            history={history}
-            addCat={props.addCat}
-            clearSearch={props.clearSearch}
-            showCat={props.showCat}
-            handleShowCat={props.handleShowCat}
-            handleShowCatTrue={props.handleShowCatTrue}
-            catFilters={catFilters}
-            bFilters={bFilters}
-            cleanFilters={cleanFilters}
-          />
-      : null}
+        <div className="flex flex-row content-start gap-1">
+          <div className="flex flex-1">
+            <SideBar />
+          </div>
+          <div className="flex flex-9 mt-[10vh]">
+            <DisplayCategories
+              handleBooSubmit={props.handleBooSubmit}
+              handleBooChange={props.handleBooChange}
+              bookInfoList={props.bookInfoList}
+              catList={props.catList}
+              handleCatSubmit={props.handleCatSubmit}
+              handleDisplay={props.handleDisplay}
+              handleChange={props.handleChange}
+              displayCategory={props.displayCategory}
+              multiCat={props.multiCat}
+              uniqueCat={props.uniqueCat}
+              user={user}
+              handleLogin={props.handleLogin}
+              history={history}
+              addCat={props.addCat}
+              clearSearch={props.clearSearch}
+              showCat={props.showCat}
+              handleShowCat={props.handleShowCat}
+              handleShowCatTrue={props.handleShowCatTrue}
+              catFilters={catFilters}
+              bFilters={bFilters}
+              cleanFilters={cleanFilters}
+            />
+          </div>
+        </div>
+        : null}
       </>
     );
   } catch (err) {
