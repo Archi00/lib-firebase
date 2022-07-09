@@ -239,6 +239,7 @@ function Dashboard(props) {
               catFilters={catFilters}
               bFilters={bFilters}
               cleanFilters={cleanFilters}
+              allBooks={allBooks}
             />
           </div>
         </div>

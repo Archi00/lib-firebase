@@ -1,6 +1,9 @@
-import { debounce } from "./utils"
+import { classNames, debounce } from "./utils"
+import { useState } from "react"
 
-const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn}) => {
+const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected}) => {
+  const [bookSelected, setBookSelected] = useState(true)
+
   const constantStyle = "flex flex-col items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
   const constantInput = "block p-4 w-full text-2xl rounded border border-gray-300 dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 placeholder:uppercase placeholder:text-center placeholder:text-xl dark:placeholder-gSearch By ray-400"
   
@@ -53,12 +56,12 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn}) => {
           </li>
         </ul>
       </div>
-      <div className="fixed bottom-0 flex flex-row text-2xl font-normal text-gray-300 rounded hover:cursor-pointer z-50 min-w-[27.27rem] max-w-[27.27rem]">
-        <div className="flex flex-start flex-1 justify-center px-8 bg-gray-900 hover:bg-gray-800 py-4">
-          <button>Books</button>
+      <div className="fixed bottom-0 flex flex-row text-2xl font-normal rounded hover:cursor-pointer z-50 min-w-[27.27rem] max-w-[27.27rem]">
+        <div className={classNames("flex flex-start rounded flex-1 shadow-xl justify-center px-8  py-4", bookSelected ? "text-gray-300 bg-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")} >
+          <button onClick={() => (handleSelected(true), setBookSelected(true))}>Books</button>
         </div>
-        <div className="flex flex-start flex-1 justify-center px-8 bg-gray-900 hover:bg-gray-800 py-4">
-          <button>Categories</button>
+        <div className={classNames("flex flex-start flex-1 shadow-xl rounded justify-center px-8 py-4", !bookSelected ? "text-gray-300 g-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")}>
+          <button onClick={() => (handleSelected(false), setBookSelected(false))}>Categories</button>
         </div>
       </div>
     </aside>
@@ -66,54 +69,3 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn}) => {
 }
 
 export default SideBar
-
-/*
-        <div className="flex flex-row justify-start mt-28 gap-96 ml-24 ">
-          <button
-            className={constantInput}
-            name="search-by-category"
-            type="text"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Category
-          </button>
-          <button
-            className={constantInput}
-            name="search-by-title"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Title
-          </button>
-          <button
-            className={constantInput}
-            name="search-by-authors"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Author
-          </button>
-          <button
-            className={constantInput}
-            name="search-by-industryIdentifiers"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search ISBN
-          </button>
-          <button
-            className={constantInput}
-            name="search-by-publisher"
-            onClick={(e) => {
-              replaceTags(e.target);
-            }}
-          >
-            Search Publisher
-          </button>
-        </div>
-*/ 
