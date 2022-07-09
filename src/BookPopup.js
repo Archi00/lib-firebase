@@ -66,7 +66,7 @@ export default class BookPopup extends React.Component {
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
             />
-            <div className="bg-gray-800 border-white border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="bg-gray-800 border-gray-400 border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="bg-gray-800">
                     <ul className="grid grid-cols-7 gap-4 min-h-[5.5vh] text-2xl text-bold text-gray-200">
                       <li className="my-auto">Cover</li>

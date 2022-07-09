@@ -4,6 +4,7 @@ import QRCode from "qrcode.react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import deleteBook from "./deleteBook";
 import BookDisplay from "./BookDisplay";
+import { classNames } from "./utils";
 
 export default class CategoryInfo extends React.Component {
   constructor() {
@@ -19,7 +20,9 @@ export default class CategoryInfo extends React.Component {
     };
     this.togglePopup = this.togglePopup.bind(this);
     this.hover = false;
+    this.constantBtnStyle = "cursor-pointer inline-block text-2xl text-gray-300 absolute bottom-0 left-0 min-w-[15vw] px-4 py-2 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
   }
+
 
   async checkBooks(list) {
     const data = await getDbData();
@@ -113,9 +116,9 @@ export default class CategoryInfo extends React.Component {
             user={this.props.user}
           />
         ) : null}
-        <div className="category-list-container">
+        <div className="category-list-container mx-12">
           <button
-            className="update-button bg-blue-700 text-white border-none hover:bg-blue-800"
+            className={classNames(this.constantBtnStyle, "mb-14")}
             onClick={(e) => {
               e.preventDefault();
               this.update();
@@ -124,7 +127,7 @@ export default class CategoryInfo extends React.Component {
             Update
           </button>
           <button
-            className="edit-button bg-blue-700 text-white border-none hover:bg-blue-800"
+            className={classNames(this.constantBtnStyle)}
             onClick={(e) => {
               e.preventDefault();
               this.edit();
@@ -133,7 +136,7 @@ export default class CategoryInfo extends React.Component {
             Edit
           </button>
           <button
-            className="sort-button bg-blue-700 text-white border-none hover:bg-blue-800"
+            className={classNames(this.constantBtnStyle, "mb-28")}
             onClick={(e) => {
               e.preventDefault();
               this.setState({ sorted: !this.state.sorted });
@@ -145,7 +148,7 @@ export default class CategoryInfo extends React.Component {
 
           {this.state.bookInfo.map((each) =>
             each ? (
-              <div className="each-flex-container bg-gray-800 text-white hover:bg-gray-600">
+              <div className="each-flex-container rounded bg-gray-800 text-white hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
                 <div
                   onClick={(e) => this.togglePopup(each)}
                   className="list-item"
@@ -169,7 +172,7 @@ export default class CategoryInfo extends React.Component {
                     }
                   }}
                 >
-                  <div className="bookinfo-display-container">
+                  <div className="bookinfo-display-container min-w-[25vw] max-w-[25vw] overflow-hidden">
                     <Router>
                       <Link
                         onClick={(e) => {
@@ -188,7 +191,7 @@ export default class CategoryInfo extends React.Component {
                       </Link>
                     </Router>
                     {this.state.outerWidth >= 800 ? (
-                      <ul className="display-info">
+                      <ul className="display-info hover:cursor-pointer">
                         <li>{each.title}</li>
                         {each.authors ? (
                           each.authors.length > 1 ? (
@@ -225,7 +228,7 @@ export default class CategoryInfo extends React.Component {
           )}
         </div>
         {window.location.pathname.includes(this.props.titleName) ? (
-          <QRCode className="QRCode" value={window.location.href} />
+          <QRCode className="absolute left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
         ) : null}
       </div>
     );

@@ -219,7 +219,7 @@ function Dashboard(props) {
           <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
             <SideBar filterCategories={filterCategories} />
           </div>
-          <div className="flex flex-9 mt-[10vh] mx-auto">
+          <div className="flex flex-9 mt-[8vh] mx-auto">
             <DisplayCategories
               handleBooSubmit={props.handleBooSubmit}
               handleBooChange={props.handleBooChange}
