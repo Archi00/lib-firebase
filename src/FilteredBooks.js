@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { auth } from "./App";
 import deleteBook from "./deleteBook";
 import BookDisplay from "./BookDisplay";
+import { classNames } from "./utils";
 
 function FilteredBooks(props) {
   const [showPopup, setShowPopup] = useState(false);
@@ -13,6 +14,9 @@ function FilteredBooks(props) {
   const [showEdit, setShowEdit] = useState(false);
   const history = useHistory();
   const [user, loading] = useAuthState(auth);
+
+
+  const constantBtnStyle = "z-50 cursor-pointer inline-block text-2xl text-gray-300 fixed bottom-0 left-0 min-w-[27.3rem] max-w-[27.3rem] px-4 py-2 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
 
   useEffect(() => {
     if (loading) return null;
@@ -40,35 +44,6 @@ function FilteredBooks(props) {
         />
       ) : null}
       <div className="category-list-container">
-        <button
-          className="update-button"
-          onClick={(e) => {
-            e.preventDefault();
-            this.update();
-          }}
-        >
-          Update
-        </button>
-        <button
-          className="edit-button"
-          onClick={(e) => {
-            e.preventDefault();
-            edit();
-          }}
-        >
-          Edit
-        </button>
-        <button
-          className="sort-button"
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({ sorted: !this.state.sorted });
-            this.update();
-          }}
-        >
-          Sort
-        </button>
-      </div>
 
         {displayBooks.map((each) =>
           each ? (
@@ -137,27 +112,12 @@ function FilteredBooks(props) {
                 </div>
                 </div>
               </div>
-              {showEdit ? (
-                <button
-                  className="delete-book-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    let temp = [];
-                    deleteBook(each, user.uid);
-                    displayBooks.forEach((y) => {
-                      if (y !== each) temp.push(each);
-                    });
-                    setDisplayBooks(temp);
-                  }}
-                >
-                  Delete
-                </button>
-              ) : null}
             </div>
             </div>
           ) : null
         )}
       </div>
+    </div>
   );
 }
 
