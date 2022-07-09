@@ -142,6 +142,7 @@ function Dashboard(props) {
   };
 
   const filterCategories = (e) => {
+    cleanFilters()
     if (!e.target.value) {
       cleanFilters();
       history.replace("/dashboard");
@@ -216,7 +217,7 @@ function Dashboard(props) {
         {!addingCategory ?
         <div className="flex flex-row content-start ">
           <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
-            <SideBar />
+            <SideBar filterCategories={filterCategories} />
           </div>
           <div className="flex flex-9 mt-[10vh] mx-auto">
             <DisplayCategories

@@ -25,4 +25,12 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
 
-export { capitalize, FetchUserName, classNames };
+function debounce(func, ms = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), ms);
+  };
+}
+
+export { capitalize, FetchUserName, classNames, debounce };
