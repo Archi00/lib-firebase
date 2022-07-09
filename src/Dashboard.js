@@ -16,6 +16,7 @@ function Dashboard(props) {
   const [catFilters, setCatFilters] = useState([]);
   const [bFilters, setBFilters] = useState([]);
   const [addingCategory, setAddingCategory] = useState(false)
+  const [allBooks, setAllBooks] = useState(true)
   const history = useHistory();
 
   const fetchUserName = async () => {
@@ -36,13 +37,6 @@ function Dashboard(props) {
     props.handleLogin(user);
     if (bFilters.length < 1) history.replace("/dashboard");
   }, [user, loading, bFilters]);
-  //  if (filters) {
-  //    filters[0].childNodes.forEach((n) => {
-  //      if (n.nodeName === "INPUT" && n.innerText === "" && !n.activeElement) {
-  //        replaceTags(n);
-  //      }
-  //    });
-  //  }
 
   const cleanFilters = () => {
     setBFilters([]);
@@ -177,6 +171,10 @@ function Dashboard(props) {
     });
   };
 
+  const handleSelected = (bool) => {
+    setAllBooks(bool)
+  }
+
   try {
     return (
       <>
@@ -215,7 +213,7 @@ function Dashboard(props) {
         {!addingCategory ?
         <div className="flex flex-row content-start ">
           <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
-            <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} />
+            <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
           </div>
           <div className="flex flex-9 mt-[8vh] mx-auto">
             <DisplayCategories
@@ -237,6 +235,7 @@ function Dashboard(props) {
               showCat={props.showCat}
               handleShowCat={props.handleShowCat}
               handleShowCatTrue={props.handleShowCatTrue}
+              bookList={props.info}
               catFilters={catFilters}
               bFilters={bFilters}
               cleanFilters={cleanFilters}

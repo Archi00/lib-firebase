@@ -1,7 +1,6 @@
 import React from "react";
 import BookPopup from "./BookPopup";
 import FilteredBooks from "./FilteredBooks";
-import SearchBookInput from "./SearchBookInput"
 
 function DisplayCategories(props) {
   return (
@@ -9,7 +8,6 @@ function DisplayCategories(props) {
       <div className="category-list">
         {window.location.pathname === "/dashboard/adding-books" ? (
           <>
-          
             <BookPopup
               handleSubmit={props.handleBooSubmit}
               handleChange={props.handleBooChange}
@@ -22,8 +20,6 @@ function DisplayCategories(props) {
               handleShowCat={props.handleShowCat}
               handleShowCatTrue={props.handleShowCatTrue}
             />
-          
-            {/*<SearchBookInput catList={props.catList}/>*/}
           </>
         ) : props.bFilters.length < 1 ? (
           props.catList.length > 0 ? (

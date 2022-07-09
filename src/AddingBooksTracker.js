@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 export default function AddingBooksTracker({that}) {
   return (
     <div className="flex flex-col w-full">
-      <div className="p-4 text-2xl text-bold text-gray-300 bg-gray-900 w-[100%] rounded-t">"ADDING QUEUE"</div>
+      <div className="p-4 text-2xl text-bold text-gray-300 bg-gray-900 w-[100%] rounded-t">ADDING QUEUE</div>
       <ul className={classNames("bg-gray-700 text-white overflow-auto", Object.entries(that.state.booksBeingAdded).length > 0 ? "h-[20vh]" : null)}>
         {Object.entries(that.state.booksBeingAdded).map((book, index) => (
           <li onClick={() => (delete that.state.booksBeingAdded[book[0]], that.setState({forceState: 0}))} key={index} id={book[0]} className="px-6 py-2 border-b border-gray-200 border-sm w-full hover:bg-gray-200 hover:text-gray-800 hover:cursor-pointer">{book[1].title}</li>

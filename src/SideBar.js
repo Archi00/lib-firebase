@@ -9,49 +9,57 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn}) => {
   return(
     <aside className="w-full h-[100vh]" aria-label="Sidebar">
       <div className="h-[100vh] fixed z-30 overflow-y-auto pt-28 px-8 mx-auto bg-gray-50 rounded dark:bg-gray-800">
-          <ul className="space-y-8">
-            <li>
-              <div className="flex flex-row p-2 text-2xl font-normal  text-gray-900 rounded-lg dark:text-white hover:cursor-pointer">
-                <div onClick={() => handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center dark:hover:bg-gray-900">
-                  <h2>Home</h2>
-                </div>
-                <div onClick={() => handleBackBtn()} className="flex flex-1 flex-end px-4 py-4 dark:hover:bg-gray-900 max-w-[20%]">
-                  <h3>Back</h3>
-                </div>
-
+        <ul className="space-y-8">
+          <li>
+            <div className="flex flex-row p-2 text-2xl font-normal  text-gray-900 rounded-lg dark:text-white hover:cursor-pointer">
+              <div onClick={() => handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center dark:hover:bg-gray-900">
+                <h2>Home</h2>
               </div>
-            </li>
-            <li>
-                <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
-                  <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Category</label>
-                  <input onChange={(e) => handleChange(e)} name="search-by-category" type="search" className={constantInput} placeholder="Search By Category" required=""></input>
-                </form>
-            </li>
-            <li>
-                <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
-                  <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Title</label>
-                  <input onChange={(e) => handleChange(e)} name="search-by-title" type="search" className={constantInput} placeholder="Search By Title" required=""></input>
-                </form>
-            </li>
-            <li>
-                <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
-                  <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Author</label>
-                  <input onChange={(e) => handleChange(e)} name="search-by-authors" type="search" className={constantInput} placeholder="Search By Author" required=""></input>
-                </form>
-            </li>
-            <li>
-                <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
-                  <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">ISBN</label>
-                  <input onChange={(e) => handleChange(e)} name="search-by-industryIdentifiers" type="search" className={constantInput} placeholder="Search By ISBN" required=""></input>
-                </form>
-            </li>
-            <li>
-                <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
-                  <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Publisher</label>
-                  <input onChange={(e) => handleChange(e)} name="search-by-publisher" type="search" className={constantInput} placeholder="Search By Publisher" required=""></input>
-                </form>
-            </li>
-          </ul>
+              <div onClick={() => handleBackBtn()} className="flex flex-1 flex-end px-4 py-4 dark:hover:bg-gray-900 max-w-[20%]">
+                <h3>Back</h3>
+              </div>
+
+            </div>
+          </li>
+          <li>
+              <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
+                <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Category</label>
+                <input onChange={(e) => handleChange(e)} name="search-by-category" type="search" className={constantInput} placeholder="Search By Category" required=""></input>
+              </form>
+          </li>
+          <li>
+              <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
+                <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Title</label>
+                <input onChange={(e) => handleChange(e)} name="search-by-title" type="search" className={constantInput} placeholder="Search By Title" required=""></input>
+              </form>
+          </li>
+          <li>
+              <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
+                <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Author</label>
+                <input onChange={(e) => handleChange(e)} name="search-by-authors" type="search" className={constantInput} placeholder="Search By Author" required=""></input>
+              </form>
+          </li>
+          <li>
+              <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
+                <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">ISBN</label>
+                <input onChange={(e) => handleChange(e)} name="search-by-industryIdentifiers" type="search" className={constantInput} placeholder="Search By ISBN" required=""></input>
+              </form>
+          </li>
+          <li>
+              <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
+                <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Publisher</label>
+                <input onChange={(e) => handleChange(e)} name="search-by-publisher" type="search" className={constantInput} placeholder="Search By Publisher" required=""></input>
+              </form>
+          </li>
+        </ul>
+      </div>
+      <div className="fixed bottom-0 flex flex-row text-2xl font-normal text-gray-300 rounded hover:cursor-pointer z-50 min-w-[27.27rem] max-w-[27.27rem]">
+        <div className="flex flex-start flex-1 justify-center px-8 bg-gray-900 hover:bg-gray-800 py-4">
+          <button>Books</button>
+        </div>
+        <div className="flex flex-start flex-1 justify-center px-8 bg-gray-900 hover:bg-gray-800 py-4">
+          <button>Categories</button>
+        </div>
       </div>
     </aside>
   )
