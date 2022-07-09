@@ -236,7 +236,7 @@ export default class CategoryInfo extends React.Component {
         </div>
         {window.location.pathname.includes(this.props.titleName) ? (
           <QRCode className="absolute left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
-        ) : null}
+          ) : null}
       </div>
     );
   }

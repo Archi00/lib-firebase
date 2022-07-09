@@ -210,6 +210,7 @@ function Dashboard(props) {
                   </Link>
                 </Router>
               </div>
+              {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase pb-[50vh]">{props.displayCategory}</h1> : null}
             </div>
             <DropdownRender />
           </div>
