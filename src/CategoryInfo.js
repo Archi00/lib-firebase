@@ -20,7 +20,7 @@ export default class CategoryInfo extends React.Component {
     };
     this.togglePopup = this.togglePopup.bind(this);
     this.hover = false;
-    this.constantBtnStyle = "cursor-pointer inline-block text-2xl text-gray-300 absolute bottom-0 left-0 min-w-[15vw] px-4 py-2 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
+    this.constantBtnStyle = "z-50 cursor-pointer inline-block text-2xl text-gray-300 fixed bottom-0 left-0 min-w-[27.3rem] max-w-[27.3rem] px-4 py-2 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
   }
 
 
@@ -235,7 +235,7 @@ export default class CategoryInfo extends React.Component {
           )}
         </div>
         {window.location.pathname.includes(this.props.titleName) ? (
-          <QRCode className="absolute left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
+          <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
           ) : null}
       </div>
     );

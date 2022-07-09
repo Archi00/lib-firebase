@@ -98,6 +98,14 @@ function Dashboard(props) {
     }
   };
 
+  const handleHomeBtn = () => {
+    cleanFilters();
+    history.replace("/dashboard");
+    props.handleDisplay("");
+  }
+
+  const handleBackBtn = () => window.location.reload()
+
   const getData = async (filter, value) => {
     let temp = [];
     if (filter === "category") {
@@ -172,37 +180,22 @@ function Dashboard(props) {
   try {
     return (
       <>
-        <header className="fixed top-0 w-screen p-0 bg-gray-800 block">
+        <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
           <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
-            <div className="mt-2 text-3xl whitespace-nowrap text-bold text-white header-logo-container">
-              {/*
-              <button
-                type="submit"
-                className="p-0 return-btn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  cleanFilters();
-                  history.replace("/dashboard");
-                  props.handleDisplay("");
-                }}
-              >
-                Logo
-              </button>
-              */}
-            </div>
+            <div className="header-logo-container"></div>
             <div className="max-w-[15vw] min-w-[15vw] flex flex-row absolute left-0 ml-[1.5vw] whitespace-nowrap">
-              <div className="flex flex-start flex-1">
+              <div className="flex flex-start flex-1 hover:cursor-pointer w-full h-full">
                 <AddCategory
                   handleChange={props.handleChange}
                   user={user}
                   history={history}
                   handleDisplay={props.handleDisplay}
                   addCat={props.addCat}
-                  setAddCat={setAddingCategory}
+                  setAddCat={setAddingCategory} 
                   addingCat={addingCategory}
                 />
               </div>
-              <div className="flex flex-end flex-1">
+              <div className="flex flex-end flex-1 hover:cursor-pointer w-full h-full">
                 <Router>
                   <Link
                     type="button"
@@ -222,7 +215,7 @@ function Dashboard(props) {
         {!addingCategory ?
         <div className="flex flex-row content-start ">
           <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
-            <SideBar filterCategories={filterCategories} />
+            <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} />
           </div>
           <div className="flex flex-9 mt-[8vh] mx-auto">
             <DisplayCategories
