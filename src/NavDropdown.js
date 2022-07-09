@@ -24,11 +24,11 @@ const Dropdown = ({ color }) => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full sm:w-6/12 md:w-4/12 px-4">
+        <div className="w-full xl:w-6/12 md:w-4/12 px-4">
           <div className="relative flex flex-row align-middle w-full">
             <button
               className={
-                "flex flex-row text-gray-300 font-bold uppercase text-xl px-8 py-3 rounded shadow-xl hover:shadow-2xl hover:bg-gray-800 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
+                "flex flex-row text-gray-300 font-bold uppercase text-xl px-8 py-3 rounded shadow-xl hover:shadow-xl hover:bg-gray-800 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
                 "bg-gray-900"
               }
               type="button"
@@ -54,7 +54,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
@@ -64,7 +64,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
@@ -74,7 +74,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
@@ -85,7 +85,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="#"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
                 onClick={e => e.preventDefault()}
