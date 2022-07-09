@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import BookPopup from "./BookPopup";
 import FilteredBooks from "./FilteredBooks";
 
@@ -21,7 +21,7 @@ function DisplayCategories(props) {
               handleShowCatTrue={props.handleShowCatTrue}
             />
           </>
-        ) : props.bFilters.length < 1 ? props.allBooks ? <h1>It works</h1> : (
+        ) : props.bFilters.length < 1 ? props.allBooks ? props.totalBookList.map(book => <h1>{book.title}</h1>) : (
           props.catList.length > 0 ? (
             !props.displayCategory ? (
               <div className="display-categories" id="catZone">

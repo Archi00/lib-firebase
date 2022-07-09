@@ -30,7 +30,8 @@ export default class App extends React.Component {
       currentBook: [],
       bookCount: 0,
       isAdding: false,
-      showCat: false
+      showCat: false,
+      totalBookList: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -62,6 +63,7 @@ export default class App extends React.Component {
             this.setState({
               catList: this.state.catList.concat(cat.data.name)
             });
+            if (cat.data.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data.books]})
           if (
             window.location.pathname.includes(cat.data.name) &&
             !this.state.displayCategory
@@ -237,6 +239,7 @@ export default class App extends React.Component {
                   showCat={this.state.showCat}
                   handleShowCat={this.handleShowCat}
                   handleShowCatTrue={this.handleShowCatTrue}
+                  totalBookList={this.state.totalBookList}
                 />
               </Route>
             </Switch>

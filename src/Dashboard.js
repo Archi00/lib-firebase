@@ -235,7 +235,7 @@ function Dashboard(props) {
               showCat={props.showCat}
               handleShowCat={props.handleShowCat}
               handleShowCatTrue={props.handleShowCatTrue}
-              bookList={props.info}
+              totalBookList={props.totalBookList}
               catFilters={catFilters}
               bFilters={bFilters}
               cleanFilters={cleanFilters}
