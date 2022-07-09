@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import BookPopup from "./BookPopup";
+import BooksDisplay from "./BooksDisplay";
 import FilteredBooks from "./FilteredBooks";
 
 function DisplayCategories(props) {
@@ -21,7 +22,9 @@ function DisplayCategories(props) {
               handleShowCatTrue={props.handleShowCatTrue}
             />
           </>
-        ) : props.bFilters.length < 1 ? props.allBooks ? props.totalBookList.map(book => <h1>{book.title}</h1>) : (
+        ) : props.bFilters.length < 1 ? props.allBooks ? 
+          <div className="category-list-container" >
+            {props.totalBookList.map(book => <BooksDisplay each={book} />)}</div> : (
           props.catList.length > 0 ? (
             !props.displayCategory ? (
               <div className="display-categories" id="catZone">
