@@ -175,6 +175,7 @@ function Dashboard(props) {
         <header className="fixed top-0 w-screen p-0 bg-gray-800 block">
           <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
             <div className="mt-2 text-3xl whitespace-nowrap text-bold text-white header-logo-container">
+              {/*
               <button
                 type="submit"
                 className="p-0 return-btn"
@@ -187,18 +188,21 @@ function Dashboard(props) {
               >
                 Logo
               </button>
+              */}
             </div>
-            <div className="self-center my-auto btn-display">
-              <AddCategory
-                handleChange={props.handleChange}
-                user={user}
-                history={history}
-                handleDisplay={props.handleDisplay}
-                addCat={props.addCat}
-                setAddCat={setAddingCategory}
-                addingCat={addingCategory}
-              />
-              <div className="inline-block">
+            <div className="max-w-[15vw] min-w-[15vw] flex flex-row absolute left-0 ml-[1.5vw] whitespace-nowrap">
+              <div className="flex flex-start flex-1">
+                <AddCategory
+                  handleChange={props.handleChange}
+                  user={user}
+                  history={history}
+                  handleDisplay={props.handleDisplay}
+                  addCat={props.addCat}
+                  setAddCat={setAddingCategory}
+                  addingCat={addingCategory}
+                />
+              </div>
+              <div className="flex flex-end flex-1">
                 <Router>
                   <Link
                     type="button"
@@ -210,8 +214,8 @@ function Dashboard(props) {
                   </Link>
                 </Router>
               </div>
-              {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase pb-[50vh]">{props.displayCategory}</h1> : null}
             </div>
+            {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase absolute top-0 right-0 left-0 mt-6">{props.displayCategory}</h1> : null}
             <DropdownRender />
           </div>
         </header>
