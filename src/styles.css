@@ -244,8 +244,6 @@ form {
 
 .display-categories-display {
   margin: auto;
-  left: 0;
-  right: 0;
   text-align: center;
   max-height: 70vh;
   max-width: 70vw;
@@ -354,7 +352,7 @@ form {
   flex: 1 0 25%;
   max-width: 20vw;
   height: auto;
-  padding: 0.2rem 1rem 0.7rem;
+  padding-top: .2rem;  
   font-size: 10px;
   text-align: center;
   align-items: center;
@@ -522,9 +520,10 @@ form {
 }
 
 .search-display-cover {
-  width: 2em;
-  height: 3em;
+  width: 4rem;
+  height: 6rem;
   border-radius: 5px;
+  margin: auto;
 }
 
 .btn-book:disabled {

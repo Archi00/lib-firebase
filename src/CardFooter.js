@@ -8,7 +8,7 @@ export default function CardFooter({bookList, that}) {
 
 
   const numOfResults = bookList.length;
-  const resultsForPage = 9
+  const resultsForPage = 10
   const totalPages = numOfResults / resultsForPage
   const numOfPages = totalPages % 2 !== 0 ? Math.round(totalPages + 1) : totalPages
 
@@ -30,7 +30,7 @@ export default function CardFooter({bookList, that}) {
           setCurrent(i)
           that.handlePagination(i)
         }}
-        className={classNames(constant, current === i ? active : inactive)}
+        className={classNames(constant, current === i ? active : inactive, "text-2xl")}
       >
         {i}
       </a>
@@ -40,7 +40,7 @@ export default function CardFooter({bookList, that}) {
   }
 
   return (
-    <div className="bg-gray-700 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+    <div className="bg-gray-700 px-4 py-3 flex items-center justify-between border-t border-gray-300 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
         <a
           href="#"
@@ -57,7 +57,7 @@ export default function CardFooter({bookList, that}) {
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-gray-300">
+          <p className="text-xl text-gray-400">
             Showing <span className="font-medium">{current}</span> to <span className="font-medium">{numOfPages}</span> of{' '}
             <span className="font-medium">{numOfResults}</span> results
           </p>

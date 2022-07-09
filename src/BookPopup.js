@@ -3,7 +3,7 @@ import AddingBooksTracker from "./AddingBooksTracker";
 import SearchBookInput from "./SearchBookInput";
 import CardFooter from "./CardFooter"
 import { classNames } from "./utils";
-import postCategory from "./addCategory";
+import postCategory from "./postCategory";
 
 export default class BookPopup extends React.Component {
   constructor() {
@@ -15,7 +15,7 @@ export default class BookPopup extends React.Component {
       lIter: 10,
       currentPage: 1,
     };
-    this.numOfBooks = 9
+    this.numOfBooks = 10
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
@@ -23,7 +23,7 @@ export default class BookPopup extends React.Component {
   }
   
   handlePagination(page) {
-    this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 9, lIter: (page * this.numOfBooks)})
+    this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 10, lIter: (page * this.numOfBooks)})
   }
 
   postBook() {
@@ -40,6 +40,8 @@ export default class BookPopup extends React.Component {
         this.props.user.uid
       );
     }
+    this.setState({booksBeingAdded: {}})
+
   }
 
   handleAddBook(book, index) {
@@ -66,7 +68,7 @@ export default class BookPopup extends React.Component {
             />
             <div className="bg-gray-800 border-white border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="bg-gray-800">
-                    <ul className="grid grid-cols-7 gap-4 min-h-[5.5vh]">
+                    <ul className="grid grid-cols-7 gap-4 min-h-[5.5vh] text-2xl text-bold text-gray-200">
                       <li className="my-auto">Cover</li>
                       <li className="my-auto">Title</li>
                       <li className="my-auto">Categories</li>
@@ -85,7 +87,7 @@ export default class BookPopup extends React.Component {
                     }}
                   >
                     <ul className="grid grid-cols-7 gap-4">
-                      <li>
+                      <li className="text-xl">
                         {book.volumeInfo.imageLinks ? (
                           <img
                             load="lazyload"
@@ -95,12 +97,12 @@ export default class BookPopup extends React.Component {
                           />
                         ) : null}
                       </li>
-                      <li className="my-auto">{book.volumeInfo.title}</li>
-                      <li className="my-auto">{book.volumeInfo.categories}</li>
-                      <li className="my-auto">{book.volumeInfo.authors}</li>
-                      <li className="my-auto">{book.volumeInfo.pageCount}</li>
-                      <li className="my-auto">{book.volumeInfo.publishedDate}</li>
-                      <li className="my-auto">{book.volumeInfo.publisher}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.title}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.categories}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.authors}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.pageCount}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.publishedDate}</li>
+                      <li className="my-auto text-2xl">{book.volumeInfo.publisher}</li>
                     </ul>
                   </div>
                 ))}
@@ -110,101 +112,11 @@ export default class BookPopup extends React.Component {
                 : null }
             </div>
           </div>
-
-        {/*}
-        <div>
-          <div className="adding-books">
-            {this.state.showBook.length > 0
-              ? this.state.showBook.map((e) => (
-                  <ul className="list-adding-books">
-                    <li>
-                      {e.volumeInfo.imageLinks ? (
-                        <img
-                          load="lazyload"
-                          className="search-display-cover"
-                          alt="cover"
-                          src={e.volumeInfo.imageLinks.thumbnail}
-                        />
-                      ) : null}
-                    </li>
-                    <li>{e.volumeInfo.title}</li>
-                    <li>{e.volumeInfo.authors}</li>
-                    <li>{e.volumeInfo.pageCount}</li>
-                    <li>{e.volumeInfo.publishedDate}</li>
-                    <li
-                      className="remove-book-list"
-                      onClick={() => {
-                        for (let i = 0; i < this.bookIds.length; i++) {
-                          if (this.bookIds[i] === e.id) {
-                            this.displayBook.splice(i, 1);
-                            this.bookIds.splice(i, 1);
-                          }
-                        }
-                        this.setState({ showBook: this.displayBook });
-                      }}
-                    >
-                      x
-                    </li>
-                  </ul>
-                ))
-              : null}
-          </div>
-          {this.state.showBook.length > 0 ? (
-            <div className="action-btns-adding">
-              <button
-                className="cancel-add-book"
-                onClick={() => {
-                  this.setState({ showBook: [] });
-                  this.displayBook = [];
-                  this.bookIds = [];
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                className="save-add-book"
-                onClick={() => {
-                  if (!this.state.category) {
-                    console.log(this.state.category);
-                    alert("No category Selected");
-                    return;
-                  }
-
-                  if (this.state.showBook.length < 2) {
-                    postCategory(
-                      {
-                        name: this.state.category,
-                        books: [this.state.showBook[0].volumeInfo]
-                      },
-                      this.props.user.uid
-                    );
-                  } else {
-                    for (let i = 0; i < this.state.showBook.length; i++) {
-                      postCategory(
-                        {
-                          name: this.state.category,
-                          books: [this.state.showBook[i].volumeInfo]
-                        },
-                        this.props.user.uid
-                      );
-                    }
-                    this.setState({ showBook: [] });
-                    this.displayBook = [];
-                    this.bookIds = [];
-                  }
-                  setTimeout(() => window.location.pathname = "/dashboard", 1000)
-                }}
-              >
-                Save
-              </button>
-            </div>
-          ) : null}
         </div>
-              */}
-      </div>
-      <div className={classNames("absolute right-0 bottom-0 mx-12 my-14", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
-        <AddingBooksTracker that={this} /> 
-      </div>
+        <div id="alertParent"></div>
+        <div className={classNames("absolute right-0 bottom-0 mx-12 my-14", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
+          <AddingBooksTracker that={this} /> 
+        </div>
       </>
     );
   }

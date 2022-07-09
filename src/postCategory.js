@@ -19,7 +19,7 @@ const postCategory = async (obj, uid) => {
             await updateDoc(rt, {
               books: arrayUnion(obj.books[0])
             });
-            console.log("book added");
+            console.log("Book Added")
             break;
           }
         }

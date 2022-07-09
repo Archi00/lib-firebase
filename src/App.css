@@ -10,7 +10,8 @@
   justify-content: space-around;
   align-items: center;
   margin: auto;
-  max-width: 90%;
+  margin-top: 10vh;
+  max-width: 70vw;
   max-height: 90%;
   gap: 1;
 }

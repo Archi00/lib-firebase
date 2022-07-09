@@ -1,6 +1,6 @@
 import React from "react";
 import { capitalize } from "./utils";
-import postCategory from "./addCategory";
+import postCategory from "./postCategory";
 
 export default class CategoryPopup extends React.Component {
   constructor() {

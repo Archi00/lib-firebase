@@ -47,7 +47,7 @@ const Dropdown = ({ color }) => {
               className={
                 (dropdownPopoverShow ? "block " : "hidden ") +
                 (color === "indigo" ? "bg-white " : "bg-gray-800" + " ") +
-                "text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                "dropdown text-base py-2 list-none text-left rounded shadow-lg mt-1"
               }
               style={{ minWidth: "14rem" }}
             >
