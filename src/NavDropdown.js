@@ -2,7 +2,7 @@ import React from "react";
 import { createPopper } from "@popperjs/core";
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const Dropdown = ({ color, updateDb }) => {
+const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -57,19 +57,9 @@ const Dropdown = ({ color, updateDb }) => {
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
-                onClick={e => e.preventDefault()}
+                onClick={() => handleIsEdit(!isEdit)}
               >
                 Edit
-              </a>
-              <a
-                href="#"
-                className={
-                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
-                  (color === "indigo" ? " text-slate-700" : "text-white")
-                }
-                onClick={e => e.preventDefault()}
-              >
-                Sort
               </a>
               <a
                 href="#"
@@ -100,10 +90,10 @@ const Dropdown = ({ color, updateDb }) => {
   );
 };
 
-export default function DropdownRender({updateDb}) {
+export default function DropdownRender({updateDb, handleIsEdit, isEdit}) {
   return (
     <>
-      <Dropdown color="white" updateDb={updateDb} />
+      <Dropdown color="white" updateDb={updateDb} handleIsEdit={handleIsEdit} isEdit={isEdit} />
     </>
   );
 }

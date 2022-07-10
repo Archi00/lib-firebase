@@ -31,7 +31,8 @@ export default class App extends React.Component {
       bookCount: 0,
       isAdding: false,
       showCat: false,
-      totalBookList: []
+      totalBookList: [],
+      isEdit: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -49,6 +50,7 @@ export default class App extends React.Component {
     this.handleShowCat = this.handleShowCat.bind(this);
     this.handleShowCatTrue = this.handleShowCatTrue.bind(this);
     this.updateDb = this.updateDb.bind(this)
+    this.handleIsEdit = this.handleIsEdit.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -92,6 +94,10 @@ export default class App extends React.Component {
 
   addCat(cat) {
     this.setState({ catList: this.state.catList.concat(cat) });
+  }
+
+  handleIsEdit(bool) {
+    this.setState({isEdit: bool})
   }
 
   handleLogin(user) {
@@ -183,6 +189,7 @@ export default class App extends React.Component {
             user={this.state.user}
             checkCurrentBook={this.checkCurrentBook}
             category={this.state.displayCategory}
+            isEdit={this.state.isEdit}
           />
         </Router>
       );
@@ -247,6 +254,8 @@ export default class App extends React.Component {
                   handleShowCatTrue={this.handleShowCatTrue}
                   totalBookList={this.state.totalBookList}
                   updateDb={this.updateDb}
+                  handleIsEdit={this.handleIsEdit}
+                  isEdit={this.state.isEdit}
                 />
               </Route>
             </Switch>

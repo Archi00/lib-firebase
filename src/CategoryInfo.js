@@ -61,29 +61,6 @@ export default class CategoryInfo extends React.Component {
     });
   }
 
-  async update() {
-    const data = await getDbData();
-    this.setState({ bookInfo: [] });
-    if (!this.state.sorted) {
-      data.forEach((each) => {
-        if (each.data.name === this.props.titleName) {
-          this.setState({
-            bookInfo: this.state.bookInfo.concat(each.data.books)
-          });
-        }
-      });
-    } else {
-      let temp = [];
-      data.forEach((each) => {
-        if (each.data.name === this.props.titleName) {
-          each.data.books.map((item) => temp.push(item));
-        }
-      });
-      temp.sort((a, b) => a.title.localeCompare(b.title));
-      this.setState({ bookInfo: temp });
-    }
-  }
-
   componentDidUpdate() {
     const bookChecker = this.props.checkCurrentBook();
     if (bookChecker[0]) {
@@ -118,35 +95,6 @@ export default class CategoryInfo extends React.Component {
           />
         ) : null}
         <div className="category-list-container mx-12">
-          <button
-            className={classNames(this.constantBtnStyle, "mb-20")}
-            onClick={(e) => {
-              e.preventDefault();
-              this.update();
-            }}
-          >
-            Update
-          </button>
-          <button
-            className={classNames(this.constantBtnStyle)}
-            onClick={(e) => {
-              e.preventDefault();
-              this.edit();
-            }}
-          >
-            Edit
-          </button>
-          <button
-            className={classNames(this.constantBtnStyle, "mb-40")}
-            onClick={(e) => {
-              e.preventDefault();
-              this.setState({ sorted: !this.state.sorted });
-              this.update();
-            }}
-          >
-            Sort
-          </button>
-
           {this.state.bookInfo.map((each) =>
             each ? (
               <div className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
@@ -216,7 +164,7 @@ export default class CategoryInfo extends React.Component {
                     ) : null}
                   </div>
                 </div>
-                {this.state.showEdit ? (
+                {this.props.isEdit ? (
                   <button
                     className="delete-book-btn"
                     onClick={(e) => {

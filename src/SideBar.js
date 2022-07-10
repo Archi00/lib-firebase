@@ -57,11 +57,11 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
         </ul>
       </div>
       <div className="fixed bottom-0 flex flex-row text-2xl font-normal rounded hover:cursor-pointer z-50 min-w-[27.27rem] max-w-[27.27rem]">
-        <div className={classNames("flex flex-start rounded flex-1 shadow-xl justify-center px-8  py-4", bookSelected ? "text-gray-300 bg-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")} >
-          <button onClick={() => (handleSelected(true), setBookSelected(true))}>Books</button>
+        <div onClick={() => (handleSelected(true), setBookSelected(true))} className={classNames("flex flex-start rounded flex-1 shadow-xl justify-center px-8  py-4", bookSelected ? "text-gray-300 bg-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")} >
+          <button>Books</button>
         </div>
-        <div className={classNames("flex flex-start flex-1 shadow-xl rounded justify-center px-8 py-4", !bookSelected ? "text-gray-300 g-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")}>
-          <button onClick={() => (handleSelected(false), setBookSelected(false))}>Categories</button>
+        <div onClick={() => (handleSelected(false), setBookSelected(false))} className={classNames("flex flex-start flex-1 shadow-xl rounded justify-center px-8 py-4", !bookSelected ? "text-gray-300 g-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")}>
+          <button>Categories</button>
         </div>
       </div>
     </aside>

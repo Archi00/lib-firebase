@@ -157,7 +157,7 @@ function Dashboard(props) {
               </div>
             </div>
             {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase absolute top-0 right-0 left-0 mt-6">{props.displayCategory}</h1> : null}
-            <DropdownRender updateDb={props.updateDb} />
+            <DropdownRender updateDb={props.updateDb} handleIsEdit={props.handleIsEdit} isEdit={props.isEdit} />
           </div>
         </header>
         {!addingCategory ?
