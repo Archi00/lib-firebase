@@ -4,6 +4,7 @@ import SearchBookInput from "./SearchBookInput";
 import CardFooter from "./CardFooter"
 import { classNames } from "./utils";
 import postCategory from "./postCategory";
+import { Successful, Wrong } from "./notifications";
 
 export default class BookPopup extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ export default class BookPopup extends React.Component {
       fIter: 0,
       lIter: 10,
       currentPage: 1,
+      success: false,
+      wrong: false
     };
     this.numOfBooks = 10
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
@@ -21,10 +24,15 @@ export default class BookPopup extends React.Component {
     this.active = "bg-gray-400 hover:bg-gray-700"
     this.inDb = ""
     props.totalBookList.map(book => this.inDb = {...this.inDb, [book.id]: book.id})
+    this.handleClose = this.handleClose.bind(this)
   }
 
   handlePagination(page) {
     this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 10, lIter: (page * this.numOfBooks)})
+  }
+
+  handleClose() {
+    this.setState({success: false, wrong: false})
   }
 
   async writeDb(books, category) {
@@ -48,11 +56,11 @@ export default class BookPopup extends React.Component {
     const category = document.getElementById("choosenCategory").children[0].textContent
     const books = Object.entries(this.state.booksBeingAdded)
 
-    if (category === "Category") alert("No category choosen")
+    if (category === "Category") return this.setState({wrong: true})
     const post = await this.writeDb(books, category)
-    if (post === true) {
+    if (post) {
       this.setState({booksBeingAdded: {}})
-      console.log("success")
+      this.setState({success: true})
     }
   }
 
@@ -125,7 +133,16 @@ export default class BookPopup extends React.Component {
             </div>
           </div>
         </div>
-        <div id="alertParent"></div>
+        {this.state.success ?
+        <div id="alertParent" className="flex m-auto justify-center max-w-[65vw] min-w-[65vw">
+          <Successful message="Books added successfully" handleClose={this.handleClose}/>
+        </div>
+        : null}
+        {this.state.wrong ?
+          <div id="alertParent" className="flex m-auto justify-center max-w-[65vw] min-w-[65vw">
+            <Wrong message="No category selected" handleClose={this.handleClose}/>
+          </div>
+        :null}
         <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(this.state.booksBeingAdded).length > 0 ? "min-h-[20vh]" : null)}>
           <AddingBooksTracker that={this} /> 
         </div>
