@@ -19,7 +19,7 @@ export default class BookPopup extends React.Component {
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
-    this.inDb
+    this.inDb = ""
     props.totalBookList.map(book => this.inDb = {...this.inDb, [book.id]: book.id})
   }
 
@@ -27,22 +27,33 @@ export default class BookPopup extends React.Component {
     this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 10, lIter: (page * this.numOfBooks)})
   }
 
-  postBook() {
+  async writeDb(books, category) {
+    try {
+      for (let i = 0, l = books.length; i < l; i++) {
+        await postCategory(
+          {
+            name: category,
+            books: [{id: books[i][0], ...books[i][1]}]
+          },
+          this.props.user.uid
+        );
+      }
+      return true;
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async postBook() {
     const category = document.getElementById("choosenCategory").children[0].textContent
     const books = Object.entries(this.state.booksBeingAdded)
 
     if (category === "Category") alert("No category choosen")
-    for (let i = 0, l = books.length; i < l; i++) {
-      postCategory(
-        {
-          name: category,
-          books: [{id: books[i][0], ...books[i][1]}]
-        },
-        this.props.user.uid
-      );
+    const post = await this.writeDb(books, category)
+    if (post === true) {
+      this.setState({booksBeingAdded: {}})
+      console.log("success")
     }
-    this.setState({booksBeingAdded: {}})
-
   }
 
   handleAddBook(book, index) {
@@ -82,7 +93,7 @@ export default class BookPopup extends React.Component {
                   <div
                     id={index}
                     key={index}
-                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) || this.inDb.hasOwnProperty(book.id) ? this.active : this.inactive, this.inDb.hasOwnProperty(book.id) ? "pointer-events-none" : null)}
+                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inDb?.hasOwnProperty(book.id) ? "pointer-events-none bg.gray-600" : this.inactive)}
                     onClick={(e) => {
                       this.handleAddBook(book, index);
                     }}

@@ -58,6 +58,7 @@ export default class App extends React.Component {
     this.handleIsEdit = this.handleIsEdit.bind(this)
     this.handleDeleteTracker = this.handleDeleteTracker.bind(this)
     this.handleForceUpdate = this.handleForceUpdate.bind(this)
+    this.forceUpdate = this.forceUpdate.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -213,6 +214,8 @@ export default class App extends React.Component {
             category={this.state.displayCategory}
             isEdit={this.state.isEdit}
             handleDeleteTracker={this.handleDeleteTracker}
+            deleteTracker={this.state.deleteTracker}
+            handleForceUpdate={this.handleForceUpdate}
           />
         </Router>
       );

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { deleteBook } from "./deleteBook";
 import BookDisplay from "./BookDisplay";
 import { classNames } from "./utils";
+import DeleteBooksTracker from "./DeleteBooksTracker";
 
 export default class CategoryInfo extends React.Component {
   constructor() {
@@ -21,6 +22,8 @@ export default class CategoryInfo extends React.Component {
     this.togglePopup = this.togglePopup.bind(this);
     this.hover = false;
     this.constantBtnStyle = "z-50 cursor-pointer inline-block text-2xl text-gray-300 fixed bottom-0 left-0 min-w-[27.3rem] max-w-[27.3rem] px-4 py-4 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
+    this.active = "bg-gray-600 border-red-600 hover:bg-gray-700"
+    this.inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
   }
 
 
@@ -94,32 +97,18 @@ export default class CategoryInfo extends React.Component {
             user={this.props.user}
           />
         ) : null}
-        <div className="category-list-container mx-12">
-          {this.state.bookInfo.map((each) =>
+        <div className="category-list-container">
+          {this.state.bookInfo.map((each, id) =>
             each ? (
-              <div className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
+              <div onClick={() => {
+                if (this.props.isEdit) this.props.handleDeleteTracker(each)
+              }} className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", this.props.deleteTracker.hasOwnProperty(each.id) ? this.active : this.inactive)}>
                 <div
-                  onClick={(e) => this.togglePopup(each)}
+                  onClick={(e) => {
+                    if (!this.props.isEdit) this.togglePopup(each)
+                  }}
                   className="list-item"
-                  onMouseOver={(e) => {
-                    if (e.target.innerHTML === "Multiple Authors") {
-                      this.authors = e.target;
-                      this.authors.innerHTML = each.authors
-                        .map((author) => `${author}<br>`)
-                        .join(" ");
-                    } else {
-                      return;
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (
-                      this.authors &&
-                      this.authors.parentElement &&
-                      this.authors.parentElement.parentElement
-                    ) {
-                      this.authors.innerHTML = "Multiple Authors";
-                    }
-                  }}
+                  id={id}
                 >
                 <div className="w-[25vw] overflow-hidden py-4 pb-8 uppercase text-bold text-white text-xl">
                   <h3>{each.title}</h3>
@@ -164,25 +153,16 @@ export default class CategoryInfo extends React.Component {
                     ) : null}
                   </div>
                 </div>
-                {this.props.isEdit ? (
-                  <button
-                    className="delete-book-btn"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      deleteBook(each, this.props.user.uid);
-                      this.deleteTimer = setTimeout(() => {
-                        this.checkBooks(each);
-                      }, 200);
-                    }}
-                  >
-                    Delete
-                  </button>
-                ) : null}
               </div>
             ) : null
           )}
+          {this.props.isEdit ? 
+            <div className={classNames("z-60 fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(this.props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
+              <DeleteBooksTracker handleDeleteTracker={this.props.handleDeleteTracker} deleteTracker={this.props.deleteTracker} handleForceUpdate={this.props.handleForceUpdate} user={this.props.user} />
+            </div>
+          :null }
         </div>
-        {window.location.pathname.includes(this.props.titleName) ? (
+        {window.location.pathname.includes(this.props.titleName) && !this.props.isEdit? (
           <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
           ) : null}
       </div>

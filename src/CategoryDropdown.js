@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-export default function CategoryDropdown({categories, setCategory}) {
+export default function CategoryDropdown({categories}) {
   const [selected, setSelected] = useState();
 
   const handleSubmit = (e, cat) => {
@@ -21,10 +21,10 @@ export default function CategoryDropdown({categories, setCategory}) {
         </>
           <Menu.Items id="menu" className="origin-top-right absolute right-0 mt-2.5 w-[16.5rem] rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-grey-600">
             <div className="py-1 px-1 pr-1.5 bg-gray-600 rounded-md">
-              {categories.map((cat, index) => {
+              {categories.map((cat) => {
                 return (
-                  <Menu.Item key={index} className="block bg-gray-600 text-white block px-2 py-3 text-2xl hover:bg-gray-500">
-                    <a href="#" onClick={(e) => handleSubmit(e, cat)}>
+                  <Menu.Item key={cat.id} className="block bg-gray-600 text-white block px-2 py-3 text-2xl hover:bg-gray-500">
+                    <a href="#" onClick={(e) => handleSubmit(e, cat.data.name)}>
                       {cat.data.name}
                     </a>
                   </Menu.Item>

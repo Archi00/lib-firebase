@@ -53,7 +53,7 @@ function DisplayCategories(props) {
               </>
             ) : (
               <div className="display-unique">
-                {props.catList.map((cat) => props.uniqueCat(cat.data.name))}
+                {props.catList.map((cat) => props.uniqueCat(cat.data.name))}  
               </div>
             )
           ) : null

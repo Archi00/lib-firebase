@@ -1,5 +1,4 @@
 import { classNames } from "./utils"
-import { useEffect, useState } from "react"
 
 export default function AddingBooksTracker({that}) {
   return (
