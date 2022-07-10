@@ -234,7 +234,7 @@ export default class App extends React.Component {
               delete this.state.delCatTracker[cat.id]
               this.setState({delCatTracker: {}})
             } else {
-              this.setState({delCatTracker: {[cat.id]: cat.id}})
+              this.setState({delCatTracker: {[cat.id]: cat}})
             }
           }
         }}
