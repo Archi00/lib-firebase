@@ -219,19 +219,21 @@ export default class App extends React.Component {
   }
 
   multiCat(title) {
+    const count = this.showNumOfBooks(title);
     this.flag = false;
     return (
-        <Router>
-          <Link id="category" to={`/dashboard/${title}`} onClick={(e) => {
-            this.handleDisplay(title)
-          }}
-          className={classNames("block bg-gray-800 text-center rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600")}
-          >
-            <div className="list-item">
-              <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
-                <h3 className="text-center">{title}</h3>
-              </div>
-      </div>
+      <Router>
+        <Link id="category" to={`/dashboard/${title}`} onClick={(e) => {
+          this.handleDisplay(title)
+        }}
+        className={classNames("block bg-gray-800 text-center rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600")}
+        >
+          <div className="list-item">
+            <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
+              <h3 className="text-center">{title}</h3>
+            </div>
+            <div className="mt-4"><h4>{count}</h4></div>
+          </div>
         </Link>
       </Router>
     );
