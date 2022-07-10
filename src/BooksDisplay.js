@@ -1,10 +1,13 @@
-const BooksDisplay = ({each, isEdit, handleDeleteTracker}) => {
+import { classNames } from "./utils"
+
+const BooksDisplay = ({each, isEdit, handleDeleteTracker, deleteTracker}) => {
+  const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
+  const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
   return (
     <div onClick={() => {
       if (isEdit === true) handleDeleteTracker(each)
-
     }} 
-    className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
+    className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", deleteTracker.hasOwnProperty(each.id) ? active : inactive)}>
       <div className="list-item">
         <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-xl">
           <h3>{each.title}</h3>

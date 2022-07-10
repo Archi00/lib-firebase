@@ -102,8 +102,8 @@ export default class App extends React.Component {
   }
 
   handleDeleteTracker(book, add=true) {
-    if (!add) this.setState({deleteTracker: {}})
-    if (!this.state.deleteTracker.hasOwnProperty(book.id)) {
+    if (!add) this.setState({deleteTracker: {}, forceUpdate: this.state.forceUpdate + 1})
+    if (!this.state.deleteTracker.hasOwnProperty(book.id) && book !== null) {
       this.setState({deleteTracker: {...this.state.deleteTracker, [book.id]: book}})
     } else {
       delete this.state.deleteTracker[book.id]

@@ -27,7 +27,7 @@ function DisplayCategories(props) {
         ) : props.bFilters.length < 1 ? props.allBooks ? 
           <>
             <div className="category-list-container" >
-              {props.totalBookList.map(book => (<BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} />))}
+              {props.totalBookList.map(book => (<BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} />))}
             </div>
             {props.isEdit ?
             <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>

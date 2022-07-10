@@ -17,7 +17,7 @@ const DeleteBooksTracker = ({handleDeleteTracker, deleteTracker, handleForceUpda
           <h4>{Object.entries(deleteTracker).length}</h4>
         </div>
         <div className="flex flex-1 justify-end">
-          <button onClick={() => handleDeleteTracker(book, false)} className="border-none text-gray-800 bg-red-600 text-black shadow-xl text-bold hover:bg-red-800 py-2 px-5 rounded ">Cancel</button>
+          <button onClick={() => handleDeleteTracker(null, false)} className="border-none text-gray-800 bg-red-600 text-black shadow-xl text-bold hover:bg-red-800 py-2 px-5 rounded ">Cancel</button>
         </div>
       </div>
       : null}
