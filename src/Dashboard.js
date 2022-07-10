@@ -43,55 +43,6 @@ function Dashboard(props) {
     setCatFilters([]);
   };
 
-  const replaceTags = (originalTag, count = 0) => {
-    cleanFilters();
-
-    originalTag.parentNode.childNodes.forEach((t) => {
-      t.nodeName === "INPUT" ? count++ : null;
-    });
-
-    if (count < 1) {
-      const replacement = document.createElement("input");
-      for (let i = 0, l = originalTag.attributes.length; i < l; ++i) {
-        let nodeName = originalTag.attributes.item(i).nodeName;
-        let nodeValue = originalTag.attributes.item(i).nodeValue;
-        replacement.setAttribute(nodeName, nodeValue);
-      }
-      if (replacement.nodeName === "INPUT") {
-        replacement.setAttribute("placeholder", originalTag.innerText);
-        replacement.setAttribute("autoFocus", true);
-        replacement.onchange = (e) => {
-          filterCategories(e);
-        };
-      }
-      originalTag.parentNode.replaceChild(replacement, originalTag);
-      replacement.focus();
-    } else {
-      const replacement = document.createElement("button");
-
-      originalTag.parentNode.childNodes.forEach((t) => {
-        if (t !== originalTag && t.nodeName === "INPUT") {
-          for (let i = 0, l = t.attributes.length; i < l; ++i) {
-            if (
-              t.attributes.item(i).nodeName !== "placeholder" &&
-              t.attributes.item(i).nodeName !== "autoFocus"
-            ) {
-              let nodeName = t.attributes.item(i).nodeName;
-              let nodeValue = t.attributes.item(i).nodeValue;
-              replacement.setAttribute(nodeName, nodeValue);
-            }
-            if (t.attributes.item(i).nodeName === "placeholder") {
-              replacement.innerText = t.attributes.item(i).nodeValue;
-            }
-            replacement.onclick = (e) => replaceTags(e.target);
-          }
-          t.parentNode.replaceChild(replacement, t);
-        }
-      });
-      replaceTags(originalTag);
-    }
-  };
-
   const handleHomeBtn = () => {
     cleanFilters();
     history.replace("/dashboard");
@@ -111,36 +62,35 @@ function Dashboard(props) {
         }
       }
       return temp;
-    } else {
-      for (let i = 0, l = props.info.length; i < l; i++) {
-        if (props.info[i].data.books) {
-          props.info[i].data.books.map((e) => {
-            if (props.info[i].data.books)
-              if (typeof e[filter] === "string") {
-                if (e[filter].toUpperCase().includes(value.toUpperCase())) {
-                  temp.push(e);
-                }
-              } else if (typeof e[filter] === "object") {
-                Object.values(e[filter]).forEach((y) => {
-                  if (!y.identifier) {
-                    if (
-                      e[filter][0].toUpperCase().includes(value.toUpperCase())
-                    ) {
-                      temp.push(e);
-                    }
-                  } else {
-                    if (y.identifier.includes(value)) {
-                      temp.push(e);
-                    }
-                  }
-                });
+    } 
+    for (let i = 0, l = props.info.length; i < l; i++) {
+      if (props.info[i].data.books) {
+        props.info[i].data.books.map((e) => {
+            if (typeof e[filter] === "string") {
+              if (e[filter].toUpperCase().includes(value.toUpperCase())) {
+                temp.push(e);
               }
-          });
-        }
+            } else if (typeof e[filter] === "object") {
+              Object.values(e[filter]).forEach((y) => {
+                if (!y.identifier) {
+                  if (
+                    e[filter][0].toUpperCase().includes(value.toUpperCase())
+                  ) {
+                    temp.push(e);
+                  }
+                } else {
+                  if (y.identifier.includes(value)) {
+                    temp.push(e);
+                  }
+                }
+              });
+            }
+        });
       }
-      history.replace(`/dashboard/search-by-${filter}`);
-      return temp;
     }
+    history.replace(`/dashboard/search-by-${filter}`);
+    return temp;
+    
   };
 
   const filterCategories = (e) => {
@@ -207,7 +157,7 @@ function Dashboard(props) {
               </div>
             </div>
             {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase absolute top-0 right-0 left-0 mt-6">{props.displayCategory}</h1> : null}
-            <DropdownRender />
+            <DropdownRender updateDb={props.updateDb} />
           </div>
         </header>
         {!addingCategory ?

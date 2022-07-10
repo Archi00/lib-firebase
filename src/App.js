@@ -48,6 +48,7 @@ export default class App extends React.Component {
     this.addBooks = this.addBooks.bind(this);
     this.handleShowCat = this.handleShowCat.bind(this);
     this.handleShowCatTrue = this.handleShowCatTrue.bind(this);
+    this.updateDb = this.updateDb.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -82,6 +83,11 @@ export default class App extends React.Component {
     const listInfo = await getBookInfo(this.state.bookTitle);
     this.setState({ bookInfoList: listInfo });
     return clearTimeout(this.timer);
+  }
+
+  async updateDb() {
+    this.categories = await getDbData()
+    console.log(this.categories)
   }
 
   addCat(cat) {
@@ -240,6 +246,7 @@ export default class App extends React.Component {
                   handleShowCat={this.handleShowCat}
                   handleShowCatTrue={this.handleShowCatTrue}
                   totalBookList={this.state.totalBookList}
+                  updateDb={this.updateDb}
                 />
               </Route>
             </Switch>

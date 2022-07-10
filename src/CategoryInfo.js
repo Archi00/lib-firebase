@@ -20,7 +20,7 @@ export default class CategoryInfo extends React.Component {
     };
     this.togglePopup = this.togglePopup.bind(this);
     this.hover = false;
-    this.constantBtnStyle = "z-50 cursor-pointer inline-block text-2xl text-gray-300 fixed bottom-0 left-0 min-w-[27.3rem] max-w-[27.3rem] px-4 py-2 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
+    this.constantBtnStyle = "z-50 cursor-pointer inline-block text-2xl text-gray-300 fixed bottom-0 left-0 min-w-[27.3rem] max-w-[27.3rem] px-4 py-4 ease-in-out duration-300 bg-gray-900 hover:bg-gray-700"
   }
 
 
@@ -119,7 +119,7 @@ export default class CategoryInfo extends React.Component {
         ) : null}
         <div className="category-list-container mx-12">
           <button
-            className={classNames(this.constantBtnStyle, "mb-14")}
+            className={classNames(this.constantBtnStyle, "mb-20")}
             onClick={(e) => {
               e.preventDefault();
               this.update();
@@ -137,7 +137,7 @@ export default class CategoryInfo extends React.Component {
             Edit
           </button>
           <button
-            className={classNames(this.constantBtnStyle, "mb-28")}
+            className={classNames(this.constantBtnStyle, "mb-40")}
             onClick={(e) => {
               e.preventDefault();
               this.setState({ sorted: !this.state.sorted });

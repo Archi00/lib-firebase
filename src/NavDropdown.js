@@ -2,7 +2,7 @@ import React from "react";
 import { createPopper } from "@popperjs/core";
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const Dropdown = ({ color }) => {
+const Dropdown = ({ color, updateDb }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -59,7 +59,7 @@ const Dropdown = ({ color }) => {
                 }
                 onClick={e => e.preventDefault()}
               >
-                Home
+                Edit
               </a>
               <a
                 href="#"
@@ -69,7 +69,7 @@ const Dropdown = ({ color }) => {
                 }
                 onClick={e => e.preventDefault()}
               >
-                Add Category
+                Sort
               </a>
               <a
                 href="#"
@@ -77,9 +77,9 @@ const Dropdown = ({ color }) => {
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
-                onClick={e => e.preventDefault()}
+                onClick={() => updateDb()}
               >
-                Add Book
+                Update
               </a>
               <div className="h-0 my-2 border border-solid border-t-0 border-gray-300 opacity-25" />
               <a
@@ -100,10 +100,10 @@ const Dropdown = ({ color }) => {
   );
 };
 
-export default function DropdownRender() {
+export default function DropdownRender({updateDb}) {
   return (
     <>
-      <Dropdown color="white" />
+      <Dropdown color="white" updateDb={updateDb} />
     </>
   );
 }
