@@ -70,7 +70,7 @@ export default class App extends React.Component {
         this.categories.map((cat) => {
           if (!this.state.catList.includes(cat.data.name) && cat.data.name)
             this.setState({
-              catList: this.state.catList.concat(cat.data.name)
+              catList: this.state.catList.concat(cat)
             });
             if (
               window.location.pathname.includes(cat.data.name) &&
@@ -218,19 +218,23 @@ export default class App extends React.Component {
     }
   }
 
-  multiCat(title) {
-    const count = this.showNumOfBooks(title);
+  multiCat(cat) {
+    const count = this.showNumOfBooks(cat.data.name);
     this.flag = false;
+
+    const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
+    const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
+
     return (
       <Router>
-        <Link id="category" to={`/dashboard/${title}`} onClick={(e) => {
-          this.handleDisplay(title)
+        <Link id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data.name : "./dashboard"}`} onClick={(e) => {
+          if (!this.state.isEdit) this.handleDisplay(cat.data.name)
         }}
         className={classNames("block bg-gray-800 text-center rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600")}
         >
           <div className="list-item">
             <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
-              <h3 className="text-center">{title}</h3>
+              <h3 className="text-center">{cat.data.name}</h3>
             </div>
             <div className="mt-4"><h4>{count}</h4></div>
           </div>

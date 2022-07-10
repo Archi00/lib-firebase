@@ -25,7 +25,7 @@ export default function CategoryDropdown({categories, setCategory}) {
                 return (
                   <Menu.Item key={index} className="block bg-gray-600 text-white block px-2 py-3 text-2xl hover:bg-gray-500">
                     <a href="#" onClick={(e) => handleSubmit(e, cat)}>
-                      {cat}
+                      {cat.data.name}
                     </a>
                   </Menu.Item>
                 )

@@ -41,11 +41,11 @@ function DisplayCategories(props) {
               <div className="category-list-container" id="catZone">
                 {props.catFilters.length > 0
                   ? props.catFilters.map((e) => props.multiCat(e))
-                  : props.catList.map((title) => props.multiCat(title))}
+                  : props.catList.map((cat) => props.multiCat(cat))}
               </div>
             ) : (
               <div className="display-unique">
-                {props.catList.map((title) => props.uniqueCat(title))}
+                {props.catList.map((cat) => props.uniqueCat(cat.data.name))}
               </div>
             )
           ) : null
