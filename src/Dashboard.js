@@ -194,6 +194,7 @@ function Dashboard(props) {
               handleDeleteTracker={props.handleDeleteTracker}
               deleteTracker={props.deleteTracker}
               handleForceUpdate={props.handleForceUpdate}
+              delCatTracker={props.delCatTracker}
             />
           </div>
         </div>

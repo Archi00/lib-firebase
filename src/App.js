@@ -288,6 +288,7 @@ export default class App extends React.Component {
                   handleDeleteTracker={this.handleDeleteTracker}
                   deleteTracker={this.state.deleteTracker}
                   handleForceUpdate={this.handleForceUpdate}
+                  delCatTracker={this.state.delCatTracker}
                 />
               </Route>
             </Switch>
