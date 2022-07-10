@@ -12,6 +12,7 @@ import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Reset from "./Reset";
 import "./App.css";
+import { classNames } from "./utils";
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
@@ -218,28 +219,21 @@ export default class App extends React.Component {
   }
 
   multiCat(title) {
-    const count = this.showNumOfBooks(title);
     this.flag = false;
     return (
-      <>
         <Router>
-          <Link id="category" className="bg-gray-800 rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600" to={`/dashboard/${title}`} onClick={(e) => {
+          <Link id="category" to={`/dashboard/${title}`} onClick={(e) => {
             this.handleDisplay(title)
-          }}>
-            <span
-              key={title}
-              className="cat-btn-info"
-              to={`/dashboard/${title}`}
-              onClick={(e) => {
-                this.handleDisplay(title);
-              }}
-            >
-              <h3>{title}</h3>
-              <p className="num-of-books">{count}</p>
-            </span>
-          </Link>
-        </Router>
-      </>
+          }}
+          className={classNames("block bg-gray-800 text-center rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600")}
+          >
+            <div className="list-item">
+              <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
+                <h3 className="text-center">{title}</h3>
+              </div>
+      </div>
+        </Link>
+      </Router>
     );
   }
 
