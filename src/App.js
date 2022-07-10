@@ -36,7 +36,8 @@ export default class App extends React.Component {
       isEdit: false,
       deleteTracker: {},
       forceUpdate: 0,
-      categories: []
+      categories: [],
+      delCatTracker: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -221,16 +222,23 @@ export default class App extends React.Component {
   multiCat(cat) {
     const count = this.showNumOfBooks(cat.data.name);
     this.flag = false;
-
     const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
     const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
 
     return (
       <Router>
-        <Link id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data.name : "./dashboard"}`} onClick={(e) => {
+        <Link id="category" myId={cat.id} to={`${!this.state.isEdit ? "./dashboard/" + cat.data.name : "./dashboard"}`} onClick={(e) => {
           if (!this.state.isEdit) this.handleDisplay(cat.data.name)
+          if (this.state.isEdit) {
+            if (this.state.delCatTracker.hasOwnProperty(cat.id)){
+              delete this.state.delCatTracker[cat.id]
+              this.setState({delCatTracker: {}})
+            } else {
+              this.setState({delCatTracker: {[cat.id]: cat.id}})
+            }
+          }
         }}
-        className={classNames("block bg-gray-800 text-center rounded border-none text-2xl text-gray-300 group cat-btn hover:shadow-xl hover:bg-gray-600")}
+        className={classNames("block bg-gray-800 text-center rounded border text-2xl text-gray-300 group hover:shadow-xl hover:bg-gray-600", this.state.delCatTracker.hasOwnProperty(cat.id) && this.state.isEdit ? active : inactive)}
         >
           <div className="list-item">
             <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
