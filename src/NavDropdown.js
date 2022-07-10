@@ -55,7 +55,8 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
                 href="#"
                 className={
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
-                  (color === "indigo" ? " text-slate-700" : "text-white")
+                  (color === "indigo" ? " text-slate-700 " : "text-white ") +
+                  (isEdit === true ? "bg-gray-700 hover:bg-gray-800 " : null)
                 }
                 onClick={() => handleIsEdit(!isEdit)}
               >
@@ -64,8 +65,9 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
               <a
                 href="#"
                 className={
-                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-700 " +
-                  (color === "indigo" ? " text-slate-700" : "text-white")
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
+                  (color === "indigo" ? " text-slate-700 " : "text-white ")
+                  
                 }
                 onClick={() => updateDb()}
               >

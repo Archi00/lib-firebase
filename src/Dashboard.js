@@ -190,6 +190,8 @@ function Dashboard(props) {
               bFilters={bFilters}
               cleanFilters={cleanFilters}
               allBooks={allBooks}
+              isEdit={props.isEdit}
+              handleDeleteTracker={props.handleDeleteTracker}
             />
           </div>
         </div>

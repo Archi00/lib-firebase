@@ -24,7 +24,7 @@ function DisplayCategories(props) {
           </>
         ) : props.bFilters.length < 1 ? props.allBooks ? 
           <div className="category-list-container" >
-            {props.totalBookList.map(book => <BooksDisplay each={book} />)}</div> : (
+            {props.totalBookList.map(book => <BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} />)}</div> : (
           props.catList.length > 0 ? (
             !props.displayCategory ? (
               <div className="display-categories" id="catZone">

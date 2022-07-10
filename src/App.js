@@ -32,7 +32,8 @@ export default class App extends React.Component {
       isAdding: false,
       showCat: false,
       totalBookList: [],
-      isEdit: false
+      isEdit: false,
+      deleteTracker: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -51,6 +52,7 @@ export default class App extends React.Component {
     this.handleShowCatTrue = this.handleShowCatTrue.bind(this);
     this.updateDb = this.updateDb.bind(this)
     this.handleIsEdit = this.handleIsEdit.bind(this)
+    this.handleDeleteTracker = this.handleDeleteTracker.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -66,6 +68,7 @@ export default class App extends React.Component {
             this.setState({
               catList: this.state.catList.concat(cat.data.name)
             });
+            console.log(cat)
             if (cat.data.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data.books]})
           if (
             window.location.pathname.includes(cat.data.name) &&
@@ -94,6 +97,16 @@ export default class App extends React.Component {
 
   addCat(cat) {
     this.setState({ catList: this.state.catList.concat(cat) });
+  }
+
+  handleDeleteTracker(book) {
+    if (!this.state.deleteTracker.hasOwnProperty(book.id)) {
+      this.setState({deleteTracker: {...this.state.deleteTracker, [book.id]: book}})
+      console.log(book.id, "Added to the delete list tracker")
+    } else {
+      delete this.state.deleteTracker[book.id]
+      console.log(book.id, "Remmoved from the delete list tracker")
+    }
   }
 
   handleIsEdit(bool) {
@@ -190,6 +203,7 @@ export default class App extends React.Component {
             checkCurrentBook={this.checkCurrentBook}
             category={this.state.displayCategory}
             isEdit={this.state.isEdit}
+            handleDeleteTracker={this.handleDeleteTracker}
           />
         </Router>
       );
@@ -256,6 +270,7 @@ export default class App extends React.Component {
                   updateDb={this.updateDb}
                   handleIsEdit={this.handleIsEdit}
                   isEdit={this.state.isEdit}
+                  handleDeleteTracker={this.handleDeleteTracker}
                 />
               </Route>
             </Switch>
