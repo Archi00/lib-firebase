@@ -1,6 +1,7 @@
 import getDbData from "./getDb";
 import { arrayRemove, doc, updateDoc } from "@firebase/firestore";
 import { db } from "./App";
+import DeleteBooksTracker from "./DeleteBooksTracker";
 
 const deleteBook = async (obj, uid) => {
   try {
@@ -39,4 +40,21 @@ const deleteBook = async (obj, uid) => {
   }
 };
 
-export default deleteBook;
+const deleteBooks = async (info, deleteTracker, uid) => {
+  try {
+    info.map((cat, index) => {
+      const filteredBooks = cat.data.books.filter(book => deleteTracker.hasOwnProperty(book.id))
+      if (filteredBooks.length > 0) {
+        const rt = doc(db, uid, cat.id)
+        filteredBooks.map(async (ash) => await updateDoc(rt, {books: arrayRemove(ash)}))
+        console.log("Books deleted")
+      }
+    })
+    return true;
+  } catch (e) {
+    console.error(e)
+    return false;
+  }
+}
+
+export {deleteBook, deleteBooks};

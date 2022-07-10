@@ -31,7 +31,7 @@ function DisplayCategories(props) {
             </div>
             {props.isEdit ?
             <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
-              <DeleteBooksTracker handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} handleForceUpdate={props.handleForceUpdate} />
+              <DeleteBooksTracker handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} handleForceUpdate={props.handleForceUpdate} user={props.user} />
             </div>
             : null}
           </> : (

@@ -2,7 +2,7 @@ import React from "react";
 import getDbData from "./getDb";
 import QRCode from "qrcode.react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import deleteBook from "./deleteBook";
+import { deleteBook } from "./deleteBook";
 import BookDisplay from "./BookDisplay";
 import { classNames } from "./utils";
 
