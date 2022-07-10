@@ -34,7 +34,8 @@ export default class App extends React.Component {
       totalBookList: [],
       isEdit: false,
       deleteTracker: {},
-      forceUpdate: 0
+      forceUpdate: 0,
+      categories: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -70,14 +71,13 @@ export default class App extends React.Component {
             this.setState({
               catList: this.state.catList.concat(cat.data.name)
             });
-            console.log(cat)
-            if (cat.data.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data.books]})
-          if (
-            window.location.pathname.includes(cat.data.name) &&
-            !this.state.displayCategory
-          ) {
-            this.setState({ displayCategory: cat.data.name });
-          }
+            if (
+              window.location.pathname.includes(cat.data.name) &&
+              !this.state.displayCategory
+              ) {
+                this.setState({ displayCategory: cat.data.name });
+              }
+          if (cat.data.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data.books]})
         });
       } else {
         return null;
@@ -94,6 +94,7 @@ export default class App extends React.Component {
 
   async updateDb() {
     this.categories = await getDbData()
+    this.setState({categories: this.categories})
     console.log(this.categories)
   }
 

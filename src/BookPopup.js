@@ -6,7 +6,7 @@ import { classNames } from "./utils";
 import postCategory from "./postCategory";
 
 export default class BookPopup extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       booksBeingAdded: {},
@@ -19,9 +19,10 @@ export default class BookPopup extends React.Component {
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700"
-
+    this.inDb
+    props.totalBookList.map(book => this.inDb = {...this.inDb, [book.id]: book.id})
   }
-  
+
   handlePagination(page) {
     this.setState({currentPage: page, fIter: (page * this.numOfBooks) - 10, lIter: (page * this.numOfBooks)})
   }
@@ -81,7 +82,7 @@ export default class BookPopup extends React.Component {
                   <div
                     id={index}
                     key={index}
-                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inactive)}
+                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) || this.inDb.hasOwnProperty(book.id) ? this.active : this.inactive, this.inDb.hasOwnProperty(book.id) ? "pointer-events-none" : null)}
                     onClick={(e) => {
                       this.handleAddBook(book, index);
                     }}
