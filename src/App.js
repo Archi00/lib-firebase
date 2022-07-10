@@ -33,7 +33,8 @@ export default class App extends React.Component {
       showCat: false,
       totalBookList: [],
       isEdit: false,
-      deleteTracker: {}
+      deleteTracker: {},
+      forceUpdate: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -53,6 +54,7 @@ export default class App extends React.Component {
     this.updateDb = this.updateDb.bind(this)
     this.handleIsEdit = this.handleIsEdit.bind(this)
     this.handleDeleteTracker = this.handleDeleteTracker.bind(this)
+    this.handleForceUpdate = this.handleForceUpdate.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -99,14 +101,18 @@ export default class App extends React.Component {
     this.setState({ catList: this.state.catList.concat(cat) });
   }
 
-  handleDeleteTracker(book) {
+  handleDeleteTracker(book, add=true) {
+    if (!add) this.setState({deleteTracker: {}})
     if (!this.state.deleteTracker.hasOwnProperty(book.id)) {
       this.setState({deleteTracker: {...this.state.deleteTracker, [book.id]: book}})
-      console.log(book.id, "Added to the delete list tracker")
     } else {
       delete this.state.deleteTracker[book.id]
-      console.log(book.id, "Remmoved from the delete list tracker")
+      this.setState({forceUpdate: this.state.forceUpdate + 1})
     }
+  }
+
+  handleForceUpdate() {
+    this.setState({forceUpdate: this.state.forceUpdate + 1})
   }
 
   handleIsEdit(bool) {
@@ -271,6 +277,8 @@ export default class App extends React.Component {
                   handleIsEdit={this.handleIsEdit}
                   isEdit={this.state.isEdit}
                   handleDeleteTracker={this.handleDeleteTracker}
+                  deleteTracker={this.state.deleteTracker}
+                  handleForceUpdate={this.handleForceUpdate}
                 />
               </Route>
             </Switch>

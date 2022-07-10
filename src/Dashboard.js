@@ -192,6 +192,8 @@ function Dashboard(props) {
               allBooks={allBooks}
               isEdit={props.isEdit}
               handleDeleteTracker={props.handleDeleteTracker}
+              deleteTracker={props.deleteTracker}
+              handleForceUpdate={props.handleForceUpdate}
             />
           </div>
         </div>

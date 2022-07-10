@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import BookPopup from "./BookPopup";
 import BooksDisplay from "./BooksDisplay";
+import DeleteBooksTracker from "./DeleteBooksTracker";
 import FilteredBooks from "./FilteredBooks";
+import { classNames } from "./utils";
 
 function DisplayCategories(props) {
   return (
@@ -23,8 +25,16 @@ function DisplayCategories(props) {
             />
           </>
         ) : props.bFilters.length < 1 ? props.allBooks ? 
-          <div className="category-list-container" >
-            {props.totalBookList.map(book => <BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} />)}</div> : (
+          <>
+            <div className="category-list-container" >
+              {props.totalBookList.map(book => (<BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} />))}
+            </div>
+            {props.isEdit ?
+            <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
+              <DeleteBooksTracker handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} handleForceUpdate={props.handleForceUpdate} />
+            </div>
+            : null}
+          </> : (
           props.catList.length > 0 ? (
             !props.displayCategory ? (
               <div className="display-categories" id="catZone">
