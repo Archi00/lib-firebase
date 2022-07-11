@@ -45,11 +45,10 @@ function FilteredBooks(props) {
       ) : null}
       <div className="category-list-container">
 
-        {displayBooks.map((each) =>
+        {displayBooks.map((each, index) =>
           each ? (
-            <div className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
+            <div key={index} className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">
               <div
-                onClick={(e) => togglePopup(each)}
                 className="list-item"
               >
               <div className="w-[25vw] overflow-hidden py-4 pb-8 uppercase text-bold text-white text-xl">
@@ -63,6 +62,7 @@ function FilteredBooks(props) {
                         e.preventDefault();
                         togglePopup(each);
                       }}
+                      to=""
                     >
                       {each.imageLinks ? (
                         <img

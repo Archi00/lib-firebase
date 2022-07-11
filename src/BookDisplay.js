@@ -78,7 +78,7 @@ export default class BookPopup extends React.Component {
     if (editBtn[0].parentNode.nextElementSibling.children[1]) {
       let description =
         editBtn[0].parentNode.nextElementSibling.children[1].children;
-      temp.books[description[0].getAttribute("objKey")] =
+      temp.books[description[0].getAttribute("objkey")] =
         description[0].innerText;
       Object.values(description).forEach((x) => {
         x.setAttribute("contenteditable", false);
@@ -89,7 +89,7 @@ export default class BookPopup extends React.Component {
       editBtn[0].parentNode.nextElementSibling.children[0].children[1].children;
     Object.values(infoTop).forEach((x) => {
       //console.log(x.getAttribute("objKey") + ": ", x.innerHTML);
-      temp.books[x.getAttribute("objKey")] = x.innerText;
+      temp.books[x.getAttribute("objkey")] = x.innerText;
     });
     Object.values(infoTop).forEach((x) => {
       x.setAttribute("contenteditable", false);
@@ -162,7 +162,7 @@ export default class BookPopup extends React.Component {
                           <li
                             className="displayBook-author"
                             value={each}
-                            objKey="authors"
+                            objkey="authors"
                           >
                             {each}
                           </li>
@@ -175,7 +175,7 @@ export default class BookPopup extends React.Component {
                       value={
                         this.props.book.authors ? this.props.book.authors : ""
                       }
-                      objKey="authors"
+                      objkey="authors"
                     >
                       {this.props.book.authors ? this.props.book.authors : ""}
                     </li>
@@ -185,7 +185,7 @@ export default class BookPopup extends React.Component {
                     value={
                       this.props.book.pageCount ? this.props.book.pageCount : ""
                     }
-                    objKey="pageCount"
+                    objkey="pageCount"
                   >
                     {this.props.book.pageCount ? this.props.book.pageCount : ""}
                   </li>
@@ -196,7 +196,7 @@ export default class BookPopup extends React.Component {
                         ? this.props.book.publishedDate
                         : ""
                     }
-                    objKey="publishedDate"
+                    objkey="publishedDate"
                   >
                     {this.props.book.publishedDate
                       ? this.props.book.publishedDate
@@ -207,7 +207,7 @@ export default class BookPopup extends React.Component {
                     value={
                       this.props.book.publisher ? this.props.book.publisher : ""
                     }
-                    objKey="publisher"
+                    objkey="publisher"
                   >
                     {this.props.book.publisher ? this.props.book.publisher : ""}
                   </li>
@@ -215,7 +215,7 @@ export default class BookPopup extends React.Component {
               </div>
               {this.props.book.description ? (
                 <div className="displayBook-extra-info">
-                  <li className="displayBook-description" objKey="description">
+                  <li className="displayBook-description" objkey="description">
                     {this.props.book.description}
                   </li>
                 </div>

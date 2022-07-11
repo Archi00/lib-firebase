@@ -50,7 +50,12 @@ function Dashboard(props) {
     props.handleDisplay("");
   }
 
-  const handleBackBtn = () => window.location.reload()
+  const handleBackBtn = () => {
+    const filters = [...document.querySelectorAll("#filter")]
+    filters.forEach(f => f.value = "")
+    cleanFilters();
+    history.replace("/dashboard")
+  }
 
   const getData = async (filter, value) => {
     let temp = [];
@@ -96,17 +101,18 @@ function Dashboard(props) {
 
   const filterCategories = (e) => {
     cleanFilters()
-    if (!e.target.value) {
+    if (e.target.value === "" || !e.target.value) {
       cleanFilters();
       history.replace("/dashboard");
+      return
     }
     const name = e.target.name.split("-").pop();
-    console.log(e.target.parentNode.childNodes)
     e.target.parentNode.childNodes.forEach((a) => {
       if (a.nodeName === "INPUT" && name === "category") {
         if (!a.value) {
           cleanFilters();
           history.replace("/dashboard");
+          return
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
           if (a.value.toUpperCase()) setCatFilters(res);
@@ -115,6 +121,7 @@ function Dashboard(props) {
         if (!a.value.toUpperCase()) {
           cleanFilters();
           history.replace("/dashboard");
+          return
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
           if (a.value.toUpperCase) setBFilters(res);
