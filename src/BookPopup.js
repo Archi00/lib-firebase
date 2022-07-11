@@ -19,9 +19,9 @@ export default class BookPopup extends React.Component {
       wrong: false
     };
     this.numOfBooks = 10
-    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-sm border-gray-400"
+    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-gray-400"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
-    this.active = "bg-gray-400 hover:bg-gray-700"
+    this.active = "bg-gray-400 hover:bg-gray-700 shadow-xl"
     this.inDb = ""
     props.totalBookList.map(book => this.inDb = {...this.inDb, [book.id]: book.id})
     this.handleClose = this.handleClose.bind(this)
@@ -101,7 +101,7 @@ export default class BookPopup extends React.Component {
                   <div
                     id={index}
                     key={index}
-                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inDb?.hasOwnProperty(book.id) ? "pointer-events-none bg.gray-600" : this.inactive)}
+                    className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inDb?.hasOwnProperty(book.id) ? "pointer-events-none bg-gray-500 text-gray-700 shadow-inner" : this.inactive)}
                     onClick={(e) => {
                       this.handleAddBook(book, index);
                     }}
