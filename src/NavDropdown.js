@@ -1,6 +1,7 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, LogoutIcon } from '@heroicons/react/solid'
+import { logout } from "./firebase";
 
 const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
   // dropdown props
@@ -80,8 +81,9 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
-                onClick={e => e.preventDefault()}
+                onClick={() => logout()}
               >
+                {/*<LogoutIcon className="-mr-2 h-8 w-5" aria-hidden="true" />*/}
                 Logout
               </a>
             </div>
