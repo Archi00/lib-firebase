@@ -70,17 +70,17 @@ export default class App extends React.Component {
       if (user) {
         this.categories = await getDbData();
         this.categories.map((cat) => {
-          if (!this.state.catList.includes(cat.data.name) && cat.data.name)
+          if (!this.state.catList.includes(cat.data?.name) && cat.data?.name)
             this.setState({
               catList: this.state.catList.concat(cat)
             });
             if (
-              window.location.pathname.includes(cat.data.name) &&
+              window.location.pathname.includes(cat.data?.name) &&
               !this.state.displayCategory
               ) {
-                this.setState({ displayCategory: cat.data.name });
+                this.setState({ displayCategory: cat.data?.name });
               }
-          if (cat.data.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data.books]})
+          if (cat.data?.books?.length > 0) this.setState({totalBookList: [...this.state.totalBookList, ...cat.data?.books]})
         });
       } else {
         return null;
@@ -230,8 +230,8 @@ export default class App extends React.Component {
 
     return (
       <Router>
-        <Link id="category" myId={cat.id} to={`${!this.state.isEdit ? "./dashboard/" + cat.data.name : "./dashboard"}`} onClick={(e) => {
-          if (!this.state.isEdit) this.handleDisplay(cat.data.name)
+        <Link id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data?.name : "./dashboard"}`} onClick={(e) => {
+          if (!this.state.isEdit) this.handleDisplay(cat.data?.name)
           if (this.state.isEdit) {
             if (this.state.delCatTracker.hasOwnProperty(cat.id)){
               delete this.state.delCatTracker[cat.id]
@@ -245,7 +245,7 @@ export default class App extends React.Component {
         >
           <div className="list-item">
             <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">
-              <h3 className="text-center">{cat.data.name}</h3>
+              <h3 className="text-center">{cat.data?.name}</h3>
             </div>
             <div className="mt-4"><h4>{count}</h4></div>
           </div>
