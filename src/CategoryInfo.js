@@ -71,11 +71,11 @@ export default class CategoryInfo extends React.Component {
         this.setState({ bookInfo: this.state.bookInfo.concat(bookChecker[1]) });
       }, 400);
     }
+    console.log(this.state.bookInfo)
   }
 
   async componentDidMount() {
     this.checkBooks();
-    window.element
     this.setState({ outerWidth: window.outerWidth });
   }
 
@@ -89,18 +89,10 @@ export default class CategoryInfo extends React.Component {
   render() {
     return (
       <div>
-        {this.state.showPopup ? (
-          <BookDisplay
-            book={this.state.book}
-            category={this.props.category}
-            closePopup={this.togglePopup}
-            user={this.props.user}
-          />
-        ) : null}
         <div className="category-list-container">
-          {this.state.bookInfo.map((each, id) =>
+          {this.state.bookInfo.map((each, index) =>
             each ? (
-              <div onClick={() => {
+              <div key={index} onClick={() => {
                 if (this.props.isEdit) this.props.handleDeleteTracker(each)
               }} className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", this.props.deleteTracker.hasOwnProperty(each.id) ? this.active : this.inactive)}>
                 <div
@@ -108,7 +100,6 @@ export default class CategoryInfo extends React.Component {
                     if (!this.props.isEdit) this.togglePopup(each)
                   }}
                   className="list-item"
-                  id={id}
                 >
                 <div className="w-[25vw] overflow-hidden py-4 pb-8 uppercase text-bold text-white text-xl">
                   <h3>{each.title}</h3>
@@ -119,8 +110,8 @@ export default class CategoryInfo extends React.Component {
                       <Link
                         onClick={(e) => {
                           e.preventDefault();
-                          this.togglePopup(each);
                         }}
+                        to=""
                       >
                         {each.imageLinks ? (
                           <img

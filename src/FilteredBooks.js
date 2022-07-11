@@ -35,16 +35,7 @@ function FilteredBooks(props) {
 
   return (
     <div>
-      {showPopup ? (
-        <BookDisplay
-          book={book}
-          category={props.category}
-          closePopup={togglePopup}
-          user={props.user}
-        />
-      ) : null}
       <div className="category-list-container">
-
         {displayBooks.map((each, index) =>
           each ? (
             <div key={index} className="each-flex-container overflow-hidden rounded bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-600 min-h-[20vh] max-h-[20vh] min-w-[25vw] max-w-[25vw]">

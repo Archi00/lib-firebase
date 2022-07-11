@@ -26,7 +26,7 @@ function DisplayCategories(props) {
               totalBookList={props.totalBookList}
             />
           </>
-        ) : props.bFilters.length < 1 ? props.allBooks ? 
+        ) : props.bFilters.length < 1 && props.catFilters.length < 1 ? props.allBooks ? 
           <>
             <div className="category-list-container" >
               {props.totalBookList.map((book, index) => (<BooksDisplay key={index} each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} />))}

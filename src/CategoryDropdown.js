@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-export default function CategoryDropdown({categories}) {
+export default function CategoryDropdown({categories, setCat}) {
   const [selected, setSelected] = useState();
 
   const handleSubmit = (e, cat) => {
     e.preventDefault()
     setSelected(cat)
+    setCat({currentCat: cat})
   }
 
   return (

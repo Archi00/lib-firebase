@@ -35,26 +35,23 @@ function Dashboard(props) {
     if (!user) return history.replace("/");
     fetchUserName();
     props.handleLogin(user);
-    if (bFilters.length < 1) history.replace("/dashboard");
   }, [user, loading, bFilters]);
 
   const cleanFilters = () => {
     setBFilters([]);
     setCatFilters([]);
-    history.replace("/dashboard")
   };
-
+  
   const handleHomeBtn = () => {
     cleanFilters();
     history.replace("/dashboard");
     props.handleDisplay("");
   }
-
+  
   const handleBackBtn = () => {
     const filters = [...document.querySelectorAll("#filter")]
     filters.forEach(f => f.value = "")
     cleanFilters();
-    history.replace("/dashboard")
   }
 
   const getData = async (filter, value) => {
@@ -65,6 +62,7 @@ function Dashboard(props) {
           temp.push(props.info[i]);
         }
       }
+      history.replace(`/dashboard/search-by-category`)
       return temp;
     } 
     for (let i = 0, l = props.info.length; i < l; i++) {
@@ -98,7 +96,6 @@ function Dashboard(props) {
   };
 
   const filterCategories = (e) => {
-    cleanFilters()
     if (e.target.value === "" || !e.target.value) {
       cleanFilters();
       history.replace("/dashboard");

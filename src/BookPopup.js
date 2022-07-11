@@ -16,7 +16,8 @@ export default class BookPopup extends React.Component {
       lIter: 10,
       currentPage: 1,
       success: false,
-      wrong: false
+      wrong: false, 
+      currentCat: ""
     };
     this.numOfBooks = 10
     this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-gray-400"
@@ -25,6 +26,7 @@ export default class BookPopup extends React.Component {
     this.inDb = ""
     props.totalBookList.map(book => this.inDb = {...this.inDb, [book.id]: book.id})
     this.handleClose = this.handleClose.bind(this)
+    this.setState = this.setState.bind(this)
   }
 
   handlePagination(page) {
@@ -67,8 +69,9 @@ export default class BookPopup extends React.Component {
   handleAddBook(book, index) {
     const el = document.getElementById(index)
     const li = document.getElementById(book.id)
+    if (!this.state.currentCat) return this.setState({wrong: true})
     if (!this.state.booksBeingAdded.hasOwnProperty(book.id)) {
-      this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: book.volumeInfo}})
+      this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: {...book.volumeInfo, category: this.state.currentCat}}})
     } else {
       delete this.state.booksBeingAdded[book.id]
       this.setState({forceUpdate: 0})
@@ -85,6 +88,7 @@ export default class BookPopup extends React.Component {
               catList={this.props.catList} 
               handleSubmit={this.props.handleSubmit} 
               handleChange={this.props.handleChange}
+              setState={this.setState}
             />
             <div className="bg-gray-800 border-gray-400 border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
               <div className="bg-gray-800">
@@ -103,7 +107,9 @@ export default class BookPopup extends React.Component {
                     key={index}
                     className={classNames(this.constantStyle, this.state.booksBeingAdded.hasOwnProperty(book.id) ? this.active : this.inDb?.hasOwnProperty(book.id) ? "pointer-events-none bg-gray-500 text-gray-700 shadow-inner" : this.inactive)}
                     onClick={(e) => {
-                      this.handleAddBook(book, index);
+                      const category = document.getElementById("choosenCategory").children[0].textContent
+                      if (category !== "Category") return this.handleAddBook(book, index);
+                      return this.setState({wrong: true})
                     }}
                   >
                     <ul className="grid grid-cols-7 gap-4">

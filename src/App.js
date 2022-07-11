@@ -90,6 +90,7 @@ export default class App extends React.Component {
 
   async handleBooSubmit(e) {
     e.preventDefault();
+    const category = document.getElementById("choosenCategory").children[0].textContent
     const listInfo = await getBookInfo(this.state.bookTitle);
     this.setState({ bookInfoList: listInfo });
     return clearTimeout(this.timer);
@@ -223,14 +224,14 @@ export default class App extends React.Component {
     }
   }
 
-  multiCat(cat, index, filtered) {
+  multiCat(cat, index) {
     const count = this.showNumOfBooks(cat.data?.name);
     this.flag = false;
     const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
     const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
     return (
       <Router key={index}>
-        <Link key={index} id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data?.name : "./dashboard"}`} onClick={(e) => {
+        <Link key={index} id="category" to={`${!this.state.isEdit ? "/dashboard/" + cat.data?.name : "/dashboard"}`} onClick={(e) => {
           if (!this.state.isEdit) this.handleDisplay(cat.data?.name)
           if (this.state.isEdit) {
             if (this.state.delCatTracker.hasOwnProperty(cat.id)){
