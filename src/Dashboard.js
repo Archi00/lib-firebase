@@ -61,10 +61,8 @@ function Dashboard(props) {
     let temp = [];
     if (filter === "category") {
       for (let i = 0, l = props.info.length; i < l; i++) {
-        if (
-          props.info[i].data.name.toUpperCase().includes(value.toUpperCase())
-        ) {
-          temp.push(props.info[i].data.name);
+        if (props.info[i].data.name.toUpperCase().includes(value.toUpperCase())) {
+          temp.push(props.info[i]);
         }
       }
       return temp;

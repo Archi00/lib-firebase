@@ -42,7 +42,7 @@ function DisplayCategories(props) {
               <>
                 <div className="category-list-container" id="catZone">
                   {props.catFilters.length > 0
-                    ? props.catFilters.map((e, index) => props.multiCat(e, index))
+                    ? props.catFilters.map((e, index, filtered=true) => props.multiCat(e, index, filtered=true))
                     : props.catList.map((cat, index) => props.multiCat(cat, index))}
                 </div>
                 {props.isEdit ? 
