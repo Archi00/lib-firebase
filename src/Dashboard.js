@@ -107,9 +107,9 @@ function Dashboard(props) {
           return
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
-          if (a.value.toUpperCase()) setCatFilters(res);
+          res.map(r => setCatFilters([...catFilters, r.data?.name]))
         });
-      } else if (a.nodeName === "INPUT" && name !== "category") {
+      } else if (a.nodeName === "INPUT" ) {
         if (!a.value.toUpperCase()) {
           cleanFilters();
           return
@@ -163,7 +163,7 @@ function Dashboard(props) {
         {!addingCategory ?
         <div className="flex flex-row content-start ">
           <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
-            <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
+            <SideBar categories={props.catList} filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
           </div>
           <div className="flex flex-9 mt-[8vh] mx-auto">
             <DisplayCategories

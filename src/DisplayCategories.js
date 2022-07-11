@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import BookPopup from "./BookPopup";
 import BooksDisplay from "./BooksDisplay";
 import { deleteCategory } from "./deleteBook";
@@ -38,11 +37,11 @@ function DisplayCategories(props) {
             : null}
           </> : (
           props.catList.length > 0 ? (
-            !props.displayCategory ? (
+            !props.displayCategory || props.catFilters.length > 0 ? (
               <>
-                <div className="category-list-container" id="catZone">
+                <div className="category-list-container">
                   {props.catFilters.length > 0
-                    ? props.catFilters.map((e, index, filtered=true) => props.multiCat(e, index, filtered=true))
+                    ? window.location.pathname("/dashboard")
                     : props.catList.map((cat, index) => props.multiCat(cat, index))}
                 </div>
                 {props.isEdit ? 

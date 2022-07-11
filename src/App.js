@@ -59,6 +59,7 @@ export default class App extends React.Component {
     this.handleDeleteTracker = this.handleDeleteTracker.bind(this)
     this.handleForceUpdate = this.handleForceUpdate.bind(this)
     this.forceUpdate = this.forceUpdate.bind(this)
+    this.setState = this.setState.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -229,6 +230,7 @@ export default class App extends React.Component {
     this.flag = false;
     const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
     const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
+    console.log(cat)
     return (
       <Router key={index}>
         <Link key={index} id="category" to={`${!this.state.isEdit ? "/dashboard/" + cat.data?.name : "/dashboard"}`} onClick={(e) => {

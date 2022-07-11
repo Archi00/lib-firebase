@@ -1,7 +1,8 @@
 import { classNames, debounce } from "./utils"
 import { useState } from "react"
+import CategoryDropdown from "./CategoryDropdown"
 
-const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected}) => {
+const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected, categories}) => {
   const [bookSelected, setBookSelected] = useState(true)
 
   const constantStyle = "flex flex-col items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
@@ -26,12 +27,12 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
 
             </div>
           </li>
-          <li>
+          {/* <li>
               <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
                 <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Category</label>
                 <input id="filter" onChange={(e) => handleChange(e)} name="search-by-category" type="search" className={constantInput} placeholder="Search By Category" required=""></input>
               </form>
-          </li>
+          </li> */}
           <li>
               <form onSubmit={(e) => e.preventDefault()} className={constantStyle}>
                 <label className="flex-1 whitespace-nowrap text-xl text-gray-200 mb-3">Title</label>
