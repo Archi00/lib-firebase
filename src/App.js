@@ -223,7 +223,7 @@ export default class App extends React.Component {
   }
 
   multiCat(cat) {
-    const count = this.showNumOfBooks(cat.data.name);
+    const count = this.showNumOfBooks(cat.data?.name);
     this.flag = false;
     const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
     const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
