@@ -35,6 +35,7 @@ function Dashboard(props) {
     if (!user) return history.replace("/");
     fetchUserName();
     props.handleLogin(user);
+    if (props.displayCategory) window.pathname = `/dashboard/${props.displayCategory}` 
   }, [user, loading, bFilters]);
 
   const cleanFilters = () => {
@@ -44,14 +45,12 @@ function Dashboard(props) {
   
   const handleHomeBtn = () => {
     cleanFilters();
-    history.replace("/dashboard");
     props.handleDisplay("");
   }
   
   const handleBackBtn = () => {
     const filters = [...document.querySelectorAll("#filter")]
     filters.forEach(f => f.value = "")
-    cleanFilters();
   }
 
   const getData = async (filter, value) => {
@@ -62,7 +61,6 @@ function Dashboard(props) {
           temp.push(props.info[i]);
         }
       }
-      history.replace(`/dashboard/search-by-category`)
       return temp;
     } 
     for (let i = 0, l = props.info.length; i < l; i++) {
@@ -90,7 +88,6 @@ function Dashboard(props) {
         });
       }
     }
-    history.replace(`/dashboard/search-by-${filter}`);
     return temp;
     
   };
@@ -98,7 +95,6 @@ function Dashboard(props) {
   const filterCategories = (e) => {
     if (e.target.value === "" || !e.target.value) {
       cleanFilters();
-      history.replace("/dashboard");
       return
     }
     const name = e.target.name.split("-").pop();
@@ -106,7 +102,6 @@ function Dashboard(props) {
       if (a.nodeName === "INPUT" && name === "category") {
         if (!a.value) {
           cleanFilters();
-          history.replace("/dashboard");
           return
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
@@ -115,7 +110,6 @@ function Dashboard(props) {
       } else if (a.nodeName === "INPUT" && name !== "category") {
         if (!a.value.toUpperCase()) {
           cleanFilters();
-          history.replace("/dashboard");
           return
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
@@ -160,7 +154,7 @@ function Dashboard(props) {
                 </Router>
               </div>
             </div>
-            {props.displayCategory && window.location.pathname !== "/dashboard" ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase absolute top-0 right-0 left-0 mt-6">{props.displayCategory}</h1> : null}
+            {props.displayCategory && window.location.pathname !== "/dashboard" && bFilters.length < 1 && catFilters.length < 1 ? <h1 className="m-auto text-bold text-gray-500 text-4xl uppercase absolute top-0 right-0 left-0 mt-6">{props.displayCategory}</h1> : null}
             <DropdownRender updateDb={props.updateDb} handleIsEdit={props.handleIsEdit} isEdit={props.isEdit} />
           </div>
         </header>
