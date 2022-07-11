@@ -100,7 +100,6 @@ export default class App extends React.Component {
   async updateDb() {
     this.categories = await getDbData()
     this.setState({categories: this.categories})
-    console.log(this.categories)
   }
 
   addCat(cat) {
