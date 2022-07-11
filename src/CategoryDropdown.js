@@ -20,7 +20,7 @@ export default function CategoryDropdown({categories}) {
           </Menu.Button>
         </>
           <Menu.Items id="menu" className="origin-top-right absolute right-0 mt-2.5 w-[16.5rem] rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-grey-600">
-            <div className="py-1 px-1 pr-1.5 bg-gray-600 rounded-md">
+            <div className="py-1 px-1 pr-1.5 bg-gray-600 rounded max-h-[50vh] overflow-y-auto">
               {categories.map((cat) => {
                 return (
                   <Menu.Item key={cat.id} className="block bg-gray-600 text-white block px-2 py-3 text-2xl hover:bg-gray-500">
