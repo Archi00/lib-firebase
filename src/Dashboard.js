@@ -30,14 +30,13 @@ function Dashboard(props) {
     }
   };
 
-  const filters = [...document.querySelectorAll("#filter")]
   useEffect(() => {
     if (loading) return null;
     if (!user) return history.replace("/");
     fetchUserName();
     props.handleLogin(user);
 
-  }, [user, loading, filters]);
+  }, [user, loading]);
 
   const cleanFilters = () => {
     setBFilters([]);
@@ -51,6 +50,7 @@ function Dashboard(props) {
   }
   
   const handleBackBtn = () => {
+    const filters = [...document.querySelectorAll("#filter")]
     filters.forEach(f => f.value = "")
     cleanFilters()
   }

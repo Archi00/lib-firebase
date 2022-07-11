@@ -71,7 +71,6 @@ export default class CategoryInfo extends React.Component {
         this.setState({ bookInfo: this.state.bookInfo.concat(bookChecker[1]) });
       }, 400);
     }
-    console.log(this.state.bookInfo)
   }
 
   async componentDidMount() {
