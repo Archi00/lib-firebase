@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from "react-router-dom";
 import CategoryInfo from "./CategoryInfo";
 import getBookInfo from "./bookData";
 import { initializeApp } from "@firebase/app";
@@ -263,6 +263,7 @@ export default class App extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/reset" component={Reset} />
               <Route path="/dashboard">

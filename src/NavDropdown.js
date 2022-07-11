@@ -53,7 +53,7 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
               style={{ minWidth: "14rem" }}
             >
               <a
-                href="#"
+                href=""
                 className={
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700 " : "text-white ") +
@@ -64,7 +64,7 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
                 Edit
               </a>
               <a
-                href="#"
+                href=""
                 className={
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
                   (color === "indigo" ? " text-slate-700 " : "text-white ")
