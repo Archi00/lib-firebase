@@ -18,7 +18,7 @@ function Dashboard(props) {
   const [addingCategory, setAddingCategory] = useState(false)
   const [allBooks, setAllBooks] = useState(true)
   const history = useHistory();
-
+  
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
@@ -30,13 +30,14 @@ function Dashboard(props) {
     }
   };
 
+  const filters = [...document.querySelectorAll("#filter")]
   useEffect(() => {
     if (loading) return null;
     if (!user) return history.replace("/");
     fetchUserName();
     props.handleLogin(user);
-    if (props.displayCategory) window.pathname = `/dashboard/${props.displayCategory}` 
-  }, [user, loading, bFilters]);
+
+  }, [user, loading, filters]);
 
   const cleanFilters = () => {
     setBFilters([]);
@@ -45,12 +46,13 @@ function Dashboard(props) {
   
   const handleHomeBtn = () => {
     cleanFilters();
+    history.replace("/dashboard")
     props.handleDisplay("");
   }
   
   const handleBackBtn = () => {
-    const filters = [...document.querySelectorAll("#filter")]
     filters.forEach(f => f.value = "")
+    cleanFilters()
   }
 
   const getData = async (filter, value) => {
