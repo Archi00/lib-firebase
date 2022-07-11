@@ -7,7 +7,10 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
   const constantStyle = "flex flex-col items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
   const constantInput = "block p-4 w-full text-2xl rounded border border-gray-300 dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 placeholder:uppercase placeholder:text-center placeholder:text-xl dark:placeholder-gSearch By ray-400"
   
-  const handleChange = debounce((e) => filterCategories(e))
+  const handleChange = debounce((e) => {
+    console.log(e.value)
+    filterCategories(e)
+  })
 
   return(
     <aside className="w-full h-[100vh]" aria-label="Sidebar">

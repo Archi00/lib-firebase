@@ -29,7 +29,7 @@ function DisplayCategories(props) {
         ) : props.bFilters.length < 1 ? props.allBooks ? 
           <>
             <div className="category-list-container" >
-              {props.totalBookList.map(book => (<BooksDisplay each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} />))}
+              {props.totalBookList.map((book, index) => (<BooksDisplay key={index} each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} />))}
             </div>
             {props.isEdit ?
             <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
@@ -42,8 +42,8 @@ function DisplayCategories(props) {
               <>
                 <div className="category-list-container" id="catZone">
                   {props.catFilters.length > 0
-                    ? props.catFilters.map((e) => props.multiCat(e))
-                    : props.catList.map((cat) => props.multiCat(cat))}
+                    ? props.catFilters.map((e, index) => props.multiCat(e, index))
+                    : props.catList.map((cat, index) => props.multiCat(cat, index))}
                 </div>
                 {props.isEdit ? 
                   <div className={classNames("uppercase fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50")}>
@@ -53,7 +53,7 @@ function DisplayCategories(props) {
               </>
             ) : (
               <div className="display-unique">
-                {props.catList.map((cat) => props.uniqueCat(cat.data?.name))}  
+                {props.catList.map((cat, index) => props.uniqueCat(cat.data?.name, index))}  
               </div>
             )
           ) : null

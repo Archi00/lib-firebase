@@ -51,25 +51,6 @@ function FilteredBooks(props) {
               <div
                 onClick={(e) => togglePopup(each)}
                 className="list-item"
-                onMouseOver={(e) => {
-                  if (e.target.innerHTML === "Multiple Authors") {
-                    this.authors = e.target;
-                    this.authors.innerHTML = each.authors
-                      .map((author) => `${author}<br>`)
-                      .join(" ");
-                  } else {
-                    return;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (
-                    this.authors &&
-                    this.authors.parentElement &&
-                    this.authors.parentElement.parentElement
-                  ) {
-                    this.authors.innerHTML = "Multiple Authors";
-                  }
-                }}
               >
               <div className="w-[25vw] overflow-hidden py-4 pb-8 uppercase text-bold text-white text-xl">
                 <h3>{each.title}</h3>

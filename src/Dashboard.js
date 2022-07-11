@@ -41,6 +41,7 @@ function Dashboard(props) {
   const cleanFilters = () => {
     setBFilters([]);
     setCatFilters([]);
+    history.replace("/dashboard")
   };
 
   const handleHomeBtn = () => {
@@ -100,22 +101,23 @@ function Dashboard(props) {
       history.replace("/dashboard");
     }
     const name = e.target.name.split("-").pop();
+    console.log(e.target.parentNode.childNodes)
     e.target.parentNode.childNodes.forEach((a) => {
       if (a.nodeName === "INPUT" && name === "category") {
         if (!a.value) {
           cleanFilters();
           history.replace("/dashboard");
         }
-        getData(a.name.split("-").pop(), a.value).then((res, err) => {
-          if (a.value) setCatFilters(res);
+        getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
+          if (a.value.toUpperCase()) setCatFilters(res);
         });
       } else if (a.nodeName === "INPUT" && name !== "category") {
-        if (!a.value) {
+        if (!a.value.toUpperCase()) {
           cleanFilters();
           history.replace("/dashboard");
         }
-        getData(a.name.split("-").pop(), a.value).then((res, err) => {
-          if (a.value) setBFilters(res);
+        getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
+          if (a.value.toUpperCase) setBFilters(res);
         });
       }
     });

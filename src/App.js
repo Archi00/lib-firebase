@@ -200,11 +200,12 @@ export default class App extends React.Component {
     });
   }
 
-  uniqueCat(title) {
+  uniqueCat(title, index) {
     if (title === this.state.displayCategory) {
       return (
-        <Router>
+        <Router key={index}>
           <CategoryInfo
+            key={index}
             titleName={title}
             handleSubmit={this.handleBooSubmit}
             handleChange={this.handleBooChange}
@@ -222,15 +223,16 @@ export default class App extends React.Component {
     }
   }
 
-  multiCat(cat) {
+  multiCat(cat, index) {
     const count = this.showNumOfBooks(cat.data?.name);
     this.flag = false;
     const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
     const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
+    console.log(cat)
 
     return (
-      <Router>
-        <Link id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data?.name : "./dashboard"}`} onClick={(e) => {
+      <Router key={index}>
+        <Link key={index} id="category" to={`${!this.state.isEdit ? "./dashboard/" + cat.data?.name : "./dashboard"}`} onClick={(e) => {
           if (!this.state.isEdit) this.handleDisplay(cat.data?.name)
           if (this.state.isEdit) {
             if (this.state.delCatTracker.hasOwnProperty(cat.id)){
