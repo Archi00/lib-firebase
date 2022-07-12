@@ -18,7 +18,7 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
         <ul className="space-y-8">
           <li>
             <div className="flex flex-row p-2 text-2xl font-normal  text-gray-900 rounded-lg dark:text-white hover:cursor-pointer">
-              <div onClick={() => handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center dark:hover:bg-gray-900">
+              <div onClick={() => window.location.pathname === "/dashboard/adding-books" ? handleHomeBtn(window.location.pathname) : handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center dark:hover:bg-gray-900">
                 <h2>Home</h2>
               </div>
               <div onClick={() => handleBackBtn()} className="flex flex-1 flex-end px-6 py-4 dark:hover:bg-gray-900 max-w-[30%]">

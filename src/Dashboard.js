@@ -43,10 +43,11 @@ function Dashboard(props) {
     setCatFilters([]);
   };
   
-  const handleHomeBtn = () => {
+  const handleHomeBtn = (pastLocation="") => {
     cleanFilters();
     history.replace("/dashboard")
     props.handleDisplay("");
+    if (pastLocation) window.location.reload() 
   }
   
   const handleBackBtn = () => {
