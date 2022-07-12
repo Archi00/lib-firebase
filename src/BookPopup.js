@@ -62,6 +62,7 @@ export default class BookPopup extends React.Component {
     const post = await this.writeDb(books, category)
     if (post) {
       this.setState({booksBeingAdded: {}})
+      this.props.handleAddedBooks(books)
       this.setState({success: true})
     }
   }
@@ -74,7 +75,6 @@ export default class BookPopup extends React.Component {
       this.setState({booksBeingAdded: {...this.state.booksBeingAdded, [book.id]: {...book.volumeInfo, category: this.state.currentCat}}})
     } else {
       delete this.state.booksBeingAdded[book.id]
-      this.setState({forceUpdate: 0})
     }
   }
 

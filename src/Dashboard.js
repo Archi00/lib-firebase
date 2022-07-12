@@ -43,11 +43,10 @@ function Dashboard(props) {
     setCatFilters([]);
   };
   
-  const handleHomeBtn = (pastLocation="") => {
+  const handleHomeBtn = () => {
     cleanFilters();
     history.replace("/dashboard")
     props.handleDisplay("");
-    if (pastLocation) window.location.reload() 
   }
   
   const handleBackBtn = () => {
@@ -197,6 +196,7 @@ function Dashboard(props) {
               deleteTracker={props.deleteTracker}
               handleForceUpdate={props.handleForceUpdate}
               delCatTracker={props.delCatTracker}
+              handleAddedBooks={props.handleAddedBooks}
             />
           </div>
         </div>

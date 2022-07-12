@@ -61,6 +61,7 @@ export default class App extends React.Component {
     this.forceUpdate = this.forceUpdate.bind(this)
     this.setState = this.setState.bind(this)
     this.handleAddedCategory = this.handleAddedCategory.bind(this)
+    this.handleAddedBooks = this.handleAddedBooks.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -119,6 +120,12 @@ export default class App extends React.Component {
 
   handleAddedCategory(cat) {
     this.setState({catList: [...this.state.catList, {data: {name: cat}}]})
+  }
+
+  handleAddedBooks(books) {
+    for (let i = 0, l = books.length; i < l; i++) {
+      this.setState({totalBookList: [...this.state.totalBookList, {id: books[i][0], ...books[i][1]}]})
+    }
   }
 
   handleForceUpdate() {
@@ -300,6 +307,7 @@ export default class App extends React.Component {
                   handleForceUpdate={this.handleForceUpdate}
                   delCatTracker={this.state.delCatTracker}
                   handleAddedCategory={this.handleAddedCategory}
+                  handleAddedBooks={this.handleAddedBooks}
                 />
               </Route>
             </Switch>

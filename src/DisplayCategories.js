@@ -23,6 +23,7 @@ function DisplayCategories(props) {
               handleShowCat={props.handleShowCat}
               handleShowCatTrue={props.handleShowCatTrue}
               totalBookList={props.totalBookList}
+              handleAddedBooks={props.handleAddedBooks}
             />
           </>
         ) : props.bFilters.length < 1 && props.catFilters.length < 1 ? props.allBooks ? 
