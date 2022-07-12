@@ -122,10 +122,21 @@ export default class App extends React.Component {
     this.setState({catList: [...this.state.catList, {data: {name: cat}}]})
   }
 
-  handleAddedBooks(books) {
+  handleAddedBooks(books, category) {
+    const catId = this.state.catList.filter(cat => cat.data?.name === category)[0].id
+    for (let i = 0, l = this.state.catList.length; i < l; i++) {
+        if (this.state.catList[i].id === catId) {
+          if (books[i]) {
+            this.state.catList[i].books = [...this.state.catList[i].books, ...books[i][1]] 
+        }
+      }
+    }
+    console.log(this.state.catList)
+    this.setState({catList: [...this.state.catList]})
     for (let i = 0, l = books.length; i < l; i++) {
       this.setState({totalBookList: [...this.state.totalBookList, {id: books[i][0], ...books[i][1]}]})
     }
+
   }
 
   handleForceUpdate() {

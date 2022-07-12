@@ -62,8 +62,11 @@ export default class BookPopup extends React.Component {
     const post = await this.writeDb(books, category)
     if (post) {
       this.setState({booksBeingAdded: {}})
-      this.props.handleAddedBooks(books)
       this.setState({success: true})
+      for (let i = 0, l = books.length; i < l; i++) {
+        this.inDb = {...this.inDb, [books[i][0]]: books[i][0]}
+      }
+      this.props.handleAddedBooks(books, category)
     }
   }
 
