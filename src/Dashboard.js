@@ -142,6 +142,7 @@ function Dashboard(props) {
                   addCat={props.addCat}
                   setAddCat={setAddingCategory} 
                   addingCat={addingCategory}
+                  handleAddedCategory={props.handleAddedCategory}
                 />
               </div>
               <div className="flex flex-end flex-1 hover:cursor-pointer w-full h-full">

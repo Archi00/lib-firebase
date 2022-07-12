@@ -21,7 +21,6 @@ export default class CategoryPopup extends React.Component {
     this.handleClickOutside = (event) => {
       if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
         this.props.closePopup();
-        window.location.reload()
       }
     };
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -51,6 +50,8 @@ export default class CategoryPopup extends React.Component {
       this.setState({ catAdded: false });
     }, 2000);
     e.target.children[0].value = "";
+    this.props.handleAddedCategory(this.state.name)
+
   }
 
   render() {

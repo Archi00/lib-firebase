@@ -60,6 +60,7 @@ export default class App extends React.Component {
     this.handleForceUpdate = this.handleForceUpdate.bind(this)
     this.forceUpdate = this.forceUpdate.bind(this)
     this.setState = this.setState.bind(this)
+    this.handleAddedCategory = this.handleAddedCategory.bind(this)
     this.categories = null;
     this.currentBook = false;
     this.book = {};
@@ -114,6 +115,10 @@ export default class App extends React.Component {
       delete this.state.deleteTracker[book.id]
       this.setState({forceUpdate: this.state.forceUpdate + 1})
     }
+  }
+
+  handleAddedCategory(cat) {
+    this.setState({catList: [...this.state.catList, {data: {name: cat}}]})
   }
 
   handleForceUpdate() {
@@ -294,6 +299,7 @@ export default class App extends React.Component {
                   deleteTracker={this.state.deleteTracker}
                   handleForceUpdate={this.handleForceUpdate}
                   delCatTracker={this.state.delCatTracker}
+                  handleAddedCategory={this.handleAddedCategory}
                 />
               </Route>
             </Switch>

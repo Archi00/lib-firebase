@@ -37,6 +37,7 @@ export default class AddCategory extends React.Component {
             history={this.props.history}
             handleDisplay={this.props.handleDisplay}
             addCat={this.props.addCat}
+            handleAddedCategory={this.props.handleAddedCategory}
           />
         ) : null}
       </div>
