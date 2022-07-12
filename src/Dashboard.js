@@ -36,7 +36,8 @@ function Dashboard(props) {
     fetchUserName();
     props.handleLogin(user);
 
-  }, [user, loading]);
+    console.log("updated dashboard", props.catList)
+  }, [user, loading, props.catList]);
 
   const cleanFilters = () => {
     setBFilters([]);

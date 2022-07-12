@@ -37,7 +37,7 @@ export default class App extends React.Component {
       deleteTracker: {},
       forceUpdate: 0,
       categories: [],
-      delCatTracker: {}
+      delCatTracker: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBooChange = this.handleBooChange.bind(this);
@@ -72,6 +72,7 @@ export default class App extends React.Component {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.categories = await getDbData();
+        this.setState({catForFilters: this.categories})
         this.categories.map((cat) => {
           if (!this.state.catList.includes(cat.data?.name) && cat.data?.name)
             this.setState({
@@ -124,6 +125,7 @@ export default class App extends React.Component {
 
   handleAddedBooks(books, category) {
     const catId = this.state.catList.filter(cat => cat.data?.name === category)[0].id
+    console.log(this.state.catList)
     for (let i = 0, l = this.state.catList.length; i < l; i++) {
         if (this.state.catList[i].id === catId) {
           if (books[i]) {
@@ -131,8 +133,8 @@ export default class App extends React.Component {
         }
       }
     }
-    console.log(this.state.catList)
     this.setState({catList: [...this.state.catList]})
+    console.log(this.state.catList)
     for (let i = 0, l = books.length; i < l; i++) {
       this.setState({totalBookList: [...this.state.totalBookList, {id: books[i][0], ...books[i][1]}]})
     }
@@ -289,7 +291,7 @@ export default class App extends React.Component {
               <Route exact path="/reset" component={Reset} />
               <Route path="/dashboard">
                 <Dashboard
-                  info={this.categories}
+                  info={this.state.catList}
                   handleBooSubmit={this.handleBooSubmit}
                   handleBooChange={this.handleBooChange}
                   bookInfoList={this.state.bookInfoList}

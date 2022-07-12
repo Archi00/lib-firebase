@@ -3,9 +3,6 @@ import { useHistory } from "react-router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { auth } from "./App";
-import deleteBook from "./deleteBook";
-import BookDisplay from "./BookDisplay";
-import { classNames } from "./utils";
 
 function FilteredBooks(props) {
   const [showPopup, setShowPopup] = useState(false);
@@ -22,6 +19,7 @@ function FilteredBooks(props) {
     if (loading) return null;
     if (!user) return history.replace("/");
     if (props.bFilters.length < 1) history.replace("/dashboard");
+    console.log(props.bFilters)
   }, [loading, user]);
 
   const togglePopup = (book) => {
