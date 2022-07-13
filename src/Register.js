@@ -30,7 +30,7 @@ function Register() {
         <form className="flex flex-col space-y-4" action="">
             <div>
                 <label htmlFor="email" className="block mb-2 text-2xl font-medium text-gray-900 dark:text-gray-300">Your name</label>
-                <input onChange={(e) => setEmail(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name" required />
+                <input onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name" required />
             </div>
             <div className="pb-12">
                 <label htmlFor="email" className="block mb-2 text-2xl font-medium text-gray-900 dark:text-gray-300">Your email</label>
