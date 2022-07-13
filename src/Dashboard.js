@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { logout } from "./firebase";
-import { auth, db } from "./App";
+import { auth, db } from "./UserApp";
 import { getDocs, query, collection, where, doc } from "@firebase/firestore";
 import DisplayCategories from "./DisplayCategories";
 import AddCategory from "./AddCategory";
@@ -36,7 +36,6 @@ function Dashboard(props) {
     fetchUserName();
     props.handleLogin(user);
 
-    console.log("updated dashboard", props.catList)
   }, [user, loading, props.catList]);
 
   const cleanFilters = () => {

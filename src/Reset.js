@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { sendPswResetEmail } from "./firebase";
-import { auth } from "./App";
+import { auth } from "./UserApp";
 import "./Reset.css";
 
 function Reset() {

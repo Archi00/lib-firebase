@@ -1,5 +1,5 @@
 import { query, getDocs, collection, doc } from "@firebase/firestore";
-import { db, auth } from "./App";
+import { db, auth } from "./UserApp";
 
 async function getDbData() {
   const user = await auth.currentUser;

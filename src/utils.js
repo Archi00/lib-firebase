@@ -1,7 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDocs, query, collection, where } from "@firebase/firestore";
 import { useState } from "react";
-import { db, auth } from "./App";
+import { db, auth } from "./UserApp";
 
 function capitalize(s) {
   return s[0].toUpperCase() + s.slice(1);

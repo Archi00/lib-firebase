@@ -1,6 +1,6 @@
 import getDbData from "./getDb";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "@firebase/firestore";
-import { db } from "./App";
+import { db } from "./UserApp";
 import DeleteBooksTracker from "./DeleteBooksTracker";
 
 const deleteBook = async (obj, uid) => {

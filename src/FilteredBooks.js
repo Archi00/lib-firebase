@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { auth } from "./App";
+import { auth } from "./UserApp";
 
 function FilteredBooks(props) {
   const [showPopup, setShowPopup] = useState(false);

@@ -1,4 +1,4 @@
-import { db } from "./App";
+import { db } from "./UserApp";
 import {
   setDoc,
   collection,

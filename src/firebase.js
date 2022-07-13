@@ -7,7 +7,7 @@ import {
   sendPasswordResetEmail,
   signOut
 } from "@firebase/auth";
-import { db, auth } from "./App";
+import { db, auth } from "./UserApp";
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { signInWithEmailPassword } from "./firebase";
-import { auth } from "./App";
+import { auth } from "./UserApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
