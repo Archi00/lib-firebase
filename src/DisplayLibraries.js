@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { BrowserRouter as Router, Link, Route } from "react-router-dom"
 import DropdownRender from "./NoUserDropdown"
 import getUsers from "./getUsers"
+import UserPage from "./UserPage"
 
 const DisplayLibraries = () => {
   const [users, setUsers] = useState([])
+  const [displayUser, setDisplayUser] = useState(false)
   
   useEffect(async () => {
     const userList = await getUsers()
     setUsers(userList)
   }, [])
+  
+  useEffect(() => {
+    if (window.location.pathname === "/") setDisplayUser(false)
+  })
 
   return (
     <>
@@ -24,10 +30,9 @@ const DisplayLibraries = () => {
       <div className="flex flex-row content-start">
         <div className="flex flex-9 mt-[8vh] mx-auto">
           {users.map((user, index) => (
-          <div key={index} className="App">
-            <div className="category-list">
-              <div className="category-list-container">
+              <div className="category-list-container" key={index} onClick={() => setDisplayUser(true)}>
                 <Router>
+                  {!displayUser ?
                     <Link to={`/display/${user.name  + "-" + user.uid.slice(-5)}`}
                     className="block bg-gray-800 text-center rounded border border-gray-600 text-2xl text-gray-300 group hover:shadow-xl hover:bg-gray-600"
                     >
@@ -37,10 +42,12 @@ const DisplayLibraries = () => {
                         </div>
                       </div>
                     </Link>
+                    : null }
+                    <Route path="/display">
+                      <UserPage />
+                    </Route>
                   </Router>
               </div>
-            </div>
-          </div>
           ))}
         </div>
       </div> 

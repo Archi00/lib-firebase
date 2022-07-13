@@ -51,30 +51,11 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
               }
               style={{ minWidth: "14rem" }}
             >
-              <a
-                href="#"
-                className={
-                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
-                  (color === "indigo" ? " text-slate-700 " : "text-white ") 
-                }
-              >
-                Something
-              </a>
-              <a
-                href="#"
-                className={
-                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-700 " +
-                  (color === "indigo" ? " text-slate-700 " : "text-white ")
-                  
-                }
-              >
-                Something
-              </a>
               <div className="h-0 my-2 border border-solid border-t-0 border-gray-300 opacity-25" />
               <a
                 href="#"
                 className={
-                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
+                  "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-blue-600 hover:text-white " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
               >
