@@ -10,6 +10,9 @@ const App = () => {
         <Route exact path="/">
           <DisplayLibraries />
         </Route>
+        <Route path="/display">
+          <Test />
+        </Route>
         <Route exact path="/login" component={UserApp} />
         <Route exact path="/register" component={UserApp} />
         <Route exact path="/reset" component={UserApp} />

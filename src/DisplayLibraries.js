@@ -5,6 +5,7 @@ import getUsers from "./getUsers"
 
 const DisplayLibraries = () => {
   const [users, setUsers] = useState([])
+  
   useEffect(async () => {
     const userList = await getUsers()
     setUsers(userList)
@@ -27,7 +28,7 @@ const DisplayLibraries = () => {
             <div className="category-list">
               <div className="category-list-container">
                 <Router>
-                    <Link to={`/display/${[user.uid]}`}
+                    <Link to={`/display/${user.name  + "-" + user.uid.slice(-5)}`}
                     className="block bg-gray-800 text-center rounded border border-gray-600 text-2xl text-gray-300 group hover:shadow-xl hover:bg-gray-600"
                     >
                       <div className="flex align-center py-6">
