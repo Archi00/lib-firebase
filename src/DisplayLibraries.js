@@ -9,23 +9,27 @@ const DisplayLibraries = () => {
             <DropdownRender />
           </div>
         </header>
-    <div className="each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]">
-      <div className="list-item">
-        <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-xl">
-          <h3>"Name of user"</h3>
-        </div>
-        <div className="flex flex-row flex-1 min-w-[20vw] max-w-[20vw] overflow-hidden text-left">
-          <div className="flex justify-end flex-1">
-            <div className="flex justify-start flex-1">
-              <ul className="display-info ml-[4vw] hover:cursor-pointer">
-                <li className="text-xl">"Num of total books"</li>
-                <li className="text-xl">"Num of categories"</li>
-              </ul>
+        <div className="flex flex-row content-start">
+          <div className="flex flex-9 mt-[8vh] mx-auto">
+            <div className="each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]">
+              <div className="list-item">
+                <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-xl">
+                  <h3>"Name of user"</h3>
+                </div>
+                <div className="flex flex-row flex-1 min-w-[20vw] max-w-[20vw] overflow-hidden text-left">
+                  <div className="flex justify-end flex-1">
+                    <div className="flex justify-start flex-1">
+                      <ul className="display-info ml-[4vw] hover:cursor-pointer">
+                        <li className="text-xl">"Num of total books"</li>
+                        <li className="text-xl">"Num of categories"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
     </>
   )
 }
