@@ -42,7 +42,7 @@ const DisplayLibraries = () => {
         <div className=" pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
           <div className="header-logo-container text-bold text-gray-600 text-3xl">
             <Router>
-              <Link to={"/"} onClick={() => setDisplayUser(false)} className="border border-gray-600 bg-gray-800 hover:border-gray-600 hover:text-gray-300 hover:bg-gray-700 mb-4 pt-2 pb-4 px-6 text-center">
+              <Link to={"/"} onClick={() => setDisplayUser(false)} className="flex flex-row text-gray-300 font-bold uppercase text-xl px-8 pt-3 mb-4 rounded shadow-xl hover:shadow-xl hover:bg-gray-800 outline-none focus:outline-none  ease-linear transition-all duration-150 bg-gray-900">
                 Users
               </Link>
             </Router>
