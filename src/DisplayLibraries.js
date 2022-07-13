@@ -45,14 +45,12 @@ const DisplayLibraries = () => {
         </div>
       </header>
       {displayUser ? 
-      <div className="flex flex-row content-start ">
-        <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
-          <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
-        </div>
+      <div className="max-w-[15vw] min-w-[15vw] fixed">
+        <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
       </div>
       : null}
       {users ?
-      <div className="flex flex-row content-start">
+      <div className="flex flex-row content-start absolute">
         <div className="flex flex-9 mt-[8vh] mx-auto">
           {users.map((user, index) => (
               <div className="category-list-container" key={index} onClick={() => setDisplayUser(true)}>
