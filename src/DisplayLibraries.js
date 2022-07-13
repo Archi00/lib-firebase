@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Link, Route } from "react-router-dom"
+import { filterCategories } from "./utils"
 import DropdownRender from "./NoUserDropdown"
 import getUsers from "./getUsers"
 import UserPage from "./UserPage"
+import SideBar from "./SideBar"
 
 const DisplayLibraries = () => {
   const [users, setUsers] = useState([])
   const [displayUser, setDisplayUser] = useState(false)
+  const [allBooks, setAllBooks] = useState(true)
   
   useEffect(async () => {
     const userList = await getUsers()
@@ -18,6 +21,18 @@ const DisplayLibraries = () => {
     if (window.location.pathname !== "/") setDisplayUser(true)
   })
 
+  const handleSelected = (bool) => {
+    setAllBooks(bool)
+  } 
+
+  const handleHomeBtn = () => {
+   console.log("back button") 
+  }
+
+  const handleBackBtn = () => {
+    console.log("clear filters")
+  }
+
   return (
     <>
       <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
@@ -27,6 +42,13 @@ const DisplayLibraries = () => {
           <DropdownRender />
         </div>
       </header>
+      {displayUser ? 
+      <div className="flex flex-row content-start ">
+        <div className="flex flex-1 max-w-[15vw] min-w-[15vw]">
+          <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
+        </div>
+      </div>
+      : null}
       {users ?
       <div className="flex flex-row content-start">
         <div className="flex flex-9 mt-[8vh] mx-auto">
