@@ -1,7 +1,7 @@
 import { query, getDocs, collection, doc } from "@firebase/firestore";
 import { db, auth } from "./UserApp";
 
-async function getDbData() {
+async function getUserData() {
   const user = await auth.currentUser;
   let list = [];
   const q = query(collection(db, user.uid));
@@ -12,4 +12,4 @@ async function getDbData() {
   return list;
 }
 
-export default getDbData;
+export default getUserData;

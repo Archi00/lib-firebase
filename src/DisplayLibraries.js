@@ -15,6 +15,7 @@ const DisplayLibraries = () => {
   
   useEffect(() => {
     if (window.location.pathname === "/") setDisplayUser(false)
+    if (window.location.pathname !== "/") setDisplayUser(true)
   })
 
   return (
@@ -44,7 +45,7 @@ const DisplayLibraries = () => {
                     </Link>
                     : null }
                     <Route path="/display">
-                      <UserPage />
+                      <UserPage user={user}/>
                     </Route>
                   </Router>
               </div>
