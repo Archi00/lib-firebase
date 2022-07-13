@@ -103,7 +103,7 @@ export default class CategoryInfo extends React.Component {
                 <div className="w-[25vw] overflow-hidden py-4 pb-8 uppercase text-bold text-white text-xl">
                   <h3>{each.title}</h3>
                 </div>
-                  <div className="flex flex-row flex-1 min-w-[20vw] max-w-[20vw] overflow-hidden text-left">
+                  <div className="flex flex-row flex-1 min-w-[20vw] max-w-[20vw] mx-auto overflow-hidden text-left">
                     <div className="flex justify-end flex-1">
                     <Router>
                       <Link

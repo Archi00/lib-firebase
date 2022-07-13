@@ -50,8 +50,8 @@ const DisplayLibraries = () => {
       </div>
       : null}
       {users ?
-      <div className="flex flex-row content-start absolute">
-        <div className="flex flex-9 mt-[8vh] mx-auto">
+      <div className="flex flex-row content-start mx-auto">
+        <div className="flex flex-9 mt-[8vh] ml-[18vw] mr-[3vw]">
           {users.map((user, index) => (
               <div className="category-list-container" key={index} onClick={() => setDisplayUser(true)}>
                 <Router>
