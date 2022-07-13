@@ -67,7 +67,7 @@ const DisplayLibraries = () => {
                     </Link>
                     : null }
                     <Route path="/display">
-                      <UserPage user={user}/>
+                      <UserPage user={user} allBooks={allBooks} />
                     </Route>
                   </Router>
               </div>
