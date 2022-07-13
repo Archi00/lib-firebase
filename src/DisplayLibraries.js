@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter as Router, Link, Route } from "react-router-dom"
+import { BrowserRouter as Router, Link, Route, history, useHistory } from "react-router-dom"
 import { filterCategories } from "./utils"
 import DropdownRender from "./NoUserDropdown"
 import getUsers from "./getUsers"
@@ -10,6 +10,8 @@ const DisplayLibraries = () => {
   const [users, setUsers] = useState([])
   const [displayUser, setDisplayUser] = useState(false)
   const [allBooks, setAllBooks] = useState(true)
+
+  const history = useHistory()
   
   useEffect(async () => {
     const userList = await getUsers()
@@ -26,7 +28,7 @@ const DisplayLibraries = () => {
   } 
 
   const handleHomeBtn = () => {
-   console.log("back button") 
+    history.goBack() 
   }
 
   const handleBackBtn = () => {

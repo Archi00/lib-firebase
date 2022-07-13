@@ -153,7 +153,7 @@ export default class CategoryInfo extends React.Component {
           :null }
         </div>
         {window.location.pathname.includes(this.props.titleName) && !this.props.isEdit? (
-          <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={window.location.href} />
+          <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={`${window.location.origin + "/display/" + user.name + "-" + user.uid.slice(-5) + this.props.titleName}`} />
           ) : null}
       </div>
     );
