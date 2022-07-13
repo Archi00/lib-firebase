@@ -13,7 +13,7 @@ const UserPage = ({user, allBooks, setUser}) => {
     const data = await getUserData(user)
     data.map(cat => {
       setCategories(categories => [...categories, cat ])
-      if (cat.data?.books?.length > 0) setBooks([...books, ...cat.data?.books])
+      if (cat.data?.books?.length > 0) setBooks(books => [...books, ...cat.data?.books])
     })
     setUser(user)
   }, [])
