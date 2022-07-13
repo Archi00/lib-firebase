@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Link, Route, history, useHistory } from "react-router-dom"
-import { filterCategories } from "./utils"
+import { classNames, filterCategories } from "./utils"
 import DropdownRender from "./NoUserDropdown"
 import getUsers from "./getUsers"
 import UserPage from "./UserPage"
@@ -45,13 +45,13 @@ const DisplayLibraries = () => {
         </div>
       </header>
       {displayUser ? 
-      <div className="max-w-[15vw] min-w-[15vw] fixed">
+      <div className="max-w-[15vw] min-w-[15vw] fixed min-h-[100vh]">
         <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
       </div>
       : null}
       {users ?
-      <div className="flex flex-row content-start mx-auto">
-        <div className="flex flex-9 mt-[8vh] ml-[18vw] mr-[3vw]">
+      <div className="flex flex-row justify-center mx-auto">
+        <div className={classNames("flex flex-9 mt-[8vh]", displayUser ? " ml-[18vw] mr-[3vw] " : null)}> 
           {users.map((user, index) => (
               <div className="category-list-container" key={index} onClick={() => setDisplayUser(true)}>
                 <Router>
