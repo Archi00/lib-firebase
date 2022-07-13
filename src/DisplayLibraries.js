@@ -10,6 +10,7 @@ const DisplayLibraries = () => {
   const [users, setUsers] = useState([])
   const [displayUser, setDisplayUser] = useState(false)
   const [allBooks, setAllBooks] = useState(true)
+  const [user, setUser] = useState()
 
   const history = useHistory()
   
@@ -28,7 +29,7 @@ const DisplayLibraries = () => {
   } 
 
   const handleHomeBtn = () => {
-    history.goBack() 
+    history.replace("/display/" + user.name + "-" + user.uid.slice(-5)) 
   }
 
   const handleBackBtn = () => {
@@ -67,7 +68,7 @@ const DisplayLibraries = () => {
                     </Link>
                     : null }
                     <Route path="/display">
-                      <UserPage user={user} allBooks={allBooks} />
+                      <UserPage user={user} allBooks={allBooks} setUser={setUser} />
                     </Route>
                   </Router>
               </div>
