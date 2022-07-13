@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import UserApp from "./UserApp"
 import Test from "./Test"
+import DisplayLibraries from "./DisplayLibraries"
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Test />
+          <DisplayLibraries />
         </Route>
         <Route exact path="/login" component={UserApp} />
         <Route exact path="/register" component={UserApp} />

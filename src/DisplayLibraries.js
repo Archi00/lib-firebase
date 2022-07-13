@@ -1,55 +1,33 @@
-import { classNames } from "./utils"
-
-const BooksDisplay = ({each, isEdit, handleDeleteTracker, deleteTracker}) => {
-  const active = "bg-gray-600 border-red-600 hover:bg-gray-700"
-  const inactive = "bg-gray-800 border-gray-600 hover:bg-gray-600"
+import DropdownRender from "./NoUserDropdown"
+const DisplayLibraries = () => {
   return (
-    <div onClick={() => {
-      if (isEdit === true) handleDeleteTracker(each)
-    }} 
-    className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", deleteTracker.hasOwnProperty(each.id) ? active : inactive)}>
+    <>
+    <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
+          <div className="p-8 pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
+            <div className="header-logo-container"></div>
+            <div className="max-w-[15vw] min-w-[15vw] flex flex-row absolute left-0 ml-[1.5vw] whitespace-nowrap"></div>
+            <DropdownRender />
+          </div>
+        </header>
+    <div className="each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]">
       <div className="list-item">
         <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-xl">
-          <h3>{each.title}</h3>
+          <h3>"Name of user"</h3>
         </div>
         <div className="flex flex-row flex-1 min-w-[20vw] max-w-[20vw] overflow-hidden text-left">
           <div className="flex justify-end flex-1">
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              {each.imageLinks ? (
-                <img
-                  load="lazyload"
-                  className="rounded object-contain h-48 w-48 text-left m-auto"
-                  alt="cover"
-                  src={each.imageLinks.thumbnail}
-                />
-              ) : null}
-            </a>
-
             <div className="flex justify-start flex-1">
               <ul className="display-info ml-[4vw] hover:cursor-pointer">
-                {each.authors ? (
-                  each.authors.length > 1 ? (
-                    <li className="multiple-authors">
-                      <span>Multiple Authors</span>
-                    </li>
-                  ) : (
-                    <li className="text-xl">{each.authors}</li>
-                  )
-                ) : null}
-                <li className="text-xl">{each.pageCount}</li>
-                <li className="text-xl">{each.publishedDate}</li>
-                <li className="text-xl">{each.publisher}</li>
+                <li className="text-xl">"Num of total books"</li>
+                <li className="text-xl">"Num of categories"</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   )
 }
 
-e
+export default DisplayLibraries
