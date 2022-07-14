@@ -36,6 +36,7 @@ const DisplayLibraries = () => {
   const handleBackBtn = () => {
     const filters = [...document.querySelectorAll("#filter")]
     filters.forEach(f => f.value = "")
+    setFilters([])
   }
 
   const handleFilters = async (e) => {
