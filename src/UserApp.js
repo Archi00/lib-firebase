@@ -16,7 +16,7 @@ import { classNames } from "./utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
+export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export default class UserApp extends React.Component {
