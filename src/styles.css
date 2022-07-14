@@ -29,6 +29,10 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+.root {
+  max-width: 70vw;
+}
+
 body {
   width: 100%;
   margin: auto;

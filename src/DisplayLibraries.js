@@ -44,7 +44,7 @@ const DisplayLibraries = () => {
   }
 
   return (
-    <>
+    <div className="min-h-[100vh] flex justify-center flex-wrap">
       <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
         <div className=" pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
           <div className="header-logo-container text-bold text-gray-600 text-3xl">
@@ -66,10 +66,9 @@ const DisplayLibraries = () => {
       </div>
       : null}
       {users?
-      <div className="flex flex-row justify-center mx-auto">
-        <div className={classNames("flex flex-9 mt-[8vh]", displayUser ? " ml-[18vw] mr-[3vw] " : null)}> 
+        <div className={classNames("flex max-w-[80vw] min-w-[80vw] flex-row flex-wrap mt-[8vh] max-h-[10vh] min-h-[10vh]", displayUser ? " ml-[18vw] mr-[3vw] " : null)}> 
           {users.map((user, index) => (
-              <div className="category-list-container" key={index} onClick={() => setDisplayUser(true)}>
+              <div className="mt-8 flex space-around mx-6 flex-row" key={index} onClick={() => setDisplayUser(true)}>
                   {!displayUser ?
                 <Router>
                     <Link to={`/display/${user.name  + "-" + user.uid.slice(-5)}`}
@@ -94,9 +93,9 @@ const DisplayLibraries = () => {
               </div>
           ))}
         </div>
-      </div> 
       :null}
-    </>
+
+    </div>
   )
 }
 
