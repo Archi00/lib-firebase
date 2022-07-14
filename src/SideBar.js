@@ -5,8 +5,8 @@ import CategoryDropdown from "./CategoryDropdown"
 const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected, handleFilters, list}) => {
   const [bookSelected, setBookSelected] = useState(true)
 
-  const constantStyle = "flex flex-col items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
-  const constantInput = "block p-4 w-full text-2xl rounded border border-gray-300 dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 placeholder:uppercase placeholder:text-center placeholder:text-xl dark:placeholder-gSearch By ray-400"
+  const constantStyle = "flex flex-col items-center p-2 text-xl font-normal text-gray-900 rounded-lg text-white hover:bg-gray-900"
+  const constantInput = "block p-4 w-full text-2xl rounded border text-gray-200 bg-gray-700 border-gray-600 placeholder:uppercase placeholder:text-center placeholder:text-xl placeholder-gSearch By ray-400"
   
   const handleChange = debounce((e) => {
     if (handleFilters) return handleFilters(e, list)
@@ -15,14 +15,14 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
 
   return(
     <aside className="w-full h-[100vh]" aria-label="Sidebar">
-      <div className="h-[100vh] fixed z-30 overflow-y-auto pt-28 px-8 mx-auto bg-gray-50 rounded dark:bg-gray-800">
+      <div className="h-[100vh] fixed z-30 overflow-y-auto pt-28 px-8 mx-auto rounded bg-gray-800">
         <ul className="space-y-8">
           <li>
-            <div className="flex flex-row p-2 text-2xl font-normal  text-gray-900 rounded-lg dark:text-white hover:cursor-pointer">
-              <div onClick={() => handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center dark:hover:bg-gray-900">
+            <div className="flex flex-row p-2 text-2xl font-normal  text-gray-300 rounded-lg text-white hover:cursor-pointer">
+              <div onClick={() => handleHomeBtn()}className="flex flex-1 flex-start px-4 py-4 text-center hover:bg-gray-900">
                 <h2>Home</h2>
               </div>
-              <div onClick={() => handleBackBtn()} className="flex flex-1 flex-end px-6 py-4 dark:hover:bg-gray-900 max-w-[30%]">
+              <div onClick={() => handleBackBtn()} className="flex flex-1 flex-end px-6 py-4 hover:bg-gray-900 max-w-[30%]">
                 <h3>Clear</h3>
               </div>
 
@@ -60,7 +60,7 @@ const SideBar = ({filterCategories, handleHomeBtn, handleBackBtn, handleSelected
           </li>
         </ul>
       </div>
-      <div className="fixed bottom-0 flex flex-row text-2xl font-normal rounded hover:cursor-pointer z-50 min-w-[27.27rem] max-w-[27.27rem]">
+      <div className="fixed bottom-0 flex flex-row text-2xl font-normal rounded hover:cursor-pointer z-50 min-w-[26.8rem] max-w-[26.8rem]">
         <div onClick={() => (handleSelected(true), setBookSelected(true))} className={classNames("flex flex-start rounded flex-1 shadow-xl justify-center px-8  py-4", bookSelected ? "text-gray-300 bg-gray-800 " : "bg-gray-900 hover:bg-gray-800 hover:text-gray-400")} >
           <button>Books</button>
         </div>
