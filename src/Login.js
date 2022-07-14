@@ -22,7 +22,7 @@ function Login(props) {
   }, [user, loading]);
 
   return (
-    <div className="login">
+    <div className="bg-gray-900 min-h-[100vh] z-1">
       <div class="text-center p-14 max-w-[40vh] min-w-[40vh] min-h-[45vh] max-h-[45vh] bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-600">
         <form class="flex flex-col space-y-12 pt-2" action="#">
             <div>
