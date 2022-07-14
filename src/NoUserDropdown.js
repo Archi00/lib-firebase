@@ -25,7 +25,7 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
     : (bgColor = "bg-" + color + "-500");
   return (
     <>
-      <div className="flex flex-wrap z-50">
+      <div className="flex flex-wrap z-50 min-h-[10vh] max-h-[10vh]">
         <div className="w-full xl:w-6/12 md:w-4/12 px-4">
           <div className="relative flex flex-row align-middle w-full">
             <button

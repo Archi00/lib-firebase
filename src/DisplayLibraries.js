@@ -44,7 +44,7 @@ const DisplayLibraries = () => {
   }
 
   return (
-    <div className="min-h-[100vh] flex justify-center flex-wrap">
+    <div className="flex justify-center flex-wrap">
       <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
         <div className=" pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
           <div className="header-logo-container text-bold text-gray-600 text-3xl">
@@ -61,7 +61,7 @@ const DisplayLibraries = () => {
         </div>
       </header>
       {displayUser && list.length > 0 ? 
-      <div className="max-w-[15vw] min-w-[15vw] fixed left-0 min-h-[100vh]">
+      <div className="max-w-[15vw] min-w-[15vw] fixed left-0">
         <SideBar handleFilters={handleFilters} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} list={list} />
       </div>
       : null}
