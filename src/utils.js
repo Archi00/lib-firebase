@@ -16,7 +16,6 @@ async function FetchUserName() {
     const data = await querySnapshot.docs[0].data();
     setName(data.name);
   } catch (err) {
-    console.error(err);
     alert("An error occured while fetching user data");
   }
 }
@@ -38,16 +37,12 @@ function debounce(func, ms = 300) {
     for (let i = 0, l = list.length; i < l; i++) {
       list[i].data?.books?.map((e) => {
           if (typeof e[filter] === "string") {
-            console.log("Filter is a string")
             if (e[filter].toUpperCase().includes(value.toUpperCase())) {
               temp.push(e);
-              console.log("Filter includes ", e)
             }
           } else if (typeof e[filter] === "object") {
-            console.log("Filter is an object")
             Object.values(e[filter]).forEach((y) => {
               if (!y.identifier) {
-                console.log("Filter has no identifier property")
                 if (
                   e[filter][0].toUpperCase().includes(value.toUpperCase())
                 ) {
@@ -55,7 +50,6 @@ function debounce(func, ms = 300) {
                 }
               } else {
                 if (y.identifier.includes(value)) {
-                  console.log("Filter has identifier value")
                   temp.push(e);
                 }
               }
@@ -63,7 +57,6 @@ function debounce(func, ms = 300) {
           }
       });
     }
-    console.log("Return array: ", temp)
     return temp;
     
   };
