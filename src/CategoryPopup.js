@@ -58,10 +58,10 @@ export default class CategoryPopup extends React.Component {
     return (
       <div className="popup opacity-90">
         <form onSubmit={this.handleSubmit} ref={this.wrapperRef} className="my-[40vh] block m-auto w-[50%]">   
-            <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Add Category</label>
+            <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only text-gray-300">Add Category</label>
             <div className="relative">
-              <input onChange={(this.props.handleChange, this.handleChange)} name="title" autoFocus type="search" id="search" className="block p-4 pl-10 w-full text-2xl text-gray-900 bg-gray-50 rounded border-2 border-gray-300 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white min-h-[5vh]" placeholder="Add Category" required=""></input>
-              <button type="submit" className="text-white absolute right-0 bottom-0 w-[10%] h-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-2xl px-4 py-2 shadow-xl dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:cursor-pointer focus:cursor-pointer">Add</button>
+              <input onChange={(this.props.handleChange, this.handleChange)} name="title" autoFocus type="search" id="search" className="block p-4 pl-10 w-full text-2xl text-gray-300 rounded border-2 border-gray-300 focus:border-gray-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white min-h-[5vh]" placeholder="Add Category" required=""></input>
+              <button type="submit" className="text-white absolute right-0 bottom-0 w-[10%] h-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-2xl px-4 py-2 shadow-xl bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 hover:cursor-pointer focus:cursor-pointer">Add</button>
             </div>
             {this.state.catAdded ? (
               <div className="mt-8 ml-[30%]">
