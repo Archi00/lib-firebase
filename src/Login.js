@@ -18,6 +18,7 @@ function Login(props) {
     }
     if (user) {
       history.replace("/dashboard");
+      window.location.reload()
     }
   }, [user, loading]);
 

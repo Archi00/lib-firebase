@@ -4,6 +4,10 @@ import DisplayLibraries from "./DisplayLibraries"
 import { useEffect } from "react"
 
 const App = () => {
+  useEffect(() => {
+    console.log(window.location.pathname)
+  })
+
   return (
     <Router>
       <Switch>

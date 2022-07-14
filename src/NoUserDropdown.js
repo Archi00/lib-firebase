@@ -30,7 +30,7 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
           <div className="relative flex flex-row align-middle w-full">
             <button
               className={
-                "flex flex-row text-gray-300 z-50 font-bold uppercase text-xl px-8 py-3 rounded shadow-xl hover:shadow-xl hover:bg-gray-800 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
+                "flex flex-row text-gray-300 font-bold uppercase text-xl px-8 py-3 rounded shadow-xl hover:shadow-xl hover:bg-gray-800 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 " +
                 "bg-gray-900"
               }
               type="button"
