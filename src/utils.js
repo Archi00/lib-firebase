@@ -33,72 +33,58 @@ function debounce(func, ms = 300) {
   };
 }
 
-  const getData = async (filter, value) => {
+  const getData = async (filter, value, list) => {
     let temp = [];
-    if (filter === "category") {
-      for (let i = 0, l = props.info.length; i < l; i++) {
-        if (props.info[i].data.name.toUpperCase().includes(value.toUpperCase())) {
-          temp.push(props.info[i]);
-        }
-      }
-      return temp;
-    } 
-    for (let i = 0, l = props.info.length; i < l; i++) {
-      if (props.info[i].data.books) {
-        props.info[i].data.books.map((e) => {
-            if (typeof e[filter] === "string") {
-              if (e[filter].toUpperCase().includes(value.toUpperCase())) {
-                temp.push(e);
-              }
-            } else if (typeof e[filter] === "object") {
-              Object.values(e[filter]).forEach((y) => {
-                if (!y.identifier) {
-                  if (
-                    e[filter][0].toUpperCase().includes(value.toUpperCase())
-                  ) {
-                    temp.push(e);
-                  }
-                } else {
-                  if (y.identifier.includes(value)) {
-                    temp.push(e);
-                  }
-                }
-              });
+    for (let i = 0, l = list.length; i < l; i++) {
+      list[i].data?.books?.map((e) => {
+          if (typeof e[filter] === "string") {
+            console.log("Filter is a string")
+            if (e[filter].toUpperCase().includes(value.toUpperCase())) {
+              temp.push(e);
+              console.log("Filter includes ", e)
             }
-        });
-      }
+          } else if (typeof e[filter] === "object") {
+            console.log("Filter is an object")
+            Object.values(e[filter]).forEach((y) => {
+              if (!y.identifier) {
+                console.log("Filter has no identifier property")
+                if (
+                  e[filter][0].toUpperCase().includes(value.toUpperCase())
+                ) {
+                  temp.push(e);
+                }
+              } else {
+                if (y.identifier.includes(value)) {
+                  console.log("Filter has identifier value")
+                  temp.push(e);
+                }
+              }
+            });
+          }
+      });
     }
+    console.log("Return array: ", temp)
     return temp;
     
   };
 
-  const filterCategories = (e) => {
-    let temp = []
+  const filterCategories = async (e, list, setFilters) => {
     if (e.target.value === "" || !e.target.value) {
       cleanFilters();
       return
     }
     const name = e.target.name.split("-").pop();
-    e.target.parentNode.childNodes.forEach((a) => {
-      if (a.nodeName === "INPUT" && name === "category") {
-        if (!a.value) {
-          cleanFilters();
-          return
-        }
-        getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
-          res.map(r => temp.push([...catFilters, r.data?.name]))
-        });
-      } else if (a.nodeName === "INPUT" ) {
+    e.target.parentNode.childNodes.forEach(async (a) => {
+      if (a.nodeName === "INPUT" ) {
         if (!a.value.toUpperCase()) {
           cleanFilters();
           return
         }
-        getData(a.name.split("-").pop(), a.value.toUpperCase()).then((res, err) => {
-          if (a.value.toUpperCase) return res;
+        getData(a.name.split("-").pop(), a.value.toUpperCase(), list).then((res, err) => {
+          if (a.value.toUpperCase()) setFilters(res);
         });
       }
     });
-    return temp
   };
 
 export { capitalize, FetchUserName, classNames, debounce, filterCategories, getData };

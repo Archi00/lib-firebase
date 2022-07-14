@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import getUserData from "./getUserData"
 import DisplayBook from "./NoUserBooksDisplay"
 
-const UserPage = ({user, allBooks, setUser}) => {
+const UserPage = ({user, allBooks, setUser, setList, list, filters}) => {
   const [categories, setCategories] = useState([])
   const [books, setBooks] = useState([])
   const [displayBooksInsideCategory,setDisplayBooksInsideCategory] = useState("")
@@ -13,14 +13,13 @@ const UserPage = ({user, allBooks, setUser}) => {
     const data = await getUserData(user)
     data.map(cat => {
       setCategories(categories => [...categories, cat ])
+      setList(list => [...list, cat])
       if (cat.data?.books?.length > 0) setBooks(books => [...books, ...cat.data?.books])
     })
     setUser(user)
   }, [])
 
   useEffect(() => {
-    console.log(`${"/display/" + user.name + "-" + user.uid.slice(-5) + "/" + "Some name"}`)
-    console.log(window.location.pathname)
     categories.map(cat => {
       if (cat.id === displayBooksInsideCategory && window.location.pathname === `${"/display/" + user.name + "-" + user.uid.slice(-5) + "/" + cat.data?.name.split(" ").join("%20")}`) {
         setDisplayCat(cat.data.books)
@@ -31,9 +30,9 @@ const UserPage = ({user, allBooks, setUser}) => {
 
   return (
     <>
-      {books && allBooks ? 
+      {books && allBooks && !filters?.length > 0? 
         books.map((book, index) => <DisplayBook key={index} each={book} />)
-      : categories && !displayBooksInsideCategory ? 
+      : categories && !displayBooksInsideCategory && !filters?.length > 0? 
           categories.map((cat, index) => (
             <Router key={index}>
                 <Link to={window.location.pathname + "/" + cat.data.name}
@@ -50,9 +49,10 @@ const UserPage = ({user, allBooks, setUser}) => {
           ))
         : null
         }
-      {displayBooksInsideCategory? 
+      {displayBooksInsideCategory && !filters?.length > 0? 
         displayCat.map((book, index) => <DisplayBook key={index} each={book} />)
       : null}
+      {filters.map((book, index) => <DisplayBook key={index} each={book} />)}
     </>
   )
 }

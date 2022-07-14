@@ -11,7 +11,8 @@ const DisplayLibraries = () => {
   const [displayUser, setDisplayUser] = useState(false)
   const [allBooks, setAllBooks] = useState(true)
   const [user, setUser] = useState()
-
+  const [list, setList] = useState([])
+  const [filters, setFilters] = useState([])
   const history = useHistory()
   
   useEffect(async () => {
@@ -33,7 +34,12 @@ const DisplayLibraries = () => {
   }
 
   const handleBackBtn = () => {
-    console.log("clear filters")
+    const filters = [...document.querySelectorAll("#filter")]
+    filters.forEach(f => f.value = "")
+  }
+
+  const handleFilters = async (e) => {
+    const filteredBooks = await filterCategories(e, list, setFilters)
   }
 
   return (
@@ -41,19 +47,21 @@ const DisplayLibraries = () => {
       <header className="fixed top-0 w-screen p-0 bg-gray-800 block z-50">
         <div className=" pt-6 h-24 rounded-lg shadow-xl delay-75 text-center flex flex-row w-screen">
           <div className="header-logo-container text-bold text-gray-600 text-3xl">
+          {displayUser ?
             <Router>
               <Link to={"/"} onClick={() => setDisplayUser(false)} className="flex flex-row text-gray-300 font-bold uppercase text-xl px-8 pt-3 mb-4 rounded shadow-xl hover:shadow-xl hover:bg-gray-800 outline-none focus:outline-none  ease-linear transition-all duration-150 bg-gray-900">
                 Users
               </Link>
             </Router>
+          : null}
           </div>
           <div className="max-w-[15vw] min-w-[15vw] flex flex-row absolute left-0 ml-[1.5vw] whitespace-nowrap"></div>
           <DropdownRender />
         </div>
       </header>
-      {displayUser ? 
+      {displayUser && list.length > 0 ? 
       <div className="max-w-[15vw] min-w-[15vw] fixed min-h-[100vh]">
-        <SideBar filterCategories={filterCategories} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} />
+        <SideBar handleFilters={handleFilters} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} list={list} />
       </div>
       : null}
       {users?
@@ -77,7 +85,7 @@ const DisplayLibraries = () => {
                     : 
                     <Router>
                     <Route path="/display">
-                      <UserPage user={user} allBooks={allBooks} setUser={setUser} />
+                      <UserPage user={user} allBooks={allBooks} setUser={setUser} setList={setList} list={list} filters={filters} />
                     </Route>
                   </Router>
                     }
