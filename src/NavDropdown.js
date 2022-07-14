@@ -81,7 +81,7 @@ const Dropdown = ({ color, updateDb, handleIsEdit, isEdit }) => {
                   "text-xl py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-red-600 hover:text-black " +
                   (color === "indigo" ? " text-slate-700" : "text-white")
                 }
-                onClick={() => logout()}
+                onClick={() => (logout())}
               >
                 {/*<LogoutIcon className="-mr-2 h-8 w-5" aria-hidden="true" />*/}
                 Logout

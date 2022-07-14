@@ -84,5 +84,4 @@ export const sendPswResetEmail = async (email) => {
 
 export const logout = async () => {
   signOut(auth);
-  window.location.reload(true);
 };
