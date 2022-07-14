@@ -61,7 +61,7 @@ const DisplayLibraries = () => {
         </div>
       </header>
       {displayUser && list.length > 0 ? 
-      <div className="max-w-[15vw] min-w-[15vw] fixed min-h-[100vh]">
+      <div className="max-w-[15vw] min-w-[15vw] fixed left-0 min-h-[100vh]">
         <SideBar handleFilters={handleFilters} handleHomeBtn={handleHomeBtn} handleBackBtn={handleBackBtn} handleSelected={handleSelected} list={list} />
       </div>
       : null}
