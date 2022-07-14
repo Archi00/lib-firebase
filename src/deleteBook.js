@@ -46,7 +46,9 @@ const deleteBooks = async (info, deleteTracker, uid) => {
       const filteredBooks = cat.data.books.filter(book => deleteTracker.hasOwnProperty(book.id))
       if (filteredBooks.length > 0) {
         const rt = doc(db, uid, cat.id)
-        filteredBooks.map(async (ash) => await updateDoc(rt, {books: arrayRemove(ash)}))
+        filteredBooks.map(async (ash) => {
+          await updateDoc(rt, {books: arrayRemove(ash)})
+        })
         console.log("Books deleted")
       }
     })
@@ -61,9 +63,10 @@ const deleteCategory = async (deleteTracker, uid) => {
   const catId = Object.entries(deleteTracker)[0][0]
   try {
     const rt = doc(db, uid, catId)
-    console.log(rt)
     await deleteDoc(rt, "books")
     console.log("Category Deleted")
+    const category = document.querySelector(`[catid=${catId}]`)
+    category.style.display = "none"
     return true;
   } catch (e) {
     console.error(e)

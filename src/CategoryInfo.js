@@ -76,6 +76,7 @@ export default class CategoryInfo extends React.Component {
   async componentDidMount() {
     this.checkBooks();
     this.setState({ outerWidth: window.outerWidth });
+    console.log(this.props.titleName.split(" ").join("%20"))
   }
 
   togglePopup(book) {
@@ -93,7 +94,9 @@ export default class CategoryInfo extends React.Component {
             each ? (
               <div key={index} onClick={() => {
                 if (this.props.isEdit) this.props.handleDeleteTracker(each)
-              }} className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", this.props.deleteTracker.hasOwnProperty(each.id) ? this.active : this.inactive)}>
+              }} className={classNames("each-flex-container overflow-hidden rounded text-gray-300 border min-h-[20vh] max-h-[20vh] min-w-[25vw] hover:cursor-pointer max-w-[25vw]", this.props.deleteTracker.hasOwnProperty(each.id) ? this.active : this.inactive)}
+              id={each.id}
+              >
                 <div
                   onClick={(e) => {
                     if (!this.props.isEdit) this.togglePopup(each)
@@ -153,7 +156,7 @@ export default class CategoryInfo extends React.Component {
           :null }
         </div>
         {window.location.pathname.includes(this.props.titleName) && !this.props.isEdit? (
-          <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={`${window.location.origin + "/display/" + this.props.user.name + "-" + this.props.user.uid.slice(-5) + this.props.titleName}`} />
+          <QRCode className="z-50 fixed left-0 bottom-0 mb-72 mx-[4vw] min-w-[5vw] min-h-[5vw]" value={`${window.location.origin + "/display/" + this.props.user.name + "-" + this.props.user.uid.slice(-5) + this.props.titleName.split(" ").join("%20")}`} />
           ) : null}
       </div>
     );

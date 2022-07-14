@@ -267,6 +267,7 @@ export default class UserApp extends React.Component {
           }
         }}
         className={classNames("block bg-gray-800 text-center rounded border text-2xl text-gray-300 group hover:shadow-xl hover:bg-gray-600", this.state.delCatTracker.hasOwnProperty(cat.id) && this.state.isEdit ? active : inactive)}
+        catid={cat.id}
         >
           <div className="list-item">
             <div className="w-[25vw] overflow-hidden whitespace-nowrap py-4 uppercase text-bold text-white text-2xl">

@@ -4,8 +4,10 @@ import { deleteCategory } from "./deleteBook";
 import DeleteBooksTracker from "./DeleteBooksTracker";
 import FilteredBooks from "./FilteredBooks";
 import { classNames } from "./utils";
+import { useState } from "react";
 
 function DisplayCategories(props) {
+  const [catDeleted, setCatDeleted] = useState(false)
   return (
     <div className="App">
       <div className="category-list">
@@ -47,7 +49,9 @@ function DisplayCategories(props) {
                 </div>
                 {props.isEdit ? 
                   <div className={classNames("uppercase fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50")}>
-                    <button onClick={() => deleteCategory(props.delCatTracker, props.user.uid)} className={classNames("text-bold uppercase w-full shadow-xl rounded justify-center px-8 py-4 text-2xl", Object.entries(props.delCatTracker).length > 0 ? "bg-red-700 text-gray-300 hover:text-gray-800 hover:bg-red-800" : "bg-gray-600 pointer-events-none text-gray-800")}>delete</button>
+                    <button onClick={async () => {
+                      const deleted = await deleteCategory(props.delCatTracker, props.user.uid)
+                      }} className={classNames("text-bold uppercase w-full shadow-xl rounded justify-center px-8 py-4 text-2xl", Object.entries(props.delCatTracker).length > 0 ? "bg-red-700 text-gray-300 hover:text-gray-800 hover:bg-red-800" : "bg-gray-600 pointer-events-none text-gray-800")}>delete</button>
                   </div>
                 : null}
               </>
