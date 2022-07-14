@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard";
 import Reset from "./Reset";
 import "./App.css";
 import { classNames } from "./utils";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
