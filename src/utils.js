@@ -63,15 +63,13 @@ function debounce(func, ms = 300) {
 
   const filterCategories = async (e, list, setFilters) => {
     if (e.target.value === "" || !e.target.value) {
-      cleanFilters();
-      return
+      return setFilters([])
     }
     const name = e.target.name.split("-").pop();
     e.target.parentNode.childNodes.forEach(async (a) => {
       if (a.nodeName === "INPUT" ) {
         if (!a.value.toUpperCase()) {
-          cleanFilters();
-          return
+          return setFilters([])
         }
         getData(a.name.split("-").pop(), a.value.toUpperCase(), list).then((res, err) => {
           if (a.value.toUpperCase()) setFilters(res);
