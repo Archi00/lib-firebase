@@ -34,7 +34,7 @@ function DisplayCategories(props) {
               {props.totalBookList.map((book, index) => (<BooksDisplay key={index} each={book} isEdit={props.isEdit} handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} />))}
             </div>
             {props.isEdit ?
-            <div className={classNames("fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
+            <div className={classNames("fixed left-0 bottom-0 min-w-[26.8rem] max-w-[26.8rem] z-50", Object.entries(props.deleteTracker).length > 0 ? "min-h-[20vh]" : null)}>
               <DeleteBooksTracker handleDeleteTracker={props.handleDeleteTracker} deleteTracker={props.deleteTracker} handleForceUpdate={props.handleForceUpdate} user={props.user} />
             </div>
             : null}
@@ -48,10 +48,12 @@ function DisplayCategories(props) {
                     : props.catList.map((cat, index) => props.multiCat(cat, index))}
                 </div>
                 {props.isEdit ? 
-                  <div className={classNames("uppercase fixed left-0 bottom-0 min-w-[27.27rem] max-w-[27.27rem] z-50")}>
-                    <button onClick={async () => {
-                      const deleted = await deleteCategory(props.delCatTracker, props.user.uid)
-                      }} className={classNames("text-bold uppercase w-full shadow-xl rounded justify-center px-8 py-4 text-2xl", Object.entries(props.delCatTracker).length > 0 ? "bg-red-700 text-gray-300 hover:text-gray-800 hover:bg-red-800" : "bg-gray-600 pointer-events-none text-gray-800")}>delete</button>
+                  <div className={classNames("fixed left-0 bottom-0 z-50 min-w-[26.8rem] max-w-[26.8rem]")}>
+                      <button onClick={async () => {
+                        const deleted = await deleteCategory(props.delCatTracker, props.user.uid)
+                        }} className={classNames(" text-bold uppercase w-full shadow-xl rounded justify-center px-8 py-4 text-2xl", Object.entries(props.delCatTracker).length > 0 ? "bg-red-700 text-gray-300 hover:text-gray-800 hover:bg-red-800" : "bg-gray-600 pointer-events-none text-gray-800")}>
+                        delete
+                      </button>
                   </div>
                 : null}
               </>

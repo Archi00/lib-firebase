@@ -13,7 +13,7 @@ export default function CategoryDropdown({categories, setCat, add}) {
 
   return (
     <>
-      <Menu as="div" id="choosenCategory" className="relative inline-block text-left m-0">
+      <Menu as="div" id="choosenCategory" className="relative inline-block text-left m-0 z-50">
         <>
           <Menu.Button className="inline-flex justify-center w-[11em] rounded border border-gray-300 shadow-xl py-[1.1rem] text-2xl font-medium bg-gray-600 text-black hover:bg-gray-700 focus:outline-none  focus:ring-offset-0.5">
             {!selected ? "Category" : selected}

@@ -20,7 +20,7 @@ export default class BookPopup extends React.Component {
       currentCat: ""
     };
     this.numOfBooks = 10
-    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-gray-400"
+    this.constantStyle = "search-results text-white text-xl hover:bg-gray-600 min-h-[7vh] border-gray-400 z-30"
     this.inactive = "bg-gray-700 hover:bg-gray-600"
     this.active = "bg-gray-400 hover:bg-gray-700 shadow-xl"
     this.inDb = ""
@@ -93,7 +93,7 @@ export default class BookPopup extends React.Component {
               handleChange={this.props.handleChange}
               setState={this.setState}
             />
-            <div className="bg-gray-800 border-gray-400 border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh]">
+            <div className="bg-gray-800 border-gray-400 border-2 border-gray-700 rounded m-auto text-center max-h-[69vh] max-w-[65vw] mt-2.5 min-h-[80vh] z-30">
               <div className="bg-gray-800">
                     <ul className="grid grid-cols-7 gap-4 min-h-[5.5vh] text-2xl text-bold text-gray-200">
                       <li className="my-auto">Cover</li>
